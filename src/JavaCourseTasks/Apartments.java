@@ -25,9 +25,8 @@ public class Apartments {
             apartmentNumber = scanner.nextInt();
         }
 
-        // Assure that apartmentNumber doesn't exceed number of apartments in the building
         final int apartmentsCountOnFloor = 4;
-
+        // Assure that apartmentNumber doesn't exceed number of apartments in the building
         if (apartmentNumber > apartmentsCountOnFloor * entrancesCount * floorsCount) {
             System.out.print("The number of apartment you've entered ");
             System.out.println("exceeds the number of apartments in the building.");
