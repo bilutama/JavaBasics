@@ -18,8 +18,8 @@ public class Apartments {
             floorsCount = scanner.nextInt();
         }
 
-        // Assure that apartmentNumber is not 0 nor negative
         int apartmentNumber = -1;
+        // Assure that apartmentNumber is not 0 nor negative
         while (apartmentNumber <= 0) {
             System.out.print("Enter the apartment number (value > 0): ");
             apartmentNumber = scanner.nextInt();
