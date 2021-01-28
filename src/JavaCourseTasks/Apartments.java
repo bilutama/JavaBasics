@@ -26,7 +26,7 @@ public class Apartments {
         }
 
         final int apartmentsPerFloor = 4;
-        //TODO: Implement an algorithm for variable number of apartments on floors
+        //TODO: Implement an algorithm for variable number of apartments per floor
 
         // Assure that apartmentNumber doesn't exceed number of apartments in the building
         if (apartmentNumber > apartmentsPerFloor * entrancesCount * floorsCount) {
