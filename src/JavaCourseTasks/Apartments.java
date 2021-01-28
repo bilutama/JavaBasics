@@ -51,7 +51,8 @@ public class Apartments {
             } else {
                 apartmentLocationOnFloor = "Right Down";
             }
-
+            
+            // Final output:
             System.out.printf("Entrance %d, floor %d, location is %s", apartmentEntrance, apartmentFloor, apartmentLocationOnFloor);
         }
     }
