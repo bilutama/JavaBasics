@@ -52,8 +52,7 @@ public class Apartments {
                 apartmentLocationOnFloor = "Right Down";
             }
 
-            System.out.printf("Entrance %d, floor %d, location is %s",
-                    apartmentEntrance, apartmentFloor, apartmentLocationOnFloor);
+            System.out.printf("Entrance %d, floor %d, location is %s", apartmentEntrance, apartmentFloor, apartmentLocationOnFloor);
         }
     }
 }
