@@ -25,22 +25,22 @@ public class Apartments {
             apartmentNumber = scanner.nextInt();
         }
 
-        final int apartmentsCountOnFloor = 4;
+        final int apartmentsPerFloor = 4;
         //TODO: Implement an algorithm for variable number of apartments on floors
 
         // Assure that apartmentNumber doesn't exceed number of apartments in the building
-        if (apartmentNumber > apartmentsCountOnFloor * entrancesCount * floorsCount) {
+        if (apartmentNumber > apartmentsPerFloor * entrancesCount * floorsCount) {
             System.out.print("The number of apartment you've entered ");
             System.out.println("exceeds the number of apartments in the building.");
         } else {
-            int apartmentEntrance = (apartmentNumber - 1) / (floorsCount * apartmentsCountOnFloor) + 1;
-            int apartmentFloor = (apartmentNumber - (apartmentEntrance - 1) * floorsCount * apartmentsCountOnFloor - 1) / apartmentsCountOnFloor + 1;
+            int apartmentEntrance = (apartmentNumber - 1) / (floorsCount * apartmentsPerFloor) + 1;
+            int apartmentFloor = (apartmentNumber - (apartmentEntrance - 1) * floorsCount * apartmentsPerFloor - 1) / apartmentsPerFloor + 1;
 
             /* Determination of the apartment's location on the following floor map:
             2 (Left Up)        3 (Right Up)
             1 (Left Down)      4 (Right Down)
              */
-            int apartmentIndexOnFloor = apartmentNumber % apartmentsCountOnFloor;
+            int apartmentIndexOnFloor = apartmentNumber % apartmentsPerFloor;
             String apartmentLocationOnFloor;
 
             if (apartmentIndexOnFloor == 1) {
