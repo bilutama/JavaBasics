@@ -1,4 +1,4 @@
-package HomeTasks;
+package Lect_01_02;
 
 import java.util.Scanner;
 
