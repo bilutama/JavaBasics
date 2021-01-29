@@ -1,4 +1,4 @@
-package Lect_01_02;/*
+package HomeTasks;/*
 Searches a pair of closest points among a set of three.
 Input: X and Y coordinates of three points.
 Output: Closest points (#1 and #2, for example) and distance between them.

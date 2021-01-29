@@ -1,4 +1,4 @@
-package Lect_01_02;
+package HomeTasks;
 
 public class CartesianGridPoint {
     private final double x;
