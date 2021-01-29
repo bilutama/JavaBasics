@@ -9,12 +9,14 @@ public class LeapYear {
         Scanner scanner = new Scanner(System.in);
 
         int year = -1;
+
         while (year <= 0) {
             System.out.print("Enter a year (value > 0): ");
             year = scanner.nextInt();
         }
 
         boolean isLeap = true;
+
         if (year % 4 != 0) {
             isLeap = false;
         } else if ((year % 100 != 0) && (year % 400 == 0)) {
