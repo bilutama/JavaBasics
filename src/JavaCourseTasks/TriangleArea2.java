@@ -8,12 +8,12 @@ public class TriangleArea2 {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Array to store 3 points with X and Y as [dimension][pointCount]
+        // Array to store 3 points with X and Y as [dimension][pointCounter]
         double[][] points = new double[2][3];
 
         System.out.println("Please enter coordinates:");
 
-        for (int i = 0; i < points.length; ++i) {
+        for (int i = 0; i < points[0].length; ++i) {
             double temporaryCoordinateX;
             double temporaryCoordinateY;
 
@@ -27,6 +27,7 @@ public class TriangleArea2 {
             points[1][i] = temporaryCoordinateY;
         }
 
+        // Angle tangents for two sides of the triangle to check if they are equal
         double tangentOfSegment1 = Math.abs(points[1][0] - points[1][1]) /
                 Math.abs(points[0][0] - points[0][1]);
         double tangentOfSegment2 = Math.abs(points[1][0] - points[1][2]) /
