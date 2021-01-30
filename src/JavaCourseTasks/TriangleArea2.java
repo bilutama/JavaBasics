@@ -1,16 +1,15 @@
 package JavaCourseTasks;
 
-import Lect_01_02.CartesianGridPoint;
-
 import java.util.Scanner;
 
-public class TriangleArea {
+public class TriangleArea2 {
     public static void main(String[] args) {
         System.out.println("*** Calculates area of a triangle ***");
 
         Scanner scanner = new Scanner(System.in);
 
-        CartesianGridPoint[] points = new CartesianGridPoint[3];
+        // Array to store 3 points with X and Y as [dimension][pointCount]
+        double[][] points = new double[2][3];
 
         System.out.println("Please enter coordinates:");
 
@@ -24,24 +23,25 @@ public class TriangleArea {
             System.out.printf("Y for point #%d: ", i + 1);
             temporaryCoordinateY = scanner.nextDouble();
 
-            points[i] = new CartesianGridPoint(temporaryCoordinateX, temporaryCoordinateY);
+            points[0][i] = temporaryCoordinateX;
+            points[1][i] = temporaryCoordinateY;
         }
 
-        double tangentOfSegment1 = Math.abs(points[0].getX() - points[1].getX()) /
-                Math.abs(points[0].getY() - points[1].getY());
-        double tangentOfSegment2 = Math.abs(points[0].getX() - points[2].getX()) /
-                Math.abs(points[0].getY() - points[2].getY());
+        double tangentOfSegment1 = Math.abs(points[1][0] - points[1][1]) /
+                Math.abs(points[0][0] - points[0][1]);
+        double tangentOfSegment2 = Math.abs(points[1][0] - points[1][2]) /
+                Math.abs(points[0][0] - points[0][2]);
 
         // Check if the points are on the line and calculate the area otherwise
         if (tangentOfSegment1 == tangentOfSegment2) {
             System.out.println("All the vertices of the triangle are on the same line, i.e. area = 0");
         } else {
-            double triangleSide1 = Math.sqrt(Math.pow((points[0].getX() - points[1].getX()), 2) +
-                    Math.pow((points[0].getY() - points[1].getY()), 2));
-            double triangleSide2 = Math.sqrt(Math.pow((points[0].getX() - points[2].getX()), 2) +
-                    Math.pow((points[0].getY() - points[2].getY()), 2));
-            double triangleSide3 = Math.sqrt(Math.pow((points[1].getX() - points[2].getX()), 2) +
-                    Math.pow((points[1].getY() - points[2].getY()), 2));
+            double triangleSide1 = Math.sqrt(Math.pow((points[0][0] - points[0][1]), 2) +
+                    Math.pow((points[1][0] - points[1][1]), 2));
+            double triangleSide2 = Math.sqrt(Math.pow((points[0][0] - points[0][2]), 2) +
+                    Math.pow((points[1][0] - points[1][2]), 2));
+            double triangleSide3 = Math.sqrt(Math.pow((points[0][1] - points[0][2]), 2) +
+                    Math.pow((points[1][1] - points[1][2]), 2));
 
             double triangleSemiPerimeter = (triangleSide1 + triangleSide2 + triangleSide3) / 2;
 
