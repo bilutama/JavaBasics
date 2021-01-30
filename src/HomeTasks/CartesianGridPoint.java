@@ -10,11 +10,11 @@ public class CartesianGridPoint {
     }
 
     // getters
-    double getY() {
-        return this.y;
+    public double getX() {
+        return x;
     }
 
-    double getX() {
-        return this.x;
+    public double getY() {
+        return y;
     }
 }

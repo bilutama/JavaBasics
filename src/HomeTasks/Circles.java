@@ -46,7 +46,7 @@ public class Circles {
     }
 
     public static double getCircleRadius(double circleArea) {
-        return Math.pow(circleArea / Math.PI, 0.5);
+        return Math.sqrt(circleArea / Math.PI);
     }
 
     public static double getSectorArea(double radius, double angleInDegrees) {
