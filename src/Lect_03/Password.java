@@ -8,14 +8,14 @@ public class Password {
 
         Scanner scanner = new Scanner(System.in);
 
-        String password = "ThePassword";
+        String password = "KindOfMagic";
 
         System.out.print("Enter a password: ");
         String passwordFromUser = scanner.nextLine();
 
         if (password.length() == passwordFromUser.length()) {
             if (password.equals(passwordFromUser)) {
-                System.out.println("Password ok.");
+                System.out.println("Password is ok.");
             } else {
                 System.out.println("Password is wrong.");
             }
