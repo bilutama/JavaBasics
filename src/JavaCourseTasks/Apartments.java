@@ -9,11 +9,14 @@ public class Apartments {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Assure that entrancesCount and floorsCount are not 0 nor negative
-        while ((entrancesCount <= 0) || (floorsCount <= 0)) {
+        // Assure that entrancesCount is not 0 nor negative
+        while (entrancesCount <= 0) {
             System.out.print("Enter numbers of entrances (values > 0): ");
             entrancesCount = scanner.nextInt();
+        }
 
+        // Assure that floorsCount is not 0 nor negative
+        while (floorsCount <= 0) {
             System.out.print("Enter numbers of floors (values > 0): ");
             floorsCount = scanner.nextInt();
         }
@@ -25,22 +28,22 @@ public class Apartments {
             apartmentNumber = scanner.nextInt();
         }
 
-        final int apartmentsPerFloor = 4;
+        final int apartmentsCounterPerFloor = 4;
         //TODO: Implement an algorithm for variable number of apartments per floor
 
         // Assure that apartmentNumber doesn't exceed number of apartments in the building
-        if (apartmentNumber > apartmentsPerFloor * entrancesCount * floorsCount) {
+        if (apartmentNumber > apartmentsCounterPerFloor * entrancesCount * floorsCount) {
             System.out.print("The number of apartment you've entered ");
             System.out.println("exceeds the number of apartments in the building.");
         } else {
-            int apartmentEntrance = (apartmentNumber - 1) / (floorsCount * apartmentsPerFloor) + 1;
-            int apartmentFloor = (apartmentNumber - (apartmentEntrance - 1) * floorsCount * apartmentsPerFloor - 1) / apartmentsPerFloor + 1;
+            int apartmentEntrance = (apartmentNumber - 1) / (floorsCount * apartmentsCounterPerFloor) + 1;
+            int apartmentFloor = (apartmentNumber - (apartmentEntrance - 1) * floorsCount * apartmentsCounterPerFloor - 1) / apartmentsCounterPerFloor + 1;
 
             /* Determination of the apartment's location on the following floor map:
             2 (Left Up)        3 (Right Up)
             1 (Left Down)      4 (Right Down)
              */
-            int apartmentIndexOnFloor = apartmentNumber % apartmentsPerFloor;
+            int apartmentIndexOnFloor = apartmentNumber % apartmentsCounterPerFloor;
             String apartmentLocationOnFloor;
 
             if (apartmentIndexOnFloor == 1) {
