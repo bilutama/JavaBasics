@@ -28,13 +28,13 @@ public class TriangleArea2 {
         }
 
         // Angle tangents for two sides of the triangle to check if they are equal
-        double tangentOfSegment1 = Math.abs(points[1][0] - points[1][1]) /
+        double segmentTangent1 = Math.abs(points[1][0] - points[1][1]) /
                 Math.abs(points[0][0] - points[0][1]);
-        double tangentOfSegment2 = Math.abs(points[1][0] - points[1][2]) /
+        double segmentTangent2 = Math.abs(points[1][0] - points[1][2]) /
                 Math.abs(points[0][0] - points[0][2]);
 
         // Check if the points are on the line and calculate the area otherwise
-        if (tangentOfSegment1 == tangentOfSegment2) {
+        if (segmentTangent1 == segmentTangent2) {
             System.out.println("All the vertices of the triangle are on the same line, i.e. area = 0");
         } else {
             double triangleSide1 = Math.sqrt(Math.pow((points[0][0] - points[0][1]), 2) +
@@ -46,12 +46,12 @@ public class TriangleArea2 {
 
             double triangleSemiPerimeter = (triangleSide1 + triangleSide2 + triangleSide3) / 2;
 
-            double areaOfTriangle = Math.sqrt((triangleSemiPerimeter) *
+            double triangleArea = Math.sqrt((triangleSemiPerimeter) *
                     (triangleSemiPerimeter - triangleSide1) *
                     (triangleSemiPerimeter - triangleSide2) *
                     (triangleSemiPerimeter - triangleSide3));
 
-            System.out.printf("Area if the triangle is %.3f: ", areaOfTriangle);
+            System.out.printf("Area if the triangle is %.3f: ", triangleArea);
         }
     }
 }
