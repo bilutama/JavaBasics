@@ -26,12 +26,13 @@ public class NextDate {
                 monthIndex = 0;
             }
 
-            final int[] daysInMonths = new int[]{29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            // Index [0] reserved for leap-year February, other indexes are 1 - Jan, 2 - Feb etc.
+            final int[] daysInMonth = new int[]{29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-            if (day < daysInMonths[monthIndex]) {
+            if (day < daysInMonth[monthIndex]) {
                 // Date is valid and the day is NOT last in the month
                 System.out.printf("The next date is %02d %02d %d", (day + 1), month, year);
-            } else if (day == daysInMonths[monthIndex]) {
+            } else if (day == daysInMonth[monthIndex]) {
                 // Date is valid and the day IS the last in the month
                 if (month == 12) {
                     // It is December, 31
