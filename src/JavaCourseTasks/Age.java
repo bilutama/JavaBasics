@@ -1,11 +1,10 @@
 package JavaCourseTasks;
 
-import java.lang.reflect.GenericDeclaration;
 import java.util.Scanner;
 
 public class Age {
     public static void main(String[] args) {
-        System.out.println("*** Checks your age ***");
+        System.out.println("*** Определение возраста ***");
 
         Scanner scanner = new Scanner(System.in);
 
