@@ -27,8 +27,8 @@ public class SquareEquation {
             double discriminant = Math.pow(b, 2) - 4 * a * c;
 
             if (discriminant > 0) {
-                double equationRoot1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-                double equationRoot2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                double equationRoot1 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                double equationRoot2 = (-b + Math.sqrt(discriminant)) / (2 * a);
                 System.out.printf("The equation has two roots: x1 = %f, x2 = %f", equationRoot1, equationRoot2);
             } else if (discriminant == 0) {
                 double equationRoot = -b / (2 * a);
