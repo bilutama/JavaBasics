@@ -8,18 +8,23 @@ public class LeapYear {
 
         Scanner scanner = new Scanner(System.in);
 
-        int year = -1;
+        while (true) {
+            int year = -1;
 
-        // Read a year
-        while (year <= 0) {
-            System.out.print("Enter a year (value > 0): ");
-            year = scanner.nextInt();
-        }
+            while (year < 0) {
+                System.out.print("Enter a year (value > 0 or 0 to terminate): ");
+                year = scanner.nextInt();
 
-        if ((year % 4 != 0) || (year % 100 != 0 && year % 400 == 0)) {
-            System.out.printf("%d is not a leap year.%n", year);
-        } else {
-            System.out.printf("%d is a leap year.%n", year);
+                if (year == 0) System.exit(0);
+            }
+
+            if ((year % 4 == 0) && (year % 100 != 0)) {
+                System.out.printf("%d is a leap year.%n", year);
+            } else if ((year % 4 == 0) && (year % 100 == 0) && (year % 400 == 0)) {
+                System.out.printf("%d is a leap year.%n", year);
+            } else {
+                System.out.printf("%d is NOT a leap year.%n", year);
+            }
         }
     }
 }
