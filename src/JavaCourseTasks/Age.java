@@ -8,7 +8,7 @@ public class Age {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите ваш возраст: ");
+        System.out.print("Введите ваш возраст: ");
         int age = scanner.nextInt();
 
         if (age > 0 && age <= 112) {
@@ -16,7 +16,7 @@ public class Age {
 
             if ((age / 10) % 10 == 1) {
                 ageTextEnding = "лет";
-            } else if (age % 10 > 4) {
+            } else if (age % 10 > 4 || age % 10 == 0) {
                 ageTextEnding = "лет";
             } else if (age % 10 == 1) {
                 ageTextEnding = "год";
@@ -24,7 +24,7 @@ public class Age {
                 ageTextEnding = "года";
             }
 
-            System.out.printf("Вам %d %s", age, ageTextEnding);
+            System.out.printf("Вам %d %s%n", age, ageTextEnding);
         } else if (age <= 0) {
             System.out.println("Вы слишком малы.");
         } else {
