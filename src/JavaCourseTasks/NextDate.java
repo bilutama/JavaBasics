@@ -7,41 +7,50 @@ public class NextDate {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter date as D/M/YYYY");
+
+        System.out.print("Day: ");
         int day = scanner.nextInt();
 
-        System.out.println("Enter date as D/M/YYYY");
+        System.out.print("Month: ");
         int month = scanner.nextInt();
 
-        System.out.println("Enter date as D/M/YYYY");
+        System.out.print("Year: ");
         int year = scanner.nextInt();
 
-        // Count days in months, index 0 corresponds to February in a leap year (29 days)
-        final int[] daysInMonths = new int[] {29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    }
-
-    private static int getDaysInYear (int year) {
-        if ((year % 4 == 0) && (year % 100 != 0)) {
-            return 366; // A leap year
-        } else if ((year % 4 == 0) && (year % 100 == 0) && (year % 400 == 0)) {
-            return 366; // A leap year
-        } else {
-            return 365; // NOT a leap year
-        }
-    }
-
-    private static boolean isDateValid (int day, int month, int year) {
-        if  (year < 0 || month > 12 || month < 0 || day < 0) {
-            return false;
+        if (year < 0 || month > 12 || month < 0 || day < 0) {
+            System.out.println("Data is not valid");
         } else {
             int monthIndex = month;
 
-            if (getDaysInYear(year) == 366 && month == 2) {
+            if (isLeap(year) && month == 2) {
                 monthIndex = 0;
             }
 
-            final int[] daysInMonths = new int[] {29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            final int[] daysInMonths = new int[]{29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-            return day <= daysInMonths[monthIndex];
+            if (day < daysInMonths[monthIndex]) {
+                // Date is valid and the day is NOT last in the month
+                System.out.printf("The next date is %02d %02d %d", (day + 1), month, year);
+            } else if (day == daysInMonths[monthIndex]) {
+                // Date is valid and the day IS the last in the month
+                if (month == 12) {
+                    // It is December, 31
+                    System.out.printf("The next date is %02d %02d %d", 1, 1, (year + 1));
+                } else {
+                    // It is NOT December, the last day in the month
+                    System.out.printf("The next date is %02d %02d %d", 1, (month + 1), year);
+                }
+            } else {
+                System.out.println("Data is not valid");
+            }
+        }
+    }
+
+    private static boolean isLeap(int year) {
+        if ((year % 4 == 0) && (year % 100 != 0)) {
+            return true; // A leap year
+        } else {
+            return (year % 4 == 0) && (year % 100 == 0) && (year % 400 == 0);
         }
     }
 }
