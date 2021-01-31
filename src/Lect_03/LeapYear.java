@@ -16,20 +16,10 @@ public class LeapYear {
             year = scanner.nextInt();
         }
 
-        boolean isLeap = true;
-
-        // Check whether the year in not a leap
-        if (year % 4 != 0) {
-            isLeap = false;
-        } else if ((year % 100 != 0) && (year % 400 == 0)) {
-            isLeap = false;
-        }
-
-        // Output
-        if (isLeap) {
-            System.out.printf("%d is a leap year.%n", year);
-        } else {
+        if ((year % 4 != 0) || (year % 100 != 0 && year % 400 == 0)) {
             System.out.printf("%d is not a leap year.%n", year);
+        } else {
+            System.out.printf("%d is a leap year.%n", year);
         }
     }
 }
