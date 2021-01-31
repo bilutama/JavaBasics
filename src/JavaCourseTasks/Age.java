@@ -18,6 +18,8 @@ public class Age {
                 ageTextEnding = "лет";
             } else if (age % 10 > 4) {
                 ageTextEnding = "лет";
+            } else if (age % 10 == 1) {
+                ageTextEnding = "год";
             } else {
                 ageTextEnding = "года";
             }
