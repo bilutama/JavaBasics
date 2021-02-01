@@ -2,9 +2,9 @@ package JavaCourseTasks;
 
 import java.util.Scanner;
 
-public class SquareEquation {
+public class QuadraticEquation {
     public static void main(String[] args) {
-        System.out.println("*** Solves a square equation ***");
+        System.out.println("*** Solves quadratic equations ***");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -18,19 +18,26 @@ public class SquareEquation {
         System.out.print("Enter c: ");
         double c = scanner.nextDouble();
 
-        if (a == 0 && b == 0 && c == 0) {
-            System.out.println("All coefficients are 0, so there are no roots.");
-        } else if (a == 0 && b != 0) {
-            double root = -c / b;
-            System.out.printf("The equation is linear, x = -c / b = %f", root);
+        if (a == 0) {
+            if (b == 0) {
+                if (c == 0) {
+                    System.out.println("All coefficients are 0, so there no equation (0 == 0).");
+                } else {
+                    System.out.printf("Incorrect identity, because %f != 0%n.", c);
+                }
+            } else {
+                double root = -c / b;
+                System.out.printf("The equation is linear, x = -c / b = %f", root);
+            }
         } else {
             double discriminant = Math.pow(b, 2) - 4 * a * c;
+            final double epsilon = 1.0E-10;
 
-            if (discriminant > 0) {
+            if (discriminant > epsilon) {
                 double equationRoot1 = (-b - Math.sqrt(discriminant)) / (2 * a);
                 double equationRoot2 = (-b + Math.sqrt(discriminant)) / (2 * a);
                 System.out.printf("The equation has two roots: x1 = %f, x2 = %f", equationRoot1, equationRoot2);
-            } else if (discriminant == 0) {
+            } else if (Math.abs(discriminant) <= epsilon) {
                 double equationRoot = -b / (2 * a);
                 System.out.printf("The equation has one root x = %f", equationRoot);
             } else {
