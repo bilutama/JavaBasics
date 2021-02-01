@@ -9,7 +9,7 @@ public class TriangleArea {
         Scanner scanner = new Scanner(System.in);
 
         // Array to store 3 points with X and Y as [dimension][pointCounter]
-        double[][] points = new double[3[2];
+        double[][] points = new double[3][2];
 
         System.out.println("Please enter coordinates:");
 
@@ -30,7 +30,7 @@ public class TriangleArea {
         } else {
             double triangleSide1 = Math.sqrt(Math.pow((points[0][0] - points[1][0]), 2) +
                     Math.pow((points[0][1] - points[1][1]), 2));
-            double triangleSide2 = Math.sqrt(Math.pow((points[0][0] - points[0][2]), 2) +
+            double triangleSide2 = Math.sqrt(Math.pow((points[0][0] - points[2][0]), 2) +
                     Math.pow((points[0][1] - points[2][1]), 2));
             double triangleSide3 = Math.sqrt(Math.pow((points[1][0] - points[2][0]), 2) +
                     Math.pow((points[1][1] - points[2][1]), 2));
