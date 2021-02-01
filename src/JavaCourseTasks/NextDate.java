@@ -49,10 +49,6 @@ public class NextDate {
     }
 
     private static boolean isLeap(int year) {
-        if ((year % 4 == 0) && (year % 100 != 0)) {
-            return true;
-        } else {
-            return (year % 4 == 0) && (year % 100 == 0) && (year % 400 == 0);
-        }
+        return (year % 100 != 0) && (year % 4 == 0) || (year % 100 == 0) && (year % 400 == 0)
     }
 }
