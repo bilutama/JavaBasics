@@ -20,7 +20,7 @@ public class LeapYear {
                 }
             }
 
-            if (((year % 4 == 0) && (year % 100 != 0)) || ((year % 4 == 0) && (year % 100 == 0) && (year % 400 == 0))) {
+            if ((year % 100 != 0) && (year % 4 == 0) || (year % 100 == 0) && (year % 400 == 0)) {
                 System.out.printf("%d is a leap year.%n", year);
             } else {
                 System.out.printf("%d is NOT a leap year.%n", year);
