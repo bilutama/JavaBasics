@@ -18,9 +18,11 @@ public class QuadraticEquation {
         System.out.print("Enter c: ");
         double c = scanner.nextDouble();
 
-        if (a == 0) {
-            if (b == 0) {
-                if (c == 0) {
+        final double epsilon = 1.0E-10;
+
+        if (Math.abs(a) <= epsilon) {
+            if (Math.abs(b) <= epsilon) {
+                if (Math.abs(c) <= epsilon) {
                     System.out.println("There is no equation. Identity 0 == 0 is correct.");
                 } else {
                     System.out.printf("Incorrect identity, because %f != 0.%n", c);
@@ -30,7 +32,6 @@ public class QuadraticEquation {
                 System.out.printf("The equation is linear, x = -c / b = %f", root);
             }
         } else {
-            final double epsilon = 1.0E-10;
             double discriminant = Math.pow(b, 2) - 4 * a * c;
 
             if (discriminant > epsilon) {
