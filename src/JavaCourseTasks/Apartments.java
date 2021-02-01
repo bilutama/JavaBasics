@@ -4,17 +4,16 @@ import java.util.Scanner;
 
 public class Apartments {
     public static void main(String[] args) {
-        int entrancesCount = -1;
-        int floorsCount = -1;
-
         Scanner scanner = new Scanner(System.in);
-
+        
+        int entrancesCount = -1;
         // Assure that entrancesCount is not 0 nor negative
         while (entrancesCount <= 0) {
             System.out.print("Enter numbers of entrances (values > 0): ");
             entrancesCount = scanner.nextInt();
         }
 
+        int floorsCount = -1;
         // Assure that floorsCount is not 0 nor negative
         while (floorsCount <= 0) {
             System.out.print("Enter numbers of floors (values > 0): ");
