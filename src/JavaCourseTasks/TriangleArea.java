@@ -43,7 +43,7 @@ public class TriangleArea {
                     (triangleSemiPerimeter - triangleSide2) *
                     (triangleSemiPerimeter - triangleSide3));
 
-            System.out.printf("Area if the triangle is %.3f: ", triangleArea);
+            System.out.printf("Area if the triangle is %.3f.", triangleArea);
         }
     }
 }
