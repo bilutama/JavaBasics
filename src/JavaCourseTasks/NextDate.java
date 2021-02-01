@@ -20,21 +20,24 @@ public class NextDate {
         if (year < 0 || month > 12 || month < 0 || day < 0) {
             System.out.println("Date is not valid.");
         } else {
-            // monthIndex is used to consider leap-year February while getting daysInMonth
-            int monthIndex = month;
-
-            if (isLeap(year) && month == 2) {
-                monthIndex = 0;
+            int daysInMonth;
+            
+            if (month == 2) {
+                if (isLeap(year)) {
+                    daysInMonth = 29;
+                } else {
+                    daysInMonth = 28;
+                }
+            } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                daysInMonth = 30;
+            } else {
+                daysInMonth = 31;
             }
-
-            // TODO: replace the array
-            // Index [0] reserved for leap-year February, other indexes are 1 - Jan, 2 - Feb etc.
-            final int[] daysInMonth = new int[]{29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-            if (day < daysInMonth[monthIndex]) {
+                    
+            if (day < daysInMonth) {
                 // Date is valid and the day is NOT last in the month
                 System.out.printf("The next day is %02d.%02d.%d", (day + 1), month, year);
-            } else if (day == daysInMonth[monthIndex]) {
+            } else if (day == daysInMonth) {
                 // Date is valid and the day IS the last in the month
                 if (month == 12) {
                     // It is December, 31
