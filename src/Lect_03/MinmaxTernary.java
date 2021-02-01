@@ -15,8 +15,8 @@ public class MinmaxTernary {
         int number2 = scanner.nextInt();
 
         if ((number1 != number2)) {
-            int maximumNumber = (number1 > number2) ? number1 : number2;
-            int minimumNumber = (number1 < number2) ? number1 : number2;
+            int maximumNumber = number1 > number2 ? number1 : number2;
+            int minimumNumber = number1 < number2 ? number1 : number2;
             System.out.printf("%d is the biggest, %d is the smallest.", maximumNumber, minimumNumber);
         } else {
             System.out.println("Numbers are equal.");
