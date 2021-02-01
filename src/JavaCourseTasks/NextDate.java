@@ -27,6 +27,7 @@ public class NextDate {
                 monthIndex = 0;
             }
 
+            // TODO: replace the array
             // Index [0] reserved for leap-year February, other indexes are 1 - Jan, 2 - Feb etc.
             final int[] daysInMonth = new int[]{29, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -49,6 +50,6 @@ public class NextDate {
     }
 
     private static boolean isLeap(int year) {
-        return (year % 100 != 0) && (year % 4 == 0) || (year % 100 == 0) && (year % 400 == 0)
+        return (year % 100 != 0) && (year % 4 == 0) || (year % 100 == 0) && (year % 400 == 0);
     }
 }
