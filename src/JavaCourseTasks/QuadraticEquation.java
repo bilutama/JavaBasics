@@ -21,7 +21,7 @@ public class QuadraticEquation {
         if (a == 0) {
             if (b == 0) {
                 if (c == 0) {
-                    System.out.println("All coefficients are 0, so there no equation (0 == 0).");
+                    System.out.println("There is no equation. Identity 0 == 0 is correct.");
                 } else {
                     System.out.printf("Incorrect identity, because %f != 0%n.", c);
                 }
