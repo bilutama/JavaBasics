@@ -2,7 +2,7 @@ package Lect_03;
 
 import java.util.Scanner;
 
-public class MinmaxTernary {
+public class MinMaxTernary {
     public static void main(String[] args) {
         System.out.println("*** Returns minimum of two numbers provided ***");
 
@@ -14,7 +14,7 @@ public class MinmaxTernary {
         System.out.print("Enter the second number: ");
         int number2 = scanner.nextInt();
 
-        if ((number1 != number2)) {
+        if (number1 != number2) {
             int maximumNumber = number1 > number2 ? number1 : number2;
             int minimumNumber = number1 < number2 ? number1 : number2;
             System.out.printf("%d is the biggest, %d is the smallest.", maximumNumber, minimumNumber);

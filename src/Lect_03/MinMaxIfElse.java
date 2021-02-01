@@ -2,7 +2,7 @@ package Lect_03;
 
 import java.util.Scanner;
 
-public class MinmaxIfElse {
+public class MinMaxIfElse {
     public static void main(String[] args) {
         System.out.println("*** Returns minimum of two numbers provided ***");
 
