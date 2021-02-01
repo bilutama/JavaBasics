@@ -11,24 +11,23 @@ public class Age {
         System.out.print("Введите ваш возраст: ");
         int age = scanner.nextInt();
 
-        if (age > 0 && age <= 112) {
+        if (age > 112) {
+            System.out.println("Вы слишком стары.");
+        } else if (age <= 0) {
+            System.out.println("Вы слишком малы.");
+        } else {
             String ageTextEnding;
 
-            if ((age / 10) % 10 == 1) {
+            int lastAgeDigit = age % 10;
+            if ((age / 10) % 10 == 1 || (lastAgeDigit > 4) || (lastAgeDigit == 0)) {
                 ageTextEnding = "лет";
-            } else if (age % 10 > 4 || age % 10 == 0) {
-                ageTextEnding = "лет";
-            } else if (age % 10 == 1) {
+            } else if (lastAgeDigit == 1) {
                 ageTextEnding = "год";
             } else {
                 ageTextEnding = "года";
             }
 
             System.out.printf("Вам %d %s%n", age, ageTextEnding);
-        } else if (age <= 0) {
-            System.out.println("Вы слишком малы.");
-        } else {
-            System.out.println("Вы слишком стары.");
         }
     }
 }
