@@ -18,10 +18,11 @@ public class Age {
         } else {
             String ageTextEnding;
 
-            int lastAgeDigit = age % 10;
-            if ((age / 10) % 10 == 1 || (lastAgeDigit > 4) || (lastAgeDigit == 0)) {
+            int ageLastDigit = age % 10;
+            
+            if ((age / 10) % 10 == 1 || (ageLastDigit > 4) || (ageLastDigit == 0)) {
                 ageTextEnding = "лет";
-            } else if (lastAgeDigit == 1) {
+            } else if (ageLastDigit == 1) {
                 ageTextEnding = "год";
             } else {
                 ageTextEnding = "года";
