@@ -24,10 +24,8 @@ public class Fibonacci {
     }
 
     static int getFibonacciNumberByIndex(int index) {
-        if (index == 1) {
-            return 0;
-        } else if (index == 2) {
-            return 1;
+        if (index == 1 || index == 2) {
+            return index - 1;
         } else {
             return getFibonacciNumberByIndex(index - 1) + getFibonacciNumberByIndex(index - 2);
         }
