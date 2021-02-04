@@ -2,19 +2,19 @@ package JavaCourseTasks;
 
 import java.util.Scanner;
 
-public class Fibonacci {
+public class FibonacciRecursion {
     public static void main(String[] args) {
         System.out.println("*** Finds Fibonacci numbers ***");
 
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Enter an index (> 0 and < 48; or 0 to terminate): ");
+            System.out.print("Enter an index (> 0 and < 47; or 0 to terminate): ");
             int fibonacciIndex = scanner.nextInt();
 
             long algorithmStartTime = System.currentTimeMillis();
 
-            if (fibonacciIndex < 0 && fibonacciIndex > 47) {
+            if (fibonacciIndex < 0 || fibonacciIndex > 46) {
                 System.out.println("Invalid index.");
             } else if (fibonacciIndex == 0) {
                 System.exit(0);

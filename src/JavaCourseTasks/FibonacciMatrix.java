@@ -9,8 +9,8 @@ public class FibonacciMatrix {
         Scanner scanner = new Scanner(System.in);
 
         int fibonacciNumberIndex = 0;
-        while (fibonacciNumberIndex < 1 || fibonacciNumberIndex > 47) {
-            System.out.print("Enter an index (> 0 and < 48): ");
+        while (fibonacciNumberIndex < 1 || fibonacciNumberIndex > 46) {
+            System.out.print("Enter an index (> 0 and < 47): ");
             fibonacciNumberIndex = scanner.nextInt();
         }
 
