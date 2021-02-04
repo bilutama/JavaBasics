@@ -9,6 +9,7 @@ public class Digits {
         Scanner scanner = new Scanner(System.in);
 
         int userNumber = 0;
+        
         while (userNumber < 1) {
             System.out.print("Enter a number (> 0): ");
             userNumber = scanner.nextInt();
@@ -18,10 +19,9 @@ public class Digits {
         int digitsSum = 0;
         int oddDigitsSum = 0;
         int maximumDigit = 0;
-        int lastDigit;
 
         while (temporaryNumber > 0) {
-            lastDigit = temporaryNumber % 10;
+            int lastDigit = temporaryNumber % 10;
             digitsSum += lastDigit;
 
             if (lastDigit > maximumDigit) {
@@ -36,7 +36,7 @@ public class Digits {
         }
 
         System.out.printf("Sum of digits = %d%n", digitsSum);
-        System.out.printf("Sum of even digits = %d%n", oddDigitsSum);
+        System.out.printf("Sum of odd digits = %d%n", oddDigitsSum);
         System.out.printf("Maximum digit = %d%n", maximumDigit);
     }
 }
