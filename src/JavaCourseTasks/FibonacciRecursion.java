@@ -19,7 +19,7 @@ public class FibonacciRecursion {
             } else if (fibonacciIndex == 0) {
                 System.exit(0);
             } else {
-                int fibonacciNumber = getFibonacciNumberByIndex(fibonacciIndex);
+                long fibonacciNumber = getFibonacciNumberByIndex(fibonacciIndex);
                 System.out.printf("F = %d.%n", fibonacciNumber);
 
                 long algorithmEndTime = System.currentTimeMillis();
@@ -28,7 +28,7 @@ public class FibonacciRecursion {
         }
     }
 
-    static int getFibonacciNumberByIndex(int index) {
+    static long getFibonacciNumberByIndex(int index) {
         if (index == 1 || index == 2) {
             return index - 1;
         } else {
