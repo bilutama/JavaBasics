@@ -22,10 +22,9 @@ public class FibonacciDirectSum {
 
             if (fibonacciIndex > 2) {
                 int i = 2;
-                int temporaryNumber;
 
                 while (i < fibonacciIndex) {
-                    temporaryNumber = fibonacciNumbers[1] + fibonacciNumbers[2];
+                    int temporaryNumber = fibonacciNumbers[1] + fibonacciNumbers[2];
                     fibonacciNumbers[1] = fibonacciNumbers[2];
                     fibonacciNumbers[2] = temporaryNumber;
                     ++i;
@@ -35,7 +34,6 @@ public class FibonacciDirectSum {
             } else {
                 System.out.printf("F = %d.%n", fibonacciNumbers[fibonacciIndex]);
             }
-
 
             long algorithmEndTime = System.currentTimeMillis();
             System.out.printf("< Executed in %dms >%n", algorithmEndTime - algorithmStartTime);
