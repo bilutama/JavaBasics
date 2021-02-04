@@ -24,18 +24,27 @@ public class SwitchCase {
         int operatorCode = scanner.nextInt();
 
         switch (operatorCode) {
-            case 1 -> System.out.printf("%.3f + %.3f = %.3f", firstOperand, secondOperand, firstOperand + secondOperand);
-            case 2 -> System.out.printf("%.3f - %.3f = %.3f", firstOperand, secondOperand, firstOperand - secondOperand);
-            case 3 -> System.out.printf("%.3f * %.3f = %.3f", firstOperand, secondOperand, firstOperand * secondOperand);
-            case 4 -> {
+            case 1:
+                System.out.printf("%.3f + %.3f = %.3f", firstOperand, secondOperand, firstOperand + secondOperand);
+                break;
+            case 2:
+                System.out.printf("%.3f - %.3f = %.3f", firstOperand, secondOperand, firstOperand - secondOperand);
+                break;
+            case 3:
+                System.out.printf("%.3f * %.3f = %.3f", firstOperand, secondOperand, firstOperand * secondOperand);
+                break;
+            case 4:
                 double epsilon = 1.0E-10;
+                
                 if (Math.abs(secondOperand) < epsilon) {
                     System.out.println("Error (Dividing by 0)");
                 } else {
-                    System.out.printf("%.3f // %.3f = %.3f", firstOperand, secondOperand, firstOperand / secondOperand);
+                    System.out.printf("%.3f / %.3f = %.3f", firstOperand, secondOperand, firstOperand / secondOperand);
                 }
-            }
-            default -> System.out.println("Unknown operator");
+                
+                break;
+            default:
+                System.out.println("Unknown operator");
         }
     }
 }
