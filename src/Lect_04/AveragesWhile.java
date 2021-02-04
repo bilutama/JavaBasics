@@ -4,21 +4,15 @@ import java.util.Scanner;
 
 public class AveragesWhile {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
         System.out.println("*** Calculates arithmetic average ***");
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("The first number: ");
+        int firstNumber = scanner.nextInt();
 
-        int firstNumber = 0;
-        while (firstNumber < 1) {
-            System.out.print("The first number (> 0): ");
-            firstNumber = scanner.nextInt();
-        }
-
-        int lastNumber = 0;
-        while (lastNumber < 1) {
-            System.out.print("The last number (> 0): ");
-            lastNumber = scanner.nextInt();
-        }
+        System.out.print("The last number: ");
+        int lastNumber = scanner.nextInt();
 
         if (lastNumber < firstNumber) {
             int temporaryNumber = lastNumber;
@@ -28,31 +22,26 @@ public class AveragesWhile {
 
         int numbersSum = 0;
         int currentNumber = firstNumber;
-
+        int evenNumbersCount = 0;
+        int evenNumbersSum = 0;
+        
         while (currentNumber <= lastNumber) {
             numbersSum += currentNumber;
+            
+            if (currentNumber % 2 == 0) {
+                evenNumbersSum += currentNumber;
+                ++evenNumbersCount;
+            }
+            
             ++currentNumber;
         }
 
         double arithmeticAverage = (double) numbersSum / (lastNumber - firstNumber + 1);
         System.out.printf("Arithmetic average is %.3f%n", arithmeticAverage);
 
-        int evenNumbersCount = 0;
-        int evenNumbersSum = 0;
-        currentNumber = firstNumber;
-
-        while (currentNumber <= lastNumber) {
-            if (currentNumber % 2 == 0) {
-                evenNumbersSum += currentNumber;
-                ++evenNumbersCount;
-            }
-
-            ++currentNumber;
-        }
-
         if (evenNumbersCount > 0) {
-            double arithmeticAverageEvenOnly = (double) evenNumbersSum / evenNumbersCount;
-            System.out.printf("Arithmetic average for even numbers only is %.3f", arithmeticAverageEvenOnly);
+            double arithmeticAverageEvenNumbers = (double) evenNumbersSum / evenNumbersCount;
+            System.out.printf("Arithmetic average for even numbers only is %.3f", arithmeticAverageEvenNumbers);
         } else {
             System.out.println("No even numbers to calculate their average.");
         }
