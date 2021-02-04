@@ -64,15 +64,12 @@ public class FibonacciMatrix {
                 matrixInPower[i][i] = 1;
             }
         } else {
-            matrixInPower = matrix;
-
-            for (int i = 1; i < n; ++i) {
-                try {
-                matrixInPower = getMatricesMultiplication(matrixInPower, matrix);
-                }
-                catch (Exception exception) {
-                    System.out.println(exception.getMessage());
-                }
+            if (n % 2 == 0) {
+                int[][] temporaryMatrix = getMatrixInPower(matrix, n / 2);
+                return getMatricesMultiplication(temporaryMatrix, temporaryMatrix);
+            } else {
+                int[][] temporaryMatrix = getMatrixInPower(matrix, (n - 1) / 2);
+                return getMatricesMultiplication(matrix, getMatricesMultiplication(temporaryMatrix, temporaryMatrix));
             }
         }
         return matrixInPower;
