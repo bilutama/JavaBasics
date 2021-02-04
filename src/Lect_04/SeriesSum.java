@@ -8,17 +8,19 @@ public class SeriesSum {
 
         Scanner scanner = new Scanner(System.in);
 
-        int seriesIndex = -1;
-        while (seriesIndex < 0) {
-            System.out.print("Enter series index: ");
-            seriesIndex = scanner.nextInt();
+        int numberCountInSeries = -1;
+        
+        while (numberCountInSeries < 0) {
+            System.out.print("Enter a number count: ");
+            numberCountInSeries = scanner.nextInt();
         }
 
-        int seriesSumByIndex = 0;
-        for (int i = 1; i <= seriesIndex; ++i) {
-            seriesSumByIndex += Math.pow(-1, i + 1) * Math.pow(i, 2);
+        int seriesSum = 0;
+        
+        for (int i = 1; i <= numberCountInSeries; ++i) {
+            seriesSum += Math.pow(-1, i + 1) * Math.pow(i, 2);
         }
 
-        System.out.printf("Sum of the series = %d%n", seriesSumByIndex);
+        System.out.printf("Sum of the series = %d%n", seriesSum);
     }
 }
