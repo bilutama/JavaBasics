@@ -9,10 +9,10 @@ public class SwitchCase {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Please enter the first operand: ");
-        double firstOperand = scanner.nextDouble();
+        double operand1 = scanner.nextDouble();
 
         System.out.print("Please enter the second operand: ");
-        double secondOperand = scanner.nextDouble();
+        double operand2 = scanner.nextDouble();
 
         System.out.println("Operations available:");
         System.out.println("code 1 for +");
@@ -25,21 +25,21 @@ public class SwitchCase {
 
         switch (operatorCode) {
             case 1:
-                System.out.printf("%.3f + %.3f = %.3f", firstOperand, secondOperand, firstOperand + secondOperand);
+                System.out.printf("%.3f + %.3f = %.3f", operand1, operand2, operand1 + operand2);
                 break;
             case 2:
-                System.out.printf("%.3f - %.3f = %.3f", firstOperand, secondOperand, firstOperand - secondOperand);
+                System.out.printf("%.3f - %.3f = %.3f", operand1, operand2, operand1 - operand2);
                 break;
             case 3:
-                System.out.printf("%.3f * %.3f = %.3f", firstOperand, secondOperand, firstOperand * secondOperand);
+                System.out.printf("%.3f * %.3f = %.3f", operand1, operand2, operand1 * operand2);
                 break;
             case 4:
                 double epsilon = 1.0E-10;
                 
-                if (Math.abs(secondOperand) < epsilon) {
+                if (Math.abs(operand2) < epsilon) {
                     System.out.println("Error (Dividing by 0)");
                 } else {
-                    System.out.printf("%.3f / %.3f = %.3f", firstOperand, secondOperand, firstOperand / secondOperand);
+                    System.out.printf("%.3f / %.3f = %.3f", operand1, operand2, operand1 / operand2);
                 }
                 
                 break;
