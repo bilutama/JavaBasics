@@ -25,8 +25,7 @@ public class FibonacciMatrix {
         try {
             long[][] fibonacciMatrix = getMatrixInPower(basicMatrix, fibonacciNumberIndex);
             System.out.printf("Number #%d = %d%n", fibonacciNumberIndex, fibonacciMatrix[0][1]);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
 
