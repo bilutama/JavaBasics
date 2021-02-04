@@ -8,8 +8,11 @@ public class FibonacciMatrix {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter an index: ");
-        int fibonacciNumberIndex = scanner.nextInt();
+        int fibonacciNumberIndex = 0;
+        while (fibonacciNumberIndex < 1 || fibonacciNumberIndex > 47) {
+            System.out.print("Enter an index (> 0 and < 48): ");
+            fibonacciNumberIndex = scanner.nextInt();
+        }
 
         long algorithmStartTime = System.currentTimeMillis();
 

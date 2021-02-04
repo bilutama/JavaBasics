@@ -9,16 +9,21 @@ public class Fibonacci {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Enter the index of a Fibonacci number (> 0 or 0 to terminate): ");
+            System.out.print("Enter an index (> 0 and < 48; or 0 to terminate): ");
             int fibonacciIndex = scanner.nextInt();
 
-            if (fibonacciIndex < 0) {
+            long algorithmStartTime = System.currentTimeMillis();
+
+            if (fibonacciIndex < 0 && fibonacciIndex > 47) {
                 System.out.println("Invalid index.");
             } else if (fibonacciIndex == 0) {
                 System.exit(0);
             } else {
                 int fibonacciNumber = getFibonacciNumberByIndex(fibonacciIndex);
                 System.out.printf("F = %d.%n", fibonacciNumber);
+
+                long algorithmEndTime = System.currentTimeMillis();
+                System.out.printf("< Executed in %dms >%n", algorithmEndTime - algorithmStartTime);
             }
         }
     }
