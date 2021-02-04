@@ -9,6 +9,7 @@ public class FibonacciMatrix {
         System.out.println("*** Returns Fibonacci number by index ***");
 
         int fibonacciNumberIndex = 0;
+
         while (fibonacciNumberIndex < 1 || fibonacciNumberIndex > 92) {
             System.out.print("Enter an index (> 0 and < 93): ");
             fibonacciNumberIndex = scanner.nextInt();
@@ -47,6 +48,7 @@ public class FibonacciMatrix {
                 }
             }
         }
+
         return matrixProduct;
     }
 
@@ -72,6 +74,7 @@ public class FibonacciMatrix {
                 matrixInPower = getMatricesMultiplication(matrix, getMatricesMultiplication(temporaryMatrix, temporaryMatrix));
             }
         }
+
         return matrixInPower;
     }
 
@@ -80,6 +83,7 @@ public class FibonacciMatrix {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.printf("%10d", matrix[i][j]);
             }
+
             System.out.println();
         }
     }
