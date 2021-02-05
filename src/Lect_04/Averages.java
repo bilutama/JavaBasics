@@ -8,10 +8,10 @@ public class Averages {
 
         System.out.println("*** Calculates arithmetic average ***");
         
-        System.out.print("The first number (> 0): ");
+        System.out.print("The first number: ");
         int firstNumber = scanner.nextInt();
 
-        System.out.print("The last number (> 0): ");
+        System.out.print("The last number: ");
         int lastNumber = scanner.nextInt();
 
         if (lastNumber < firstNumber) {
@@ -33,12 +33,12 @@ public class Averages {
             }
         }
 
-        double arithmeticAverage = (double) numbersSum / (lastNumber - firstNumber + 1);
-        System.out.printf("Arithmetic average is %.3f%n", arithmeticAverage);
+        double average = (double) numbersSum / (lastNumber - firstNumber + 1);
+        System.out.printf("Average is %.3f%n", average);
 
         if (evenNumbersCount > 0) {
-            double arithmeticAverageEvenNumbers = (double) evenNumbersSum / evenNumbersCount;
-            System.out.printf("Arithmetic average for even numbers only is %.3f", arithmeticAverageEvenNumbers);
+            double evenNumbersAverage = (double) evenNumbersSum / evenNumbersCount;
+            System.out.printf("Average for even numbers is %.3f", evenNumbersAverage);
         } else {
             System.out.println("No even numbers to calculate their average.");
         }
