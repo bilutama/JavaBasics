@@ -25,6 +25,7 @@ public class TriangleArea {
         double deltaX2MultipleDeltaY1 = (points[0][1] - points[2][1]) * (points[0][0] - points[1][0]);
 
         final double epsilon = 1.0E-10;
+
         // Check if the points are on the line and calculate the area otherwise
         if (Math.abs(deltaX1MultipleDeltaY2 - deltaX2MultipleDeltaY1) <= epsilon) {
             System.out.println("All the vertices of the triangle are on the same line, i.e. area = 0");

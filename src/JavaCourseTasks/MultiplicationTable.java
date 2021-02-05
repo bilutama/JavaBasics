@@ -22,6 +22,7 @@ public class MultiplicationTable {
             lastNumber = scanner.nextInt();
         }
 
+        // printing the first line
         for (int i = 1; i <= firstNumber; i++) {
             if (i > 1) {
                 System.out.printf("%4d", i);
@@ -32,12 +33,14 @@ public class MultiplicationTable {
 
         System.out.println();
 
+        // printing the separator
         for (int i = 1; i <= firstNumber; i++) {
             System.out.print("____");
         }
 
         System.out.println();
 
+        // printing the multiplication table
         for (int i = 2; i <= firstNumber; i++) {
             for (int j = 1; j <= lastNumber; j++) {
                 if (j == 1) {
@@ -46,6 +49,7 @@ public class MultiplicationTable {
                     System.out.printf("%4d", i * j);
                 }
             }
+
             System.out.println();
         }
     }

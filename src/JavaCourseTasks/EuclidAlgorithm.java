@@ -10,17 +10,13 @@ public class EuclidAlgorithm {
 
         int firstNumber = 0;
 
-        while (firstNumber < 1) {
-            System.out.print("The first number (> 0): ");
-            firstNumber = scanner.nextInt();
-        }
+        System.out.print("The first number: ");
+        firstNumber = Math.abs(scanner.nextInt());
 
         int secondNumber = 0;
 
-        while (secondNumber < 1) {
-            System.out.print("The last number (> 0): ");
-            secondNumber = scanner.nextInt();
-        }
+        System.out.print("The last number: ");
+        secondNumber = Math.abs(scanner.nextInt());
 
         if (secondNumber < firstNumber) {
             int temporaryNumber = secondNumber;
@@ -28,9 +24,9 @@ public class EuclidAlgorithm {
             firstNumber = temporaryNumber;
         }
 
-        int modulo = firstNumber % secondNumber;
+        int modulo = 1;
 
-        while (modulo > 0) {
+        while (modulo != 0) {
             modulo = firstNumber % secondNumber;
             firstNumber = secondNumber;
             secondNumber = modulo;

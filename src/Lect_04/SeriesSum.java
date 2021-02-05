@@ -12,7 +12,7 @@ public class SeriesSum {
         
         while (numbersCountInSeries < 0) {
             System.out.print("Enter a number count: ");
-            numbesrCountInSeries = scanner.nextInt();
+            numbersCountInSeries = scanner.nextInt();
         }
 
         int seriesSum = 0;
