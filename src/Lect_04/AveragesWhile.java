@@ -21,27 +21,27 @@ public class AveragesWhile {
         }
 
         int numbersSum = 0;
-        int currentNumber = firstNumber;
+        int i = firstNumber;
         int evenNumbersCount = 0;
         int evenNumbersSum = 0;
         
-        while (currentNumber <= lastNumber) {
-            numbersSum += currentNumber;
+        while (i <= lastNumber) {
+            numbersSum += i;
             
-            if (currentNumber % 2 == 0) {
-                evenNumbersSum += currentNumber;
+            if (i % 2 == 0) {
+                evenNumbersSum += i;
                 ++evenNumbersCount;
             }
             
-            ++currentNumber;
+            ++i;
         }
 
-        double arithmeticAverage = (double) numbersSum / (lastNumber - firstNumber + 1);
-        System.out.printf("Arithmetic average is %.3f%n", arithmeticAverage);
+        double average = (double) numbersSum / (lastNumber - firstNumber + 1);
+        System.out.printf("Average is %.3f%n", average);
 
         if (evenNumbersCount > 0) {
-            double arithmeticAverageEvenNumbers = (double) evenNumbersSum / evenNumbersCount;
-            System.out.printf("Arithmetic average for even numbers only is %.3f", arithmeticAverageEvenNumbers);
+            double evenNumbersAverage = (double) evenNumbersSum / evenNumbersCount;
+            System.out.printf("Average for even numbers is %.3f", evenNumbersAverage);
         } else {
             System.out.println("No even numbers to calculate their average.");
         }
