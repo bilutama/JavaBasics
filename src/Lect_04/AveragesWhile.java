@@ -21,9 +21,9 @@ public class AveragesWhile {
         }
 
         int numbersSum = 0;
-        int i = firstNumber;
         int evenNumbersCount = 0;
         int evenNumbersSum = 0;
+        int i = firstNumber;
         
         while (i <= lastNumber) {
             numbersSum += i;
