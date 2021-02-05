@@ -8,16 +8,16 @@ public class SeriesSum {
 
         Scanner scanner = new Scanner(System.in);
 
-        int numberCountInSeries = -1;
+        int numbersCountInSeries = -1;
         
-        while (numberCountInSeries < 0) {
+        while (numbersCountInSeries < 0) {
             System.out.print("Enter a number count: ");
-            numberCountInSeries = scanner.nextInt();
+            numbesrCountInSeries = scanner.nextInt();
         }
 
         int seriesSum = 0;
         
-        for (int i = 1; i <= numberCountInSeries; ++i) {
+        for (int i = 1; i <= numbersCountInSeries; ++i) {
             seriesSum += Math.pow(-1, i + 1) * Math.pow(i, 2);
         }
 
