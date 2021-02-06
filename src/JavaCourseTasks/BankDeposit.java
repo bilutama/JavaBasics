@@ -43,11 +43,11 @@ public class BankDeposit {
         DecimalFormat decimalFormat = new DecimalFormat("###,##0.0");
 
         for (int i = 1; i <= monthsCount; ++i) {
-            System.out.printf("%3d |", i);
+            System.out.printf("%5d |", i);
             System.out.printf("%15s ", decimalFormat.format(depositStateStart));
 
             depositStateEnd = depositStateStart * (1 + annualInterestRate / 12 / 100);
-            System.out.printf("%16s", decimalFormat.format(depositStateEnd));
+            System.out.printf("%14s", decimalFormat.format(depositStateEnd));
 
             double interest = depositStateEnd - depositStateStart;
             System.out.printf("%16s%n", decimalFormat.format(interest));
