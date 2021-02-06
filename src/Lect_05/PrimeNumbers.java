@@ -34,13 +34,23 @@ public class PrimeNumbers {
 
         long algorithmEndTime = System.currentTimeMillis();
 
+        final int numbersInRow = 10;
+        int primeNumbersCount = 0;
+
         for (int n = 2; n <= userNumber; ++n) {
+
             if (isPrime[n - 1]) {
-                System.out.printf("%3d ", n);
+                ++primeNumbersCount;
+                System.out.printf("%4d ", n);
+
+                if (primeNumbersCount % numbersInRow == 0) {
+                    System.out.println();
+                }
             }
         }
 
-        System.out.println();
+        System.out.printf("%n%n");
+        System.out.printf("< %d prime numbers found >%n", primeNumbersCount);
         System.out.printf("< Executed in %dms >%n", algorithmEndTime - algorithmStartTime);
     }
 }

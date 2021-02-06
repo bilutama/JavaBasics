@@ -19,8 +19,8 @@ public class EuclidAlgorithm {
         userNumber2 = scanner.nextInt();
 
         try {
-            int GCD = getGreatestCommonDivisor(userNumber1, userNumber2);
-            System.out.printf("GCD = %d", GCD);
+            int greatestCommonDivisor = getGreatestCommonDivisor(userNumber1, userNumber2);
+            System.out.printf("The greatest common divisor = %d", greatestCommonDivisor);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

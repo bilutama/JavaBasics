@@ -15,15 +15,15 @@ public class MultiplicationTable {
             firstNumber = scanner.nextInt();
         }
 
-        int lastNumber = 0;
+        int secondNumber = 0;
 
-        while (lastNumber < 2) {
+        while (secondNumber < 2) {
             System.out.print("Maximum column number (> 1): ");
-            lastNumber = scanner.nextInt();
+            secondNumber = scanner.nextInt();
         }
 
         // printing the first line
-        for (int i = 1; i <= lastNumber; i++) {
+        for (int i = 1; i <= secondNumber; i++) {
             if (i > 1) {
                 System.out.printf("%4d", i);
             } else {
@@ -34,7 +34,7 @@ public class MultiplicationTable {
         System.out.println();
 
         // printing the separator
-        for (int i = 1; i <= lastNumber; i++) {
+        for (int i = 1; i <= secondNumber; i++) {
             System.out.print("____");
         }
 
@@ -42,7 +42,7 @@ public class MultiplicationTable {
 
         // printing the multiplication table
         for (int i = 2; i <= firstNumber; i++) {
-            for (int j = 1; j <= lastNumber; j++) {
+            for (int j = 1; j <= secondNumber; j++) {
                 if (j == 1) {
                     System.out.printf("%3d|", i);
                 } else {
