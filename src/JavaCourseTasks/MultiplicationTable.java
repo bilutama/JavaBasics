@@ -11,19 +11,19 @@ public class MultiplicationTable {
         int firstNumber = 0;
 
         while (firstNumber < 2) {
-            System.out.print("The first number (> 1): ");
+            System.out.print("Maximum row number (> 1): ");
             firstNumber = scanner.nextInt();
         }
 
         int lastNumber = 0;
 
         while (lastNumber < 2) {
-            System.out.print("The last number (> 1): ");
+            System.out.print("Maximum column number (> 1): ");
             lastNumber = scanner.nextInt();
         }
 
         // printing the first line
-        for (int i = 1; i <= firstNumber; i++) {
+        for (int i = 1; i <= lastNumber; i++) {
             if (i > 1) {
                 System.out.printf("%4d", i);
             } else {
@@ -34,7 +34,7 @@ public class MultiplicationTable {
         System.out.println();
 
         // printing the separator
-        for (int i = 1; i <= firstNumber; i++) {
+        for (int i = 1; i <= lastNumber; i++) {
             System.out.print("____");
         }
 

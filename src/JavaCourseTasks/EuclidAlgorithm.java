@@ -8,30 +8,36 @@ public class EuclidAlgorithm {
 
         Scanner scanner = new Scanner(System.in);
 
-        int firstNumber = 0;
+        int userNumber1 = 0;
 
         System.out.print("The first number: ");
-        firstNumber = Math.abs(scanner.nextInt());
+        userNumber1 = scanner.nextInt();
 
-        int secondNumber = 0;
+        int userNumber2 = 0;
 
         System.out.print("The last number: ");
-        secondNumber = Math.abs(scanner.nextInt());
+        userNumber2 = scanner.nextInt();
 
-        if (secondNumber < firstNumber) {
-            int temporaryNumber = secondNumber;
-            secondNumber = firstNumber;
-            firstNumber = temporaryNumber;
+        try {
+            int GCD = getGreatestCommonDivisor(userNumber1, userNumber2);
+            System.out.printf("GCD = %d", GCD);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    public static int getGreatestCommonDivisor(int maximumNumber, int minimumNumber) throws Exception {
+        if (minimumNumber == 0 && maximumNumber == 0) {
+            throw new Exception("ERROR: no GCD for two 0");
         }
 
-        int modulo = 1;
+        minimumNumber = Math.abs(minimumNumber);
+        maximumNumber = Math.abs(maximumNumber);
 
-        while (modulo != 0) {
-            modulo = firstNumber % secondNumber;
-            firstNumber = secondNumber;
-            secondNumber = modulo;
+        if (minimumNumber == 0) {
+            return maximumNumber;
         }
 
-        System.out.printf("GCD = %d", firstNumber);
+        return getGreatestCommonDivisor(minimumNumber, maximumNumber % minimumNumber);
     }
 }
