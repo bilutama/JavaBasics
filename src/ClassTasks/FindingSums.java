@@ -7,22 +7,22 @@ public class FindingSums {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("The first number: ");
-        int firstNumber = scanner.nextInt();
+        int smallNumber = scanner.nextInt();
 
         System.out.print("The last number: ");
-        int lastNumber = scanner.nextInt();
+        int bigNumber = scanner.nextInt();
 
-        if (lastNumber < firstNumber) {
-            int temporaryNumber = lastNumber;
-            lastNumber = firstNumber;
-            firstNumber = temporaryNumber;
+        if (bigNumber < smallNumber) {
+            int temporaryNumber = bigNumber;
+            bigNumber = smallNumber;
+            smallNumber = temporaryNumber;
         }
 
         int numbersSum = 0;
         int evenNumbersCount = 0;
         int evenNumbersSum = 0;
 
-        for (int i = firstNumber; i <= lastNumber; ++i) {
+        for (int i = smallNumber; i <= bigNumber; ++i) {
             numbersSum += i;
 
             if (i % 2 == 0) {

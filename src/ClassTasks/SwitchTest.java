@@ -1,7 +1,5 @@
 package ClassTasks;
 
-import com.sun.source.tree.CaseTree;
-
 import java.util.Scanner;
 
 public class SwitchTest {
@@ -20,12 +18,12 @@ public class SwitchTest {
                 break;
             case "sum":
                 System.out.print("The first number: ");
-                double firstNumber = scanner.nextDouble();
+                double number1 = scanner.nextDouble();
 
                 System.out.print("The second number: ");
-                double secondNumber = scanner.nextDouble();
+                double number2 = scanner.nextDouble();
 
-                System.out.printf("Sum = %.3f%n", firstNumber + secondNumber);
+                System.out.printf("Sum = %.3f%n", number1 + number2);
                 break;
             default:
                 System.out.println("Unknown command");
