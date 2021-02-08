@@ -18,7 +18,6 @@ public class PrimeNumbers {
         long algorithmStartTime = System.currentTimeMillis();
 
         boolean[] isPrime = new boolean[userNumber];
-        isPrime[0] = false;
 
         for (int i = 1; i < userNumber; ++i) {
             isPrime[i] = true;
@@ -38,7 +37,6 @@ public class PrimeNumbers {
         int primeNumbersCount = 0;
 
         for (int n = 2; n <= userNumber; ++n) {
-
             if (isPrime[n - 1]) {
                 ++primeNumbersCount;
                 System.out.printf("%4d ", n);
