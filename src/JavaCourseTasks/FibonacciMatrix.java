@@ -33,7 +33,7 @@ public class FibonacciMatrix {
         System.out.printf("< Executed in %dms >%n", algorithmEndTime - algorithmStartTime);
     }
 
-    public static long[][] getMatricesMultiplication(long[][] matrix1, long[][] matrix2) throws Exception {
+    public static long[][] getMatricesProduct(long[][] matrix1, long[][] matrix2) throws Exception {
         if (matrix1[0].length != matrix2.length) {
             throw new Exception("ERROR: multiplication of matrices is impossible");
         }
@@ -67,10 +67,10 @@ public class FibonacciMatrix {
         } else {
             if (n % 2 == 0) {
                 long[][] temporaryMatrix = getMatrixInPower(matrix, n / 2);
-                matrixInPower = getMatricesMultiplication(temporaryMatrix, temporaryMatrix);
+                matrixInPower = getMatricesProduct(temporaryMatrix, temporaryMatrix);
             } else {
                 long[][] temporaryMatrix = getMatrixInPower(matrix, (n - 1) / 2);
-                matrixInPower = getMatricesMultiplication(matrix, getMatricesMultiplication(temporaryMatrix, temporaryMatrix));
+                matrixInPower = getMatricesProduct(matrix, getMatricesProduct(temporaryMatrix, temporaryMatrix));
             }
         }
 
