@@ -24,7 +24,7 @@ public class FibonacciMatrix {
 
         try {
             long[][] fibonacciMatrix = getMatrixInPower(basicMatrix, fibonacciNumberIndex);
-            System.out.printf("Number #%d = %d%n", fibonacciNumberIndex, fibonacciMatrix[0][1]);
+            System.out.printf("Number #%d = %,d%n", fibonacciNumberIndex, fibonacciMatrix[0][1]);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
@@ -80,7 +80,7 @@ public class FibonacciMatrix {
     public static void printMatrix(long[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                System.out.printf("%10d", matrix[i][j]);
+                System.out.printf("%,10d", matrix[i][j]);
             }
 
             System.out.println();
