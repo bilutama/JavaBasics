@@ -10,18 +10,9 @@ public class BinarySearch {
         final int arraySize = 100;
         int[] array = new int[arraySize];
 
-        Random randomNumber = new Random();
-
-        // Array initialization with random numbers
+        // Array initialization
         for (int i = 0; i < arraySize; ++i) {
-            array[i] = 2 * i;
-            /*
-            if (i < 50) {
-                array[i] = i;
-            } else {
-                array[i] = i + 1;
-            }
-             */
+            array[i] = 2 * (i + 1);
         }
 
         // printing the array;
@@ -39,10 +30,9 @@ public class BinarySearch {
         System.out.print("Enter a number to find: ");
         int userNumber = scanner.nextInt();
 
-        int numberPositionInArray;
         boolean foundNumberPosition = false;
         int leftBound = 0;
-        int rightBound = array.length;
+        int rightBound = array.length - 1;
         //int middlePosition = (rightBound + leftBound) / 2;
 
         while (!foundNumberPosition) {
@@ -53,13 +43,15 @@ public class BinarySearch {
             } else if ((array[middlePosition] < userNumber) && (rightBound - leftBound) > 1) {
                 leftBound = middlePosition + 1;
             } else {
-                numberPositionInArray = leftBound;
                 foundNumberPosition = true;
 
                 if (array[middlePosition] == userNumber) {
-                    System.out.printf("Your number has %d position in the array.", numberPositionInArray);
+                    System.out.printf("The number has %d position in the array.%n", middlePosition + 1);
+                } else if (array[rightBound] == userNumber) {
+                    System.out.printf("The number has %d position in the array.%n", rightBound + 1);
                 } else {
-                    System.out.printf("Your number is not in the array. Closest is %d with %d position in the array.%n", array[numberPositionInArray], numberPositionInArray);
+                    System.out.println("The number is not in the array.");
+                    //System.out.printf("Your number is not in the array. Closest is %d with %d position in the array.%n", array[leftBound], leftBound + 1);
                 }
             }
         }
