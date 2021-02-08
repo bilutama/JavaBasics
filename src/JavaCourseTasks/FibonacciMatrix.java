@@ -23,8 +23,8 @@ public class FibonacciMatrix {
         };
 
         try {
-            long[][] fibonacciMatrix = getMatrixInPower(basicMatrix, fibonacciNumberIndex);
-            System.out.printf("Number #%d = %,d%n", fibonacciNumberIndex, fibonacciMatrix[0][1]);
+            long[][] fibonacciMatrix = getMatrixInPower(basicMatrix, fibonacciNumberIndex - 1);
+            System.out.printf("Number #%d = %,d%n", fibonacciNumberIndex, fibonacciMatrix[0][0]);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
