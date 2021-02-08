@@ -15,40 +15,19 @@ public class PrimeNumbers {
             userNumber = scanner.nextInt();
         }
 
-        long algorithmStartTime = System.currentTimeMillis();
-
         boolean[] isPrime = new boolean[userNumber];
 
         for (int i = 1; i < userNumber; ++i) {
             isPrime[i] = true;
         }
 
-        for (int n = 2; n * n <= userNumber; ++n) {
+        for (int n = 2; n <= userNumber; ++n) {
             if (isPrime[n - 1]) {
+                System.out.printf("%4d%n", n);
                 for (int j = n * n; j <= userNumber; j += n) {
                     isPrime[j - 1] = false;
                 }
             }
         }
-
-        long algorithmEndTime = System.currentTimeMillis();
-
-        final int numbersCountInRow = 10;
-        int primeNumbersCount = 0;
-
-        for (int n = 2; n <= userNumber; ++n) {
-            if (isPrime[n - 1]) {
-                ++primeNumbersCount;
-                System.out.printf("%4d ", n);
-
-                if (primeNumbersCount % numbersCountInRow == 0) {
-                    System.out.println();
-                }
-            }
-        }
-
-        System.out.printf("%n%n");
-        System.out.printf("< %d prime numbers found >%n", primeNumbersCount);
-        System.out.printf("< Executed in %dms >%n", algorithmEndTime - algorithmStartTime);
     }
 }
