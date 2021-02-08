@@ -33,7 +33,7 @@ public class PrimeNumbers {
 
         long algorithmEndTime = System.currentTimeMillis();
 
-        final int numbersInRow = 10;
+        final int numbersCountInRow = 10;
         int primeNumbersCount = 0;
 
         for (int n = 2; n <= userNumber; ++n) {
@@ -41,7 +41,7 @@ public class PrimeNumbers {
                 ++primeNumbersCount;
                 System.out.printf("%4d ", n);
 
-                if (primeNumbersCount % numbersInRow == 0) {
+                if (primeNumbersCount % numbersCountInRow == 0) {
                     System.out.println();
                 }
             }
