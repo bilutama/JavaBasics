@@ -6,10 +6,10 @@ public class FindingSums {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("The first number: ");
+        System.out.print("The first number to sum: ");
         int smallNumber = scanner.nextInt();
 
-        System.out.print("The last number: ");
+        System.out.print("The last number to sum: ");
         int bigNumber = scanner.nextInt();
 
         if (bigNumber < smallNumber) {
