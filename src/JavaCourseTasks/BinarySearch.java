@@ -42,6 +42,7 @@ public class BinarySearch {
         int rightBound = array.length;
         //int middlePosition = (rightBound + leftBound) / 2;
 
+        //TODO: debug for case of number is not in an array
         while (!foundNumberPosition) {
             int middlePosition = leftBound + (rightBound - leftBound) / 2;
 
