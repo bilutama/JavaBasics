@@ -38,7 +38,6 @@ public class PrimeNumbers {
         int primeNumbersCount = 0;
 
         for (int n = 2; n <= userNumber; ++n) {
-
             if (isPrime[n - 1]) {
                 ++primeNumbersCount;
                 System.out.printf("%4d ", n);

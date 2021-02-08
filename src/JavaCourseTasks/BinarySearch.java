@@ -1,6 +1,5 @@
 package JavaCourseTasks;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class BinarySearch {
@@ -51,7 +50,6 @@ public class BinarySearch {
                     System.out.printf("The number has %d position in the array.%n", rightBound + 1);
                 } else {
                     System.out.println("The number is not in the array.");
-                    //System.out.printf("Your number is not in the array. Closest is %d with %d position in the array.%n", array[leftBound], leftBound + 1);
                 }
             }
         }
