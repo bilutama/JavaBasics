@@ -14,11 +14,14 @@ public class BinarySearch {
 
         // Array initialization with random numbers
         for (int i = 0; i < arraySize; ++i) {
+            array[i] = 2 * i;
+            /*
             if (i < 50) {
                 array[i] = i;
             } else {
                 array[i] = i + 1;
             }
+             */
         }
 
         // printing the array;
@@ -42,16 +45,15 @@ public class BinarySearch {
         int rightBound = array.length;
         //int middlePosition = (rightBound + leftBound) / 2;
 
-        //TODO: debug for case of number is not in an array
         while (!foundNumberPosition) {
             int middlePosition = leftBound + (rightBound - leftBound) / 2;
 
-            if (array[middlePosition] > userNumber) {
+            if ((array[middlePosition] > userNumber) && (rightBound - leftBound) > 1) {
                 rightBound = middlePosition - 1;
-            } else if (array[middlePosition] < userNumber) {
+            } else if ((array[middlePosition] < userNumber) && (rightBound - leftBound) > 1) {
                 leftBound = middlePosition + 1;
             } else {
-                numberPositionInArray = middlePosition;
+                numberPositionInArray = leftBound;
                 foundNumberPosition = true;
 
                 if (array[middlePosition] == userNumber) {
