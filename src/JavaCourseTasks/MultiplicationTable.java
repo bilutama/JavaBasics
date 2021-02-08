@@ -8,22 +8,22 @@ public class MultiplicationTable {
 
         Scanner scanner = new Scanner(System.in);
 
-        int firstNumber = 0;
+        int rowCount = 0;
 
-        while (firstNumber < 2) {
-            System.out.print("Maximum row number (> 1): ");
-            firstNumber = scanner.nextInt();
+        while (rowCount < 2) {
+            System.out.print("Row count (> 1): ");
+            rowCount = scanner.nextInt();
         }
 
-        int secondNumber = 0;
+        int columnCount = 0;
 
-        while (secondNumber < 2) {
-            System.out.print("Maximum column number (> 1): ");
-            secondNumber = scanner.nextInt();
+        while (columnCount < 2) {
+            System.out.print("Column count (> 1): ");
+            columnCount = scanner.nextInt();
         }
 
         // printing the first line
-        for (int i = 1; i <= secondNumber; i++) {
+        for (int i = 1; i <= columnCount; i++) {
             if (i > 1) {
                 System.out.printf("%4d", i);
             } else {
@@ -34,15 +34,15 @@ public class MultiplicationTable {
         System.out.println();
 
         // printing the separator
-        for (int i = 1; i <= secondNumber; i++) {
+        for (int i = 1; i <= columnCount; i++) {
             System.out.print("____");
         }
 
         System.out.println();
 
         // printing the multiplication table
-        for (int i = 2; i <= firstNumber; i++) {
-            for (int j = 1; j <= secondNumber; j++) {
+        for (int i = 2; i <= rowCount; i++) {
+            for (int j = 1; j <= columnCount; j++) {
                 if (j == 1) {
                     System.out.printf("%3d|", i);
                 } else {
