@@ -11,14 +11,14 @@ public class MultiplicationTable {
         int rowsCount = 0;
 
         while (rowsCount < 2) {
-            System.out.print("Row count (> 1): ");
+            System.out.print("Rows count (> 1): ");
             rowsCount = scanner.nextInt();
         }
 
         int columnsCount = 0;
 
         while (columnsCount < 2) {
-            System.out.print("Column count (> 1): ");
+            System.out.print("Columns count (> 1): ");
             columnsCount = scanner.nextInt();
         }
 
