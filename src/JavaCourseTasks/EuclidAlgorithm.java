@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class EuclidAlgorithm {
     public static void main(String[] args) {
-        System.out.println("*** Euclid Algorithm (GCD for two numbers) ***");
-
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("*** Euclid Algorithm (GCD for two numbers) ***");
 
         System.out.print("The first number: ");
         int number1 = Math.abs(scanner.nextInt());
