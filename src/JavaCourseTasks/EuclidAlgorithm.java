@@ -8,36 +8,28 @@ public class EuclidAlgorithm {
 
         Scanner scanner = new Scanner(System.in);
 
-        int userNumber1 = 0;
-
         System.out.print("The first number: ");
-        userNumber1 = scanner.nextInt();
+        int number1 = Math.abs(scanner.nextInt());
 
-        int userNumber2 = 0;
+        System.out.print("The second number: ");
+        int number2 = Math.abs(scanner.nextInt());
 
-        System.out.print("The last number: ");
-        userNumber2 = scanner.nextInt();
+        if (number1 == 0 && number2 == 0) {
+            System.out.println("ERROR: There is no greatest common divisor for zeros");
+        } else if (Math.min(number1, number2) == 0) {
+            System.out.printf("The greatest common divisor = %d%n", Math.max(number1, number2));
+        } else {
+            int dividend = Math.max(number1, number2);
+            int divisor = Math.min(number1, number2);
+            int remainder = dividend % divisor;
 
-        try {
-            int greatestCommonDivisor = getGreatestCommonDivisor(userNumber1, userNumber2);
-            System.out.printf("The greatest common divisor = %d", greatestCommonDivisor);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            while (remainder > 0) {
+                dividend = divisor;
+                divisor = remainder;
+                remainder = dividend % divisor;
+            }
+
+            System.out.printf("The greatest common divisor = %d%n", divisor);
         }
-    }
-
-    public static int getGreatestCommonDivisor(int maximumNumber, int minimumNumber) throws Exception {
-        if (minimumNumber == 0 && maximumNumber == 0) {
-            throw new Exception("ERROR: no GCD for two 0");
-        }
-
-        minimumNumber = Math.abs(minimumNumber);
-        maximumNumber = Math.abs(maximumNumber);
-
-        if (minimumNumber == 0) {
-            return maximumNumber;
-        }
-
-        return getGreatestCommonDivisor(minimumNumber, maximumNumber % minimumNumber);
     }
 }
