@@ -42,7 +42,7 @@ public class MultiplicationTable {
         for (int i = 2; i <= rowsCount; i++) {
             System.out.printf("%3d|", i);
             
-            for (int j = 1; j <= columnsCount; j++) {
+            for (int j = 2; j <= columnsCount; j++) {
                 System.out.printf("%4d", i * j);
             }
 
