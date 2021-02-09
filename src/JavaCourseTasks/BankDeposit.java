@@ -17,10 +17,11 @@ public class BankDeposit {
         }
 
         double annualInterestRate = -1.0;
+        final int percentToFractionCoefficient = 100;
 
         while (annualInterestRate < 0.0) {
-            System.out.print("Annual interest rate, %: ");
-            annualInterestRate = scanner.nextDouble();
+            System.out.print("Annual profit rate, %: ");
+            annualInterestRate = scanner.nextDouble() / percentToFractionCoefficient;
         }
 
         int monthsCount = -1;
@@ -40,17 +41,21 @@ public class BankDeposit {
         double depositStateStart = deposit;
         double depositStateEnd = 0;
 
+        final int monthsCountInYear = 12;
+
+        double depositMultiplier = (1 + annualInterestRate / monthsCountInYear);
+
         DecimalFormat decimalFormat = new DecimalFormat("###,##0.0");
 
         for (int i = 1; i <= monthsCount; ++i) {
             System.out.printf("%5d |", i);
             System.out.printf("%15s ", decimalFormat.format(depositStateStart));
 
-            depositStateEnd = depositStateStart * (1 + annualInterestRate / 12 / 100);
+            depositStateEnd = depositStateStart * depositMultiplier;
             System.out.printf("%14s", decimalFormat.format(depositStateEnd));
 
-            double interest = depositStateEnd - depositStateStart;
-            System.out.printf("%16s%n", decimalFormat.format(interest));
+            double profit = depositStateEnd - depositStateStart;
+            System.out.printf("%16s%n", decimalFormat.format(profit));
 
             depositStateStart = depositStateEnd;
         }
@@ -58,7 +63,7 @@ public class BankDeposit {
         System.out.println("_________________________________________________________");
         System.out.printf("Your deposit at the end of the period, USD: %s%n", decimalFormat.format(depositStateEnd));
 
-        double totalInterest = depositStateEnd - deposit;
-        System.out.printf("Total interest per period, USD: %s%n", decimalFormat.format(totalInterest));
+        double totalProfit = depositStateEnd - deposit;
+        System.out.printf("Total profit per period, USD: %s%n", decimalFormat.format(totalProfit));
     }
 }
