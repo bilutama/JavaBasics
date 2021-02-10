@@ -14,10 +14,10 @@ public class OrderCost {
         double milkPrice = 80.0;
         System.out.printf("Bottle of milk - RUR $%.1f%n", milkPrice);
 
-        System.out.print("How many bottles of milk: ");
+        System.out.print("How many baguettes: ");
         int baguettesCount = scanner.nextInt();
 
-        System.out.print("How many baguettes: ");
+        System.out.print("How many bottles of milk: ");
         int milkBottlesCount = scanner.nextInt();
 
         System.out.printf("Your order costs: $%.1f%n", getOrderCost(baguettesCount, milkBottlesCount, baguettePrice, milkPrice));
