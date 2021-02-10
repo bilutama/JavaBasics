@@ -6,7 +6,6 @@ public class OverloadedFunction {
     public static void main(String[] args) {
         byte byteVariable = 1;
         short shortVariable = 1;
-        char charVariable = 'a';
         int intVariable = 1;
         long longVariable = 1L;
         float floatVariable = 1.0f;
@@ -14,7 +13,6 @@ public class OverloadedFunction {
 
         System.out.printf("Byte type size, bytes: %d%n", getTypeSize(byteVariable));
         System.out.printf("Short type size, bytes: %d%n", getTypeSize(shortVariable));
-        System.out.printf("Char type size, bytes: %d%n", getTypeSize(charVariable));
         System.out.printf("Int type size, bytes: %d%n", getTypeSize(intVariable));
         System.out.printf("Long type size, bytes: %d%n", getTypeSize(longVariable));
         System.out.printf("Float type size, bytes: %d%n", getTypeSize(floatVariable));
@@ -27,10 +25,6 @@ public class OverloadedFunction {
 
     public static int getTypeSize (short variable) {
         return Short.SIZE / bitsInByte;
-    }
-
-    public static int getTypeSize (char variable) {
-        return Character.SIZE / bitsInByte;
     }
 
     public static int getTypeSize (int variable) {
