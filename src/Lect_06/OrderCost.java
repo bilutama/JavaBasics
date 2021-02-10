@@ -6,21 +6,29 @@ public class OrderCost {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("*** Electronics E-Store ***");
+        System.out.println("*** E-Market ***");
 
         double baguettePrice = 70.0;
         System.out.printf("Baguette - RUR %.1f%n", baguettePrice);
 
         double milkPrice = 80.0;
-        System.out.printf("Bottle of milk - RUR $%.1f%n", milkPrice);
+        System.out.printf("Bottle of milk - RUR %.1f%n", milkPrice);
 
-        System.out.print("How many baguettes: ");
-        int baguettesCount = scanner.nextInt();
+        int baguettesCount = -1;
 
-        System.out.print("How many bottles of milk: ");
-        int milkBottlesCount = scanner.nextInt();
+        while (baguettesCount < 0) {
+            System.out.print("How many baguettes: ");
+            baguettesCount = scanner.nextInt();
+        }
 
-        System.out.printf("Your order costs: $%.1f%n", getOrderCost(baguettesCount, milkBottlesCount, baguettePrice, milkPrice));
+        int milkBottlesCount = -1;
+
+        while (milkBottlesCount < 0) {
+            System.out.print("How many bottles of milk: ");
+            milkBottlesCount = scanner.nextInt();
+        }
+
+        System.out.printf("Your order costs is RUR %.1f%n", getOrderCost(baguettesCount, milkBottlesCount, baguettePrice, milkPrice));
     }
 
     public static double getOrderCost(int productCount1, int productCount2, double productPrice1, double productPrice2){
