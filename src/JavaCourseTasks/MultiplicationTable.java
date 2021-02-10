@@ -10,22 +10,22 @@ public class MultiplicationTable {
 
         int rowsCount = 0;
 
-        while (rowsCount < 2) {
-            System.out.print("Rows count (> 1): ");
+        while (rowsCount < 1) {
+            System.out.print("Rows count (> 0): ");
             rowsCount = scanner.nextInt();
         }
 
         int columnsCount = 0;
 
-        while (columnsCount < 2) {
-            System.out.print("Columns count (> 1): ");
+        while (columnsCount < 1) {
+            System.out.print("Columns count (> 0): ");
             columnsCount = scanner.nextInt();
         }
 
         // printing the first line
         System.out.print("    ");
         
-        for (int i = 2; i <= columnsCount; i++) {
+        for (int i = 1; i <= columnsCount; i++) {
             System.out.printf("%4d", i);
         }
 
@@ -39,10 +39,10 @@ public class MultiplicationTable {
         System.out.println();
 
         // printing the multiplication table
-        for (int i = 2; i <= rowsCount; i++) {
+        for (int i = 1; i <= rowsCount; i++) {
             System.out.printf("%3d|", i);
             
-            for (int j = 2; j <= columnsCount; j++) {
+            for (int j = 1; j <= columnsCount; j++) {
                 System.out.printf("%4d", i * j);
             }
 
