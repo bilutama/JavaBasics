@@ -13,7 +13,7 @@ public class GuessNumber {
         System.out.println("The number from 1 to 100 is conceived.");
         System.out.println("Try to guess it: ");
 
-        int i = 1;
+        int attemptsCount = 1;
 
         while (true) {
             int userNumber = scanner.nextInt();
@@ -23,11 +23,11 @@ public class GuessNumber {
             } else if (userNumber > conceivedNumber) {
                 System.out.print("The number is smaller, try again: ");
             } else {
-                System.out.printf("This is a win! You've successfully guessed it on %d try.", i);
+                System.out.printf("This is a win! You've successfully guessed it on %d try.", attemptsCount);
                 break;
             }
             
-            ++i;
+            ++attemptsCount;
         }
     }
 }
