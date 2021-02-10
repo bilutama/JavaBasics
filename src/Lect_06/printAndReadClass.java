@@ -11,6 +11,7 @@ public class printAndReadClass {
         System.out.printf("Value = %d%n", variable);
 
         String inputPrompt = "Test the function \"printAndRead\": ";
+
         variable = printAndRead(inputPrompt);
         System.out.printf("Value = %d%n", variable);
     }
