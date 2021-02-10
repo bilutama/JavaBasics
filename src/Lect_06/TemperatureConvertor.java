@@ -8,9 +8,10 @@ public class TemperatureConvertor {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        double temperatureCelsius = absoluteZeroCelsius;
+        double temperatureCelsius = absoluteZeroCelsius - 1.0;
+        final double epsilon = 1.0e-10;
 
-        while (temperatureCelsius <= absoluteZeroCelsius) {
+        while (temperatureCelsius - absoluteZeroCelsius < epsilon) {
             System.out.print("Enter temperature in Celsius degrees: ");
             temperatureCelsius = scanner.nextDouble();
         }
