@@ -28,7 +28,7 @@ public class OrderCost {
             milkBottlesCount = scanner.nextInt();
         }
 
-        System.out.printf("Your order costs is RUR %.1f%n", getOrderCost(baguettesCount, milkBottlesCount, baguettePrice, milkPrice));
+        System.out.printf("Your order costs RUR %.1f%n", getOrderCost(baguettesCount, milkBottlesCount, baguettePrice, milkPrice));
     }
 
     public static double getOrderCost(int productCount1, int productCount2, double productPrice1, double productPrice2){
