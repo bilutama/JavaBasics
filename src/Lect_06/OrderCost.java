@@ -32,10 +32,11 @@ public class OrderCost {
     }
 
     public static double getOrderCost(int productCount1, int productCount2, double productPrice1, double productPrice2){
+        int productsCountInOrder = productCount1 + productCount2;
         double orderCostWithoutDiscount = productCount1 * productPrice1 + productCount2 * productPrice2;
         double discount = 0.0;
 
-        if (productCount1 + productCount2 >= 10){
+        if (productsCountInOrder >= 10){
             discount += 0.05;
         }
 
