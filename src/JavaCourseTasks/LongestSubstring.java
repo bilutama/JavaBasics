@@ -2,8 +2,8 @@ package JavaCourseTasks;
 
 public class LongestSubstring {
     public static void main(String[] args) {
-        String string1 = "aaaar";
-        String string2 = "aaaaaaaaaar";
+        String string1 = "vasalisii";
+        String string2 = "aasvasalisiidsdfg";
 
         if (string1.length() == 0 || string2.length() == 0) {
             System.out.println("One of strings is empty");
@@ -24,7 +24,7 @@ public class LongestSubstring {
         String maximumSubstring = "";
         int maximumSubstringLenght = 0;
 
-        for (int i = 0; i < longString.length(); ++i) {
+        for (int i = 0; i < longString.length() - maximumSubstringLenght; ++i) {
             for (int j = 0; j < shortString.length(); ++j) {
                 if (longString.charAt(i) == shortString.charAt(j)) {
                     int subStringShift = 1;
