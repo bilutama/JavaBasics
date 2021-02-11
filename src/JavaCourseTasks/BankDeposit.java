@@ -16,13 +16,15 @@ public class BankDeposit {
             deposit = scanner.nextDouble();
         }
 
-        double annualInterestRate = -1.0;
+        double percent = -1.0;
         final int percentToFractionCoefficient = 100;
 
-        while (annualInterestRate < 0.0) {
+        while (percent < 0.0) {
             System.out.print("Annual profit rate, %: ");
-            annualInterestRate = scanner.nextDouble() / percentToFractionCoefficient;
+            percent = scanner.nextDouble();
         }
+
+        double annualInterestRate = percent / percentToFractionCoefficient;
 
         int monthsCount = -1;
 
