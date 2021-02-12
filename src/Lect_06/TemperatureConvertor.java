@@ -3,15 +3,15 @@ package Lect_06;
 import java.util.Scanner;
 
 public class TemperatureConvertor {
-    final static double absoluteZeroCelsius = -237.15;
+    public final static double ABSOLUTE_ZERO_CELSIUS = -273.15;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        double temperatureCelsius = absoluteZeroCelsius - 1.0;
+        double temperatureCelsius = ABSOLUTE_ZERO_CELSIUS - 1.0;
         final double epsilon = 1.0e-10;
 
-        while (temperatureCelsius - absoluteZeroCelsius < epsilon) {
+        while (temperatureCelsius - ABSOLUTE_ZERO_CELSIUS < epsilon) {
             System.out.print("Enter temperature in Celsius degrees: ");
             temperatureCelsius = scanner.nextDouble();
         }
@@ -24,7 +24,7 @@ public class TemperatureConvertor {
     }
 
     public static double convertCelsiusToKelvins(double celsiusDegrees) {
-        return celsiusDegrees - absoluteZeroCelsius;
+        return celsiusDegrees - ABSOLUTE_ZERO_CELSIUS;
     }
 
     public static double convertCelsiusToFahrenheits(double celsiusDegrees) {
