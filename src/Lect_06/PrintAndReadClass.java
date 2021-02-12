@@ -2,7 +2,7 @@ package Lect_06;
 
 import java.util.Scanner;
 
-public class printAndReadClass {
+public class PrintAndReadClass {
     public static void main(String[] args) {
         int variable = printAndRead("Enter a number: ");
         System.out.printf("Value = %d%n", variable);

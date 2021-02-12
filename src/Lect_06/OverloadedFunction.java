@@ -1,8 +1,6 @@
 package Lect_06;
 
 public class OverloadedFunction {
-    static final int bitsInByte = 8;
-
     public static void main(String[] args) {
         byte byteVariable = 1;
         short shortVariable = 1;
@@ -20,26 +18,26 @@ public class OverloadedFunction {
     }
 
     public static int getTypeSize (byte variable) {
-        return Byte.SIZE / bitsInByte;
+        return 1;
     }
 
     public static int getTypeSize (short variable) {
-        return Short.SIZE / bitsInByte;
+        return 2;
     }
 
     public static int getTypeSize (int variable) {
-        return Integer.SIZE / bitsInByte;
+        return 4;
     }
 
     public static int getTypeSize (long variable) {
-        return Long.SIZE / bitsInByte;
+        return 8;
     }
 
     public static int getTypeSize (float variable) {
-        return Float.SIZE / bitsInByte;
+        return 4;
     }
 
     public static int getTypeSize (double variable) {
-        return Double.SIZE / bitsInByte;
+        return 8;
     }
 }
