@@ -3,7 +3,7 @@ package Lect_06;
 import java.util.Scanner;
 
 public class TemperatureConvertor {
-    public final static double ABSOLUTE_ZERO_CELSIUS = -273.15;
+    public static final double ABSOLUTE_ZERO_CELSIUS = -273.15;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
