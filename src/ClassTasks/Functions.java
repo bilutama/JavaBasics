@@ -7,36 +7,47 @@ public class Functions {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter x: ");
-        int x = scanner.nextInt();
+        double x = scanner.nextDouble();
 
         System.out.print("Enter y: ");
-        int y = scanner.nextInt();
+        double y = scanner.nextDouble();
 
-        System.out.printf("x + y = %d%n", getSum(x, y));
-        System.out.printf("Minimum is %d%n", getMinimum(x, y));
-        System.out.printf("Maximum is %d%n", getMaximum(x, y));
+        System.out.printf("3x + 4y = %.3f%n", getSum3Xand4Y(x, y));
+        System.out.printf("Minimum is %.3f%n", getMinimum(x, y));
+        System.out.printf("Maximum is %.3f%n", getMaximum(x, y));
 
-        System.out.printf("158 + 365 = %d%n", getSum(158, 365));
+        System.out.printf("158 + 365 = %.3f%n", getSum3Xand4Y(158.0, 365.0));
 
         x = 1654631223;
         y = -85503546;
-        System.out.printf("sum of %d and %d is %d%n", x, y, getSum(x, y));
-        System.out.printf("Minimum is %d%n", getMinimum(x, y));
-        System.out.printf("Maximum is %d%n", getMaximum(x, y));
+        System.out.printf("sum of %.3f and %.3f is %.3f%n", x, y, getSum3Xand4Y(x, y));
+        System.out.printf("Minimum is %.3f%n", getMinimum(x, y));
+        System.out.printf("Maximum is %.3f%n", getMaximum(x, y));
+
+        System.out.print("Enter a: ");
+        int a = scanner.nextInt();
+
+        System.out.print("Enter b: ");
+        int b = scanner.nextInt();
+
+        System.out.printf("Average for the sum from %d to %d is %d%n", a, b, getAverageForRange(a, b));
     }
 
-    public static long getSum(int x, int y) {
-        return x + y;
+    public static double getSum3Xand4Y(double x, double y) {
+        return 3.0 * x + 4.0 * y;
     }
 
-    public static long getSumForRange(int begin, int end) {
+    public static long getAverageForRange(int begin, int end) {
         int sumForRange = 0;
 
-        for (int i = begin; i <= end; ++i) {
+        int min = getMinimum(begin, end);
+        int max = getMaximum(begin, end);
+
+        for (int i = min; i <= max; ++i) {
             sumForRange += i;
         }
 
-        return sumForRange;
+        return sumForRange / (max - min + 1);
     }
 
     public static int getMinimum(int x, int y) {
@@ -44,6 +55,14 @@ public class Functions {
     }
 
     public static int getMaximum(int x, int y) {
-        return (x > y) ? x : y;
+        return (x >= y) ? x : y;
+    }
+
+    public static double getMinimum(double x, double y) {
+        return (x < y) ? x : y;
+    }
+
+    public static double getMaximum(double x, double y) {
+        return (x >= y) ? x : y;
     }
 }

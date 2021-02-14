@@ -16,7 +16,7 @@ public class PrintAndReadClass {
         System.out.printf("Value = %d%n", variable);
     }
 
-    public static int printAndRead (String inputPrompt) {
+    public static int printAndRead(String inputPrompt) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print(inputPrompt);
