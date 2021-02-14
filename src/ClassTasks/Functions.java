@@ -12,15 +12,15 @@ public class Functions {
         System.out.print("Enter y: ");
         double y = scanner.nextDouble();
 
-        System.out.printf("3x + 4y = %.3f%n", getSum3Xand4Y(x, y));
+        System.out.printf("3x + 4y = %.3f%n", getSum3XAnd4Y(x, y));
         System.out.printf("Minimum is %.3f%n", getMinimum(x, y));
         System.out.printf("Maximum is %.3f%n", getMaximum(x, y));
 
-        System.out.printf("158 + 365 = %.3f%n", getSum3Xand4Y(158.0, 365.0));
+        System.out.printf("158 + 365 = %.3f%n", getSum3XAnd4Y(158.0, 365.0));
 
         x = 1654631223;
         y = -85503546;
-        System.out.printf("sum of %.3f and %.3f is %.3f%n", x, y, getSum3Xand4Y(x, y));
+        System.out.printf("sum of %.3f and %.3f is %.3f%n", x, y, getSum3XAnd4Y(x, y));
         System.out.printf("Minimum is %.3f%n", getMinimum(x, y));
         System.out.printf("Maximum is %.3f%n", getMaximum(x, y));
 
@@ -30,14 +30,14 @@ public class Functions {
         System.out.print("Enter b: ");
         int b = scanner.nextInt();
 
-        System.out.printf("Average for the sum from %d to %d is %d%n", a, b, getAverageForRange(a, b));
+        System.out.printf("Average for the sum from %d to %d is %.3f%n", a, b, getAverageForRange(a, b));
     }
 
-    public static double getSum3Xand4Y(double x, double y) {
+    public static double getSum3XAnd4Y(double x, double y) {
         return 3.0 * x + 4.0 * y;
     }
 
-    public static long getAverageForRange(int begin, int end) {
+    public static double getAverageForRange(int begin, int end) {
         int sumForRange = 0;
 
         int min = getMinimum(begin, end);
@@ -47,7 +47,7 @@ public class Functions {
             sumForRange += i;
         }
 
-        return sumForRange / (max - min + 1);
+        return (double) sumForRange / (max - min + 1);
     }
 
     public static int getMinimum(int x, int y) {
