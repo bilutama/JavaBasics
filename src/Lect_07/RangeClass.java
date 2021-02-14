@@ -25,7 +25,7 @@ public class RangeClass {
         return to;
     }
 
-    public double getRangeLenght() {
+    public double getRangeLength() {
         return from - to;
     }
 
