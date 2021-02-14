@@ -44,6 +44,7 @@ public class OrderCost {
             discount +=0.05;
         }
 
+        System.out.printf("Discount is %.1f%% (RUR %.1f)%n", discount * 100, orderCostWithoutDiscount * discount);
         return orderCostWithoutDiscount * (1 - discount);
     }
 }
