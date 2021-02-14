@@ -6,7 +6,7 @@ public class RangeProgram {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("== Setting a range == ");
+        System.out.println("*** Setting a range ***");
         System.out.print("Enter the left bound: ");
         double leftBound = scanner.nextDouble();
 

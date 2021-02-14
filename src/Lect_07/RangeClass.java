@@ -4,7 +4,7 @@ public class RangeClass {
     private double from;
     private double to;
 
-    public RangeClass(double from, double to){
+    public RangeClass(double from, double to) {
         this.from = from;
         this.to = to;
     }
