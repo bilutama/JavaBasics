@@ -3,6 +3,11 @@ package Lect_06;
 import java.util.Scanner;
 
 public class OrderCost {
+    private static double DISCOUNT_FOR_AMOUNT = 0.05;
+    private static double DISCOUNT_FOR_TOTAL_ORDER_COST = 0.05;
+    private static int AMOUNT_FOR_DISCOUNT = 10;
+    private static double ORDER_COST_FOR_DISCOUNT = 1000.0;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -31,17 +36,17 @@ public class OrderCost {
         System.out.printf("Your order costs RUR %.1f%n", getOrderCost(baguettesCount, milkBottlesCount, baguettePrice, milkPrice));
     }
 
-    public static double getOrderCost(int productCount1, int productCount2, double productPrice1, double productPrice2){
+    public static double getOrderCost(int productCount1, int productCount2, double productPrice1, double productPrice2) {
         int productsCountInOrder = productCount1 + productCount2;
         double orderCostWithoutDiscount = productCount1 * productPrice1 + productCount2 * productPrice2;
         double discount = 0.0;
 
-        if (productsCountInOrder >= 10){
-            discount += 0.05;
+        if (productsCountInOrder >= AMOUNT_FOR_DISCOUNT) {
+            discount += DISCOUNT_FOR_AMOUNT;
         }
 
-        if (orderCostWithoutDiscount >= 1000) {
-            discount +=0.05;
+        if (orderCostWithoutDiscount >= ORDER_COST_FOR_DISCOUNT) {
+            discount += DISCOUNT_FOR_TOTAL_ORDER_COST;
         }
 
         System.out.printf("Discount is %.1f%% (RUR %.1f)%n", discount * 100, orderCostWithoutDiscount * discount);
