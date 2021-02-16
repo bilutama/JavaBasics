@@ -3,10 +3,10 @@ package Lect_06;
 import java.util.Scanner;
 
 public class OrderCost {
-    private static double DISCOUNT_FOR_AMOUNT = 0.05;
-    private static double DISCOUNT_FOR_TOTAL_ORDER_COST = 0.05;
-    private static int AMOUNT_FOR_DISCOUNT = 10;
-    private static double ORDER_COST_FOR_DISCOUNT = 1000.0;
+    private static final double DISCOUNT_FOR_AMOUNT = 0.05;
+    private static final double DISCOUNT_FOR_TOTAL_ORDER_COST = 0.05;
+    private static final int AMOUNT_FOR_DISCOUNT = 10;
+    private static final double ORDER_COST_FOR_DISCOUNT = 1000.0;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -49,7 +49,6 @@ public class OrderCost {
             discount += DISCOUNT_FOR_TOTAL_ORDER_COST;
         }
 
-        System.out.printf("Discount is %.1f%% (RUR %.1f)%n", discount * 100, orderCostWithoutDiscount * discount);
         return orderCostWithoutDiscount * (1 - discount);
     }
 }
