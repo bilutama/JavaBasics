@@ -13,9 +13,9 @@ public class RangeProgram {
         System.out.print("Enter the right bound: ");
         double rightBound = scanner.nextDouble();
 
-        RangeClass range = new RangeClass(leftBound, rightBound);
+        Range range = new Range(leftBound, rightBound);
 
-        System.out.printf("Length of the range is %.3f%n", range.getRangeLength());
+        System.out.printf("Length of the range is %.3f%n", range.getLength());
 
         System.out.print("Enter a point: ");
         double point = scanner.nextDouble();
