@@ -21,6 +21,19 @@ public class HeapSort {
         System.out.println();
 
         // Build a heap from the array
+
+
+        for (int i : array) {
+            System.out.printf("%3d", i);
+        }
+
+        // Sort the heap recursively
+
+    }
+
+    static private int[] buildHeap(int[] array) {
+        int arraySize = array.length;
+
         for (int i = arraySize / 2 - 1; i >= 0; --i) {
 
             int leftChild = 2 * i + 1;
@@ -42,14 +55,8 @@ public class HeapSort {
                 array[max] = array[i];
                 array[i] = temp;
             }
-
         }
 
-        for (int i : array) {
-            System.out.printf("%3d", i);
-        }
-
-        // Sort the heap recursively
-
+        return array;
     }
 }
