@@ -1,6 +1,6 @@
 package Lect_07;
 
-public class RangeClass {
+public class Range {
     private double from;
     private double to;
 
