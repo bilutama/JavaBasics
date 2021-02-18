@@ -6,18 +6,19 @@ public class Palindrome {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("*** Determines whether a string is a palindrome (ignores all characters except letters) ***");
         System.out.print("Enter a string: ");
         String string = scanner.nextLine();
 
-        if (string.length() == 0) {
-            System.out.println("The string is empty - no palindromes.");
+        if (!string.matches("(?i).*[a-zа-я].*")) {
+            System.out.println("The string has no letters.");
         } else {
             boolean isPalindrome = true;
             int firstCharIndex = 0;
             int lastCharIndex = string.length() - 1;
 
-            char firstChar = Character.toLowerCase(string.charAt(firstCharIndex));
-            char lastChar = Character.toLowerCase(string.charAt(lastCharIndex));
+            char firstChar = string.charAt(firstCharIndex);
+            char lastChar = string.charAt(lastCharIndex);
 
             while (lastCharIndex - firstCharIndex > 0) {
                 while (!Character.isLetter(firstChar) && firstCharIndex < lastCharIndex) {
@@ -30,7 +31,7 @@ public class Palindrome {
                     lastChar = Character.toLowerCase(string.charAt(lastCharIndex));
                 }
 
-                if (firstChar != lastChar) {
+                if (Character.toLowerCase(firstChar) != Character.toLowerCase(lastChar)) {
                     isPalindrome = false;
                     break;
                 }
