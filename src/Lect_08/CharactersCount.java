@@ -32,19 +32,19 @@ public class CharactersCount {
         String spacesCountEnding = "";
         String otherCharactersCountEnding = "";
 
-        if (lettersCount > 1) {
+        if (lettersCount == 1) {
             lettersCountEnding = "s";
         }
 
-        if (digitsCount > 1) {
+        if (digitsCount == 1) {
             digitsCountEnding = "s";
         }
 
-        if (spacesCount > 1) {
+        if (spacesCount == 1) {
             spacesCountEnding = "s";
         }
 
-        if (otherCharactersCount > 1) {
+        if (otherCharactersCount == 1) {
             otherCharactersCountEnding = "s";
         }
 
