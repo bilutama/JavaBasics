@@ -14,7 +14,7 @@ public class Substring {
             System.out.println("The string is empty");
         } else {
             int SubstringLength = 1;
-            int maxSubstringLength = 1;
+            int maximumSubstringLength = 1;
 
             for (int i = 1; i < string.length(); ++i) {
                 char thisChar = Character.toLowerCase(string.charAt(i));
@@ -23,18 +23,18 @@ public class Substring {
                 if (thisChar == previousChar) {
                     ++SubstringLength;
 
-                    if (i == string.length() - 1 && SubstringLength > maxSubstringLength) {
-                        maxSubstringLength = SubstringLength;
+                    if (i == string.length() - 1 && SubstringLength > maximumSubstringLength) {
+                        maximumSubstringLength = SubstringLength;
                     }
                 } else {
-                    if (SubstringLength > maxSubstringLength) {
-                        maxSubstringLength = SubstringLength;
+                    if (SubstringLength > maximumSubstringLength) {
+                        maximumSubstringLength = SubstringLength;
                     }
 
                     SubstringLength = 1;
                 }
             }
-            System.out.printf("The maximum count of repeating characters is %d", maxSubstringLength);
+            System.out.printf("The maximum count of repeating characters is %d", maximumSubstringLength);
         }
     }
 }
