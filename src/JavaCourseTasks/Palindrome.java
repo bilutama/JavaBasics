@@ -41,9 +41,9 @@ public class Palindrome {
             }
 
             if (isPalindrome) {
-                System.out.println("This is a palindrome.");
+                System.out.println("The string is a palindrome.");
             } else {
-                System.out.println("This is NOT a palindrome.");
+                System.out.println("The string is NOT a palindrome.");
             }
         }
     }
