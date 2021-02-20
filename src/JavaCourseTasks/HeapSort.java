@@ -2,7 +2,7 @@ package JavaCourseTasks;
 
 public class HeapSort {
     public static void main(String[] args) {
-        int[] array = new int[]{15,9,18,1,3,2,17,5,7,8,50,4,100,121,16,32,65,76,44,51};
+        int[] array = new int[]{15, 9, 18, 1, 3, 2, 17, 5, 7, 8, 50, 4, 100, 121, 16, 32, 65, 76, 44, 51};
 
         System.out.println("The initial array:");
         printArray(array);
@@ -12,7 +12,7 @@ public class HeapSort {
             //printArray(array); // For monitoring while debugging
 
             int temp = array[0];
-            array[0] = array [array.length - i - 1];
+            array[0] = array[array.length - i - 1];
             array[array.length - i - 1] = temp;
         }
 
