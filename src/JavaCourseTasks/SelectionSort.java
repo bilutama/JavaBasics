@@ -10,14 +10,8 @@ public class SelectionSort {
             array[i] = arraySize - i;
         }
 
-        // printing the array
         System.out.println("The initial array:");
-
-        for (int i : array) {
-            System.out.printf("%3d", i);
-        }
-
-        System.out.println();
+        printArray(array);
 
         // sorting the array
         for (int i = 0; i < arraySize - 1; ++i) {
@@ -36,11 +30,15 @@ public class SelectionSort {
             }
         }
 
-        // printing the sorted array
         System.out.println("The sorted array:");
+        printArray(array);
+    }
 
+    static private void printArray(int[] array) {
         for (int i : array) {
-            System.out.printf("%3d", i);
+            System.out.printf("%4d", i);
         }
+
+        System.out.println();
     }
 }

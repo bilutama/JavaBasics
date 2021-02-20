@@ -4,45 +4,45 @@ public class HeapSort {
     public static void main(String[] args) {
         int[] array = new int[]{15,9,18,1,3,2,17,5,7,8,50,4,100,121,16,32,65,76,44,51};
 
-        // printing the initial array
         System.out.println("The initial array:");
         printArray(array);
-        System.out.println();
 
         for (int i = 0; i < array.length; ++i) {
             array = buildHeap(array, 0, array.length - i);
-            printArray(array);
+            //printArray(array); // For monitoring while debugging
 
             int temp = array[0];
             array[0] = array [array.length - i - 1];
             array[array.length - i - 1] = temp;
         }
+
+        System.out.println("The sorted array:");
+        printArray(array);
     }
 
-    static private int[] buildHeap(int[] array, int k, int n) {
-
-        for (int i = n / 2 - 1; i >= k; --i) {
+    static private int[] buildHeap(int[] array, int heapRoot, int heapLength) {
+        for (int i = heapLength / 2 - 1; i >= heapRoot; --i) {
 
             int leftChild = 2 * i + 1;
             int rightChild = 2 * i + 2;
 
-            int max = i;
+            int maximumElement = i;
 
-            if (leftChild < n && array[leftChild] > array[i]) {
-                max = leftChild;
+            if (leftChild < heapLength && array[leftChild] > array[i]) {
+                maximumElement = leftChild;
             }
 
-            if (rightChild < n && array[rightChild] > array[max]) {
-                max = rightChild;
+            if (rightChild < heapLength && array[rightChild] > array[maximumElement]) {
+                maximumElement = rightChild;
             }
 
-            // move max element to the root and recursively check down the heap
-            if (i != max) {
-                int temp = array[max];
-                array[max] = array[i];
+            // move maximumElement element to the root and recursively check down the heap
+            if (i != maximumElement) {
+                int temp = array[maximumElement];
+                array[maximumElement] = array[i];
                 array[i] = temp;
 
-                array = buildHeap(array, max, n);
+                array = buildHeap(array, maximumElement, heapLength);
             }
         }
         return array;
