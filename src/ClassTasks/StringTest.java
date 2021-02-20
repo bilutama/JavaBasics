@@ -1,4 +1,4 @@
-package Lect_08;
+package ClassTasks;
 
 import java.util.Scanner;
 
