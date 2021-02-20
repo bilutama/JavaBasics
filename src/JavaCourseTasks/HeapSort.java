@@ -26,23 +26,23 @@ public class HeapSort {
             int leftChild = 2 * i + 1;
             int rightChild = 2 * i + 2;
 
-            int maximumElement = i;
+            int maximum = i;
 
             if (leftChild < heapLength && array[leftChild] > array[i]) {
-                maximumElement = leftChild;
+                maximum = leftChild;
             }
 
-            if (rightChild < heapLength && array[rightChild] > array[maximumElement]) {
-                maximumElement = rightChild;
+            if (rightChild < heapLength && array[rightChild] > array[maximum]) {
+                maximum = rightChild;
             }
 
-            // move maximumElement element to the root and recursively check down the heap
-            if (i != maximumElement) {
-                int temp = array[maximumElement];
-                array[maximumElement] = array[i];
+            // move maximum element to the root and recursively check down the heap
+            if (i != maximum) {
+                int temp = array[maximum];
+                array[maximum] = array[i];
                 array[i] = temp;
 
-                array = buildHeap(array, maximumElement, heapLength);
+                array = buildHeap(array, maximum, heapLength);
             }
         }
         return array;
