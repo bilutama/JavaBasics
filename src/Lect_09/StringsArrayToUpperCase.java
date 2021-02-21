@@ -2,15 +2,31 @@ package Lect_09;
 
 public class StringsArrayToUpperCase {
     public static void main(String[] args) {
-        double[] array = new double[]{1.5, 2.3, 3.2, 4.8, 10.6, 5.4, 6.1, 7.9, 8.3, 9.5};
+        String[] array = new String[]{"the", "Show", "MUST", "gO", "on", null};
 
-        double max = Double.MIN_VALUE;
-        for (double i : array) {
-            if (i > max) {
-                max = i;
+        printArray(array);
+
+        applyUpperCase(array);
+        printArray(array);
+    }
+
+    public static void applyUpperCase(String[] array) {
+        for (int i = 0; i < array.length; ++i) {
+            if (array[i] != null) {
+                array[i] = array[i].toUpperCase();
+            }
+        }
+    }
+
+    public static void printArray(String[] array) {
+        for (String word : array) {
+            if (word != null) {
+                System.out.printf("%s ", word);
+            } else {
+                System.out.print("[null] ");
             }
         }
 
-        System.out.printf("Maximum value in the array is %.3f%n", max);
+        System.out.println();
     }
 }
