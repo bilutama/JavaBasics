@@ -29,38 +29,38 @@ public class MultiplicationTableInArray {
     public static int[][] getMultiplicationTable(int rowsCount, int columnsCount) {
         int[][] multiplicationTable = new int[rowsCount][columnsCount];
 
-        for (int i = 1; i <= rowsCount; i++) {
-            for (int j = 1; j <= columnsCount; j++) {
-                multiplicationTable[i - 1][j - 1] = i * j;
+        for (int i = 0; i < rowsCount; i++) {
+            for (int j = 0; j < columnsCount; j++) {
+                multiplicationTable[i][j] = (i + 1) * (j + 1);
             }
         }
 
         return multiplicationTable;
     }
 
-    public static void printMultiplicationTable(int[][] array) {
+    public static void printMultiplicationTable(int[][] multiplicationTable) {
         // printing the first line
         System.out.print("    ");
 
-        for (int i = 1; i <= array[0].length; ++i) {
+        for (int i = 1; i <= multiplicationTable[0].length; ++i) {
             System.out.printf("%4d", i);
         }
 
         System.out.println();
 
         // printing the separator
-        for (int i = 0; i < array[0].length + 1; ++i) {
+        for (int i = 0; i < multiplicationTable[0].length + 1; ++i) {
             System.out.print("____");
         }
 
         System.out.println();
 
         // printing the multiplication table
-        for (int i = 0; i < array.length; ++i) {
+        for (int i = 0; i < multiplicationTable.length; ++i) {
             System.out.printf("%3d|", i + 1);
 
-            for (int j = 0; j < array[0].length; ++j) {
-                System.out.printf("%4d", array[i][j]);
+            for (int j = 0; j < multiplicationTable[0].length; ++j) {
+                System.out.printf("%4d", multiplicationTable[i][j]);
             }
 
             System.out.println();
