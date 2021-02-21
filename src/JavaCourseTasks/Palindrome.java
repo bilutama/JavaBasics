@@ -10,14 +10,23 @@ public class Palindrome {
         System.out.print("Enter a string: ");
         String string = scanner.nextLine();
 
-        if (!string.matches("(?i).*[a-zа-я].*")) {
-            System.out.println("The string has no letters.");
+        if (isPalindrome(string)) {
+            System.out.println("The string is a palindrome.");
         } else {
-            boolean isPalindrome = true;
+            System.out.println("The string is NOT a palindrome.");
+        }
+    }
+
+    public static boolean isPalindrome(String string) {
+        if (string == null || string.length() == 0) {
+            return false;
+        } else {
             int firstCharIndex = 0;
             int lastCharIndex = string.length() - 1;
+            boolean hasLetters = false;
 
             while (lastCharIndex - firstCharIndex > 0) {
+
                 char firstChar = string.charAt(firstCharIndex);
                 char lastChar = string.charAt(lastCharIndex);
 
@@ -26,25 +35,24 @@ public class Palindrome {
                     firstChar = Character.toLowerCase(string.charAt(firstCharIndex));
                 }
 
+                if (!hasLetters && firstCharIndex <= lastCharIndex && Character.isLetter(firstChar)) {
+                    hasLetters = true;
+                }
+
                 while (!Character.isLetter(lastChar) && lastCharIndex > firstCharIndex) {
                     --lastCharIndex;
                     lastChar = Character.toLowerCase(string.charAt(lastCharIndex));
                 }
 
                 if (Character.toLowerCase(firstChar) != Character.toLowerCase(lastChar)) {
-                    isPalindrome = false;
-                    break;
+                    return false;
                 }
 
                 ++firstCharIndex;
                 --lastCharIndex;
             }
 
-            if (isPalindrome) {
-                System.out.println("The string is a palindrome.");
-            } else {
-                System.out.println("The string is NOT a palindrome.");
-            }
+            return hasLetters;// true;
         }
     }
 }
