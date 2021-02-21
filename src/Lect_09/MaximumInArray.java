@@ -1,26 +1,31 @@
 package Lect_09;
 
-import java.util.Scanner;
-
 public class MaximumInArray {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        double[] array = new double[]{1.4, 2.5, 3.7, 4.3, 10.9, 5.3, 6.3, 7.6, 8.1, 5.2};
 
-        int[] array = new int[]{1, 2, 3, 4, 10, 5, 6, 7, 8, 5};
-
-        System.out.print("Enter a number to find in the array: ");
-        int number = scanner.nextInt();
-
-        System.out.println(getIndexInArray(array, number));
+        System.out.println("Array is:");
+        printArray(array);
+        System.out.printf("It's maximum element is %.1f", getMaximumIndex(array));
     }
 
-    public static int getIndexInArray(int[] array, int number) {
-        for (int i = 0; i < array.length; ++i) {
-            if (array[i] == number) {
-                return i;
+    public static double getMaximumIndex(double[] array) {
+        double max = array[0];
+
+        for (int i = 1; i < array.length; ++i) {
+            if (array[i] > max) {
+                max = array[i];
             }
         }
 
-        return -1;
+        return max;
+    }
+
+    public static void printArray(double[] array) {
+        for (double number : array) {
+            System.out.printf("%.1f ", number);
+        }
+
+        System.out.println();
     }
 }

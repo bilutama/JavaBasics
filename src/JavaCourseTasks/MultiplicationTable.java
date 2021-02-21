@@ -32,7 +32,7 @@ public class MultiplicationTable {
         System.out.println();
 
         // printing the separator
-        for (int i = 1; i <= columnsCount; i++) {
+        for (int i = 1; i <= columnsCount + 1; i++) {
             System.out.print("____");
         }
 
