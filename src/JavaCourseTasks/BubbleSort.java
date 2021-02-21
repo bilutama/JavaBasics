@@ -13,6 +13,7 @@ public class BubbleSort {
         System.out.println("The initial array:");
         printArray(array);
 
+        // TODO: rewrite algorithm. This is insertion sort
         // sorting the array
         for (int i = 0; i < arraySize - 1; ++i) {
             if (array[i + 1] < array[i]) {

@@ -17,10 +17,10 @@ public class Palindrome {
             int firstCharIndex = 0;
             int lastCharIndex = string.length() - 1;
 
-            char firstChar = string.charAt(firstCharIndex);
-            char lastChar = string.charAt(lastCharIndex);
-
             while (lastCharIndex - firstCharIndex > 0) {
+                char firstChar = string.charAt(firstCharIndex);
+                char lastChar = string.charAt(lastCharIndex);
+
                 while (!Character.isLetter(firstChar) && firstCharIndex < lastCharIndex) {
                     ++firstCharIndex;
                     firstChar = Character.toLowerCase(string.charAt(firstCharIndex));

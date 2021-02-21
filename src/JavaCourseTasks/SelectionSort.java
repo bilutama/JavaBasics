@@ -2,7 +2,7 @@ package JavaCourseTasks;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        final int arraySize = 20;
+        final int arraySize = 10;
         int[] array = new int[arraySize];
 
         // Array initialization

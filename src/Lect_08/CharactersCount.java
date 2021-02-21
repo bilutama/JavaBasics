@@ -27,26 +27,10 @@ public class CharactersCount {
             }
         }
 
-        String lettersCountEnding = "";
-        String digitsCountEnding = "";
-        String spacesCountEnding = "";
-        String otherCharactersCountEnding = "";
-
-        if (lettersCount == 1) {
-            lettersCountEnding = "s";
-        }
-
-        if (digitsCount == 1) {
-            digitsCountEnding = "s";
-        }
-
-        if (spacesCount == 1) {
-            spacesCountEnding = "s";
-        }
-
-        if (otherCharactersCount == 1) {
-            otherCharactersCountEnding = "s";
-        }
+        String lettersCountEnding = (lettersCount > 1) ? "s" : "";
+        String digitsCountEnding = (digitsCount > 1) ? "s" : "";
+        String spacesCountEnding = (spacesCount > 1) ? "s" : "";
+        String otherCharactersCountEnding = (otherCharactersCount > 1) ? "s" : "";
 
         System.out.println("Your string consists of:");
         System.out.printf("%d letter%s%n", lettersCount, lettersCountEnding);

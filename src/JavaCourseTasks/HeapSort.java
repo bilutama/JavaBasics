@@ -8,7 +8,7 @@ public class HeapSort {
         printArray(array);
 
         for (int i = 0; i < array.length; ++i) {
-            array = buildHeap(array, 0, array.length - i);
+            buildHeap(array, 0, array.length - i);
             //printArray(array); // For monitoring while debugging
 
             int temp = array[0];
@@ -20,7 +20,7 @@ public class HeapSort {
         printArray(array);
     }
 
-    static private int[] buildHeap(int[] array, int heapRoot, int heapLength) {
+    static private void buildHeap(int[] array, int heapRoot, int heapLength) {
         for (int i = heapLength / 2 - 1; i >= heapRoot; --i) {
 
             int leftChild = 2 * i + 1;
@@ -42,10 +42,9 @@ public class HeapSort {
                 array[maximum] = array[i];
                 array[i] = temp;
 
-                array = buildHeap(array, maximum, heapLength);
+                buildHeap(array, maximum, heapLength);
             }
         }
-        return array;
     }
 
     static private void printArray(int[] array) {

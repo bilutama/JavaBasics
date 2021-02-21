@@ -2,7 +2,7 @@ package JavaCourseTasks;
 
 public class QuickSort {
     public static void main(String[] args) {
-        final int arraySize = 5;
+        final int arraySize = 1;
         int[] array = new int[arraySize];
 
         // Array initialization
@@ -15,7 +15,7 @@ public class QuickSort {
 
         // sorting the array
         for (int i = 0; i < arraySize - 1; ++i) {
-
+            // TODO: implement quicksort algorithm
         }
 
         System.out.println("The sorted array:");
