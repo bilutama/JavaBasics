@@ -18,9 +18,7 @@ public class Palindrome {
     }
 
     public static boolean isPalindrome(String string) {
-        if (string == null || string.length() == 0) {
-            return true;
-        } else {
+        if (string != null && string.length() != 0) {
             int firstCharIndex = 0;
             int lastCharIndex = string.length() - 1;
 
@@ -47,7 +45,8 @@ public class Palindrome {
                 --lastCharIndex;
             }
 
-            return true;
         }
+
+        return true;
     }
 }
