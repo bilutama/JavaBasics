@@ -25,7 +25,7 @@ public class Palindrome {
             int lastCharIndex = string.length() - 1;
             boolean hasLetters = false;
 
-            while (lastCharIndex - firstCharIndex > 0) {
+            while (lastCharIndex > firstCharIndex) {
 
                 char firstChar = string.charAt(firstCharIndex);
                 char lastChar = string.charAt(lastCharIndex);
