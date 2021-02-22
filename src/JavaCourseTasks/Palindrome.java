@@ -19,11 +19,10 @@ public class Palindrome {
 
     public static boolean isPalindrome(String string) {
         if (string == null || string.length() == 0) {
-            return false;
+            return true;
         } else {
             int firstCharIndex = 0;
             int lastCharIndex = string.length() - 1;
-            boolean hasLetters = false;
 
             while (lastCharIndex > firstCharIndex) {
 
@@ -33,10 +32,6 @@ public class Palindrome {
                 while (!Character.isLetter(firstChar) && firstCharIndex < lastCharIndex) {
                     ++firstCharIndex;
                     firstChar = Character.toLowerCase(string.charAt(firstCharIndex));
-                }
-
-                if (!hasLetters && firstCharIndex <= lastCharIndex && Character.isLetter(firstChar)) {
-                    hasLetters = true;
                 }
 
                 while (!Character.isLetter(lastChar) && lastCharIndex > firstCharIndex) {
@@ -52,7 +47,7 @@ public class Palindrome {
                 --lastCharIndex;
             }
 
-            return hasLetters;// true;
+            return true;
         }
     }
 }
