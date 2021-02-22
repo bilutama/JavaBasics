@@ -28,7 +28,7 @@ public class Substring {
             if (currentChar == previousChar) {
                 ++substringLength;
 
-                // check if the current char the last in the string
+                // check if the current char is the last in the string
                 if (i == string.length() - 1 && substringLength > maximumSubstringLength) {
                     maximumSubstringLength = substringLength;
                 }
