@@ -10,7 +10,7 @@ public class Substring {
         System.out.print("Enter a string: ");
         String string = scanner.nextLine();
 
-        System.out.printf("Maximum substring length of repeating characters is %d", getMaximumSubstringLength(string));
+        System.out.printf("Maximum substring length of repeating characters is %d%n", getMaximumSubstringLength(string));
     }
 
     public static int getMaximumSubstringLength(String string) {
@@ -28,7 +28,7 @@ public class Substring {
             if (currentChar == previousChar) {
                 ++substringLength;
 
-                // check if current char the last in the string
+                // check if the current char the last in the string
                 if (i == string.length() - 1 && substringLength > maximumSubstringLength) {
                     maximumSubstringLength = substringLength;
                 }
@@ -37,8 +37,8 @@ public class Substring {
                     maximumSubstringLength = substringLength;
                 }
 
-                // return if current maxSubstringLength is longer than the end of string
-                if (maximumSubstringLength > string.length() - i) {
+                // return if current maxSubstringLength is longer than the end of the string
+                if (maximumSubstringLength >= string.length() - i) {
                     return maximumSubstringLength;
                 }
 
