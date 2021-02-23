@@ -2,7 +2,7 @@ package JavaCourseTasks;
 
 public class QuickSort {
     public static void main(String[] args) {
-        final int arraySize = 1;
+        final int arraySize = 5;
         int[] array = new int[arraySize];
 
         // Array initialization

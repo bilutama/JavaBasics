@@ -14,7 +14,7 @@ public class InsertionSort {
         printArray(array);
 
         sortArray(array);
-        
+
         System.out.println("The sorted array:");
         printArray(array);
     }
@@ -23,7 +23,7 @@ public class InsertionSort {
         if (array.length < 2) {
             return;
         }
-        
+
         for (int i = 0; i < array.length - 1; ++i) {
             if (array[i + 1] < array[i]) {
                 int j = i;
@@ -38,7 +38,7 @@ public class InsertionSort {
             }
         }
     }
-    
+
     private static void printArray(int[] array) {
         for (int i : array) {
             System.out.printf("%4d", i);

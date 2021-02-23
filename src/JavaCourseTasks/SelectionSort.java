@@ -14,16 +14,16 @@ public class SelectionSort {
         printArray(array);
 
         sortArray(array);
-        
+
         System.out.println("The sorted array:");
         printArray(array);
     }
-    
+
     private static void sortArray(int[] array) {
         if (array.length < 2) {
             return;
         }
-        
+
         for (int i = 0; i < array.length - 1; ++i) {
             int minIndex = i;
 

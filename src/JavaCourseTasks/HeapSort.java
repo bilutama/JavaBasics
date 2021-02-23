@@ -7,6 +7,17 @@ public class HeapSort {
         System.out.println("The initial array:");
         printArray(array);
 
+        sortArray(array);
+
+        System.out.println("The sorted array:");
+        printArray(array);
+    }
+
+    private static void sortArray(int[] array) {
+        if (array.length < 2) {
+            return;
+        }
+
         for (int i = 0; i < array.length; ++i) {
             buildHeap(array, 0, array.length - i);
             //printArray(array); // For monitoring while debugging
@@ -15,9 +26,6 @@ public class HeapSort {
             array[0] = array[array.length - i - 1];
             array[array.length - i - 1] = temp;
         }
-
-        System.out.println("The sorted array:");
-        printArray(array);
     }
 
     static private void buildHeap(int[] array, int heapRoot, int heapLength) {
@@ -36,7 +44,7 @@ public class HeapSort {
                 maximum = rightChild;
             }
 
-            // move maximum element to the root and recursively check down the heap
+            // Move the maximum element to the root and recursively sift the heap down to leaves
             if (i != maximum) {
                 int temp = array[maximum];
                 array[maximum] = array[i];
