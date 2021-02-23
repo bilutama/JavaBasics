@@ -6,7 +6,7 @@ public class SearchInArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] array = new int[]{1, 2, 3, 4, 10, 5, 6, 7, 8, 5};
+        int[] array = {1, 2, 3, 4, 10, 5, 6, 7, 8, 5};
 
         System.out.print("Enter a number to find it in the array: ");
         int number = scanner.nextInt();

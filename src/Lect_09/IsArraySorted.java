@@ -2,9 +2,9 @@ package Lect_09;
 
 public class IsArraySorted {
     public static void main(String[] args) {
-        int[] array1 = new int[]{100, 55, 3, 2, 1, 0};
-        int[] array2 = new int[]{1, 2, 3, 10, 50, 55, 600};
-        int[] array3 = new int[]{15, 2, 5, 16, 100, 0, 600};
+        int[] array1 = {100, 55, 3, 2, 1, 0};
+        int[] array2 = {1, 2, 3, 10, 50, 55, 600};
+        int[] array3 = {15, 2, 5, 16, 100, 0, 600};
 
         System.out.printf("Array1 is sorted in ascending order: %s%n", isSortedAscendingOrder(array1));
         System.out.printf("Array2 is sorted in ascending order: %s%n", isSortedAscendingOrder(array2));

@@ -6,10 +6,10 @@ public class MaximumInArray {
 
         System.out.println("Array is:");
         printArray(array);
-        System.out.printf("It's maximum element is %.1f", getMaximumElementIndex(array));
+        System.out.printf("It's maximum element is %.1f", getMaximumFromArray(array));
     }
 
-    public static double getMaximumElementIndex(double[] array) {
+    public static double getMaximumFromArray(double[] array) {
         double max = array[0];
 
         for (int i = 1; i < array.length; ++i) {
