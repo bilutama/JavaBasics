@@ -27,12 +27,12 @@ public class BinarySearchRecursive {
         }
 
         System.out.print("Enter a number to find: ");
-        int userNumber = scanner.nextInt();
+        int numberToFind = scanner.nextInt();
 
         int leftBound = 0;
         int rightBound = array.length - 1;
 
-        int position = getNumberPositionInArray(array, leftBound, rightBound, userNumber);
+        int position = getNumberPositionInArray(array, numberToFind, leftBound, rightBound);
 
         if (position != -1) {
             System.out.printf("Position in array is %d%n", position);
@@ -41,13 +41,13 @@ public class BinarySearchRecursive {
         }
     }
 
-    private static int getNumberPositionInArray(int[] array, int leftBound, int rightBound, int numberToFind) {
+    private static int getNumberPositionInArray(int[] array, int numberToFind, int leftBound, int rightBound) {
         int middlePosition = leftBound + (rightBound - leftBound) / 2;
 
         if ((array[middlePosition] < numberToFind) && (rightBound - leftBound > 1)) {
-            return getNumberPositionInArray(array, middlePosition + 1, rightBound, numberToFind);
+            return getNumberPositionInArray(array, numberToFind, middlePosition + 1, rightBound);
         } else if ((array[middlePosition] > numberToFind) && (rightBound - leftBound > 1)) {
-            return getNumberPositionInArray(array, leftBound, middlePosition - 1, numberToFind);
+            return getNumberPositionInArray(array, numberToFind, leftBound, middlePosition - 1);
         } else {
             if (array[middlePosition] == numberToFind) {
                 return middlePosition + 1;
