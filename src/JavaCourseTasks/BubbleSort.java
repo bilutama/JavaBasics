@@ -2,7 +2,7 @@ package JavaCourseTasks;
 
 public class BubbleSort {
     public static void main(String[] args) {
-        final int arraySize = 5;
+        final int arraySize = 30;
         int[] array = new int[arraySize];
 
         // Array initialization
@@ -13,27 +13,38 @@ public class BubbleSort {
         System.out.println("The initial array:");
         printArray(array);
 
-        // TODO: rewrite algorithm. This is insertion sort
-        // sorting the array
-        for (int i = 0; i < arraySize - 1; ++i) {
-            if (array[i + 1] < array[i]) {
-                int j = i;
-
-                while (j >= 0 && array[j + 1] < array[j]) {
-                    int temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                    --j;
-                    //printArray(array); // Monitoring while debugging
-                }
-            }
-        }
-
+        sortArray(array);
+        
         System.out.println("The sorted array:");
         printArray(array);
     }
+    
+    private static void sortArray(int[] array) {
+        if (array.length < 2) {
+            return;
+        }
+        
+        for (int i = 1; i < array.length; ++i) {
+            boolean isSorted = true;
+            
+            for (int j = 0; j < array.length - i; ++j) {
+                if (array[j] > array[j+1]) {
+                    isSorted = false;
+                    
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+                printArray(array);
+                
+                if (isSorted) {
+                    break;
+                }
+            }
+        }
+    }
 
-    static private void printArray(int[] array) {
+    private static void printArray(int[] array) {
         for (int i : array) {
             System.out.printf("%4d", i);
         }
