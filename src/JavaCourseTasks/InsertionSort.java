@@ -2,7 +2,7 @@ package JavaCourseTasks;
 
 public class InsertionSort {
     public static void main(String[] args) {
-        final int arraySize = 5;
+        final int arraySize = 10;
         int[] array = new int[arraySize];
 
         // Array initialization
@@ -13,9 +13,18 @@ public class InsertionSort {
         System.out.println("The initial array:");
         printArray(array);
 
-        // TODO: rewrite algorithm. This is insertion sort
-        // sorting the array
-        for (int i = 0; i < arraySize - 1; ++i) {
+        sortArray(array);
+        
+        System.out.println("The sorted array:");
+        printArray(array);
+    }
+
+    private static void sortArray(int[] array) {
+        if (array.length < 2) {
+            return;
+        }
+        
+        for (int i = 0; i < array.length - 1; ++i) {
             if (array[i + 1] < array[i]) {
                 int j = i;
 
@@ -24,16 +33,13 @@ public class InsertionSort {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     --j;
-                    //printArray(array); // Monitoring while debugging
+                    //printArray(array); // For debugging
                 }
             }
         }
-
-        System.out.println("The sorted array:");
-        printArray(array);
     }
-
-    static private void printArray(int[] array) {
+    
+    private static void printArray(int[] array) {
         for (int i : array) {
             System.out.printf("%4d", i);
         }
