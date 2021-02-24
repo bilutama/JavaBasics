@@ -14,29 +14,29 @@ public class BubbleSort {
         printArray(array);
 
         sortArray(array);
-        
+
         System.out.println("The sorted array:");
         printArray(array);
     }
-    
+
     private static void sortArray(int[] array) {
         if (array.length < 2) {
             return;
         }
-        
+
         for (int i = 1; i < array.length; ++i) {
             boolean isSorted = true;
-            
+
             for (int j = 0; j < array.length - i; ++j) {
-                if (array[j] > array[j+1]) {
+                if (array[j] > array[j + 1]) {
                     isSorted = false;
-                    
+
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                 }
                 printArray(array);
-                
+
                 if (isSorted) {
                     break;
                 }

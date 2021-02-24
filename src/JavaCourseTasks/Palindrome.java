@@ -44,9 +44,7 @@ public class Palindrome {
                 ++firstCharIndex;
                 --lastCharIndex;
             }
-
         }
-
         return true;
     }
 }
