@@ -10,11 +10,19 @@ public class Substring {
         System.out.print("Enter a string: ");
         String string = scanner.nextLine();
 
-        System.out.printf("Maximum substring length of repeating characters is %d%n", getMaximumSubstringLength(string));
+        try {
+            System.out.printf("Maximum substring length of repeating characters is %d%n", getMaximumSubstringLength(string));
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
-    public static int getMaximumSubstringLength(String string) {
-        if (string == null || string.length() == 0) {
+    public static int getMaximumSubstringLength(String string) throws Exception {
+        if (string == null) {
+            throw new Exception("Null Pointer");
+        }
+
+        if (string.length() == 0) {
             return 0;
         }
 

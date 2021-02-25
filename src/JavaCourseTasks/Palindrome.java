@@ -18,12 +18,11 @@ public class Palindrome {
     }
 
     public static boolean isPalindrome(String string) {
-        if (string != null && string.length() != 0) {
+        if (string.length() != 0) {
             int firstCharIndex = 0;
             int lastCharIndex = string.length() - 1;
 
             while (lastCharIndex > firstCharIndex) {
-
                 char firstChar = string.charAt(firstCharIndex);
                 char lastChar = string.charAt(lastCharIndex);
 
@@ -45,6 +44,7 @@ public class Palindrome {
                 --lastCharIndex;
             }
         }
+
         return true;
     }
 }
