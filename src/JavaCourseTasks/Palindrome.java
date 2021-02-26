@@ -18,31 +18,32 @@ public class Palindrome {
     }
 
     public static boolean isPalindrome(String string) {
-        if (string.length() != 0) {
-            int firstCharIndex = 0;
-            int lastCharIndex = string.length() - 1;
+        if (string.length() == 0) {
 
-            while (lastCharIndex > firstCharIndex) {
-                char firstChar = string.charAt(firstCharIndex);
-                char lastChar = string.charAt(lastCharIndex);
+        }
 
-                while (!Character.isLetter(firstChar) && firstCharIndex < lastCharIndex) {
-                    ++firstCharIndex;
-                    firstChar = Character.toLowerCase(string.charAt(firstCharIndex));
-                }
+        int firstCharIndex = 0;
+        int lastCharIndex = string.length() - 1;
+        char firstChar = string.charAt(firstCharIndex);
+        char lastChar = string.charAt(lastCharIndex);
 
-                while (!Character.isLetter(lastChar) && lastCharIndex > firstCharIndex) {
-                    --lastCharIndex;
-                    lastChar = Character.toLowerCase(string.charAt(lastCharIndex));
-                }
-
-                if (Character.toLowerCase(firstChar) != Character.toLowerCase(lastChar)) {
-                    return false;
-                }
-
+        while (lastCharIndex > firstCharIndex) {
+            while (!Character.isLetter(firstChar) && firstCharIndex < lastCharIndex) {
                 ++firstCharIndex;
-                --lastCharIndex;
+                firstChar = Character.toLowerCase(string.charAt(firstCharIndex));
             }
+
+            while (!Character.isLetter(lastChar) && lastCharIndex > firstCharIndex) {
+                --lastCharIndex;
+                lastChar = Character.toLowerCase(string.charAt(lastCharIndex));
+            }
+
+            if (Character.toLowerCase(firstChar) != Character.toLowerCase(lastChar)) {
+                return false;
+            }
+
+            ++firstCharIndex;
+            --lastCharIndex;
         }
 
         return true;
