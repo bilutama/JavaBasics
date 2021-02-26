@@ -8,19 +8,16 @@ public class EuclidAlgorithmRecursive {
 
         Scanner scanner = new Scanner(System.in);
 
-        int number1 = 0;
+        System.out.println("*** Euclid Algorithm (GCD for two numbers) ***");
 
         System.out.print("The first number: ");
-        number1 = scanner.nextInt();
+        int number1 = Math.abs(scanner.nextInt());
 
-        int number2 = 0;
-
-        System.out.print("The last number: ");
-        number2 = scanner.nextInt();
+        System.out.print("The second number: ");
+        int number2 = Math.abs(scanner.nextInt());
 
         try {
-            int greatestCommonDivisor = getGreatestCommonDivisor(number1, number2);
-            System.out.printf("The greatest common divisor = %d", greatestCommonDivisor);
+            System.out.printf("The greatest common divisor = %d", getGreatestCommonDivisor(number1, number2);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
@@ -28,7 +25,7 @@ public class EuclidAlgorithmRecursive {
 
     public static int getGreatestCommonDivisor(int maximumNumber, int minimumNumber) throws Exception {
         if (minimumNumber == 0 && maximumNumber == 0) {
-            throw new Exception("ERROR: no GCD for two 0");
+            throw new Exception("no GCD when both numbers equal zeros");
         }
 
         minimumNumber = Math.abs(minimumNumber);
