@@ -19,7 +19,7 @@ public class Palindrome {
 
     public static boolean isPalindrome(String string) {
         if (string.length() == 0) {
-
+            return true;
         }
 
         int firstCharIndex = 0;

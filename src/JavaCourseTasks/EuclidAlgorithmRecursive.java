@@ -17,7 +17,7 @@ public class EuclidAlgorithmRecursive {
         int number2 = Math.abs(scanner.nextInt());
 
         try {
-            System.out.printf("The greatest common divisor = %d", getGreatestCommonDivisor(number1, number2);
+            System.out.printf("The greatest common divisor = %d", getGreatestCommonDivisor(number1, number2));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
