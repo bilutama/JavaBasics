@@ -20,7 +20,7 @@ public class BinarySearch {
         System.out.print("Enter a number to find: ");
         int number = scanner.nextInt();
 
-        System.out.printf("Number's position is %d%n", getElementIndex(array, number));
+        System.out.printf("Number's index is %d%n", getElementIndex(array, number));
     }
 
     public static int getElementIndex(int[] array, int number) {
