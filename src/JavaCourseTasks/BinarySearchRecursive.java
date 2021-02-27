@@ -6,56 +6,45 @@ public class BinarySearchRecursive {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        final int arraySize = 100;
-        int[] array = new int[arraySize];
+        final int ARRAY_SIZE = 30;
+        int[] array = new int[ARRAY_SIZE];
 
         // Array initialization
-        for (int i = 0; i < arraySize; ++i) {
+        for (int i = 0; i < ARRAY_SIZE; ++i) {
             array[i] = 2 * (i + 1);
         }
 
         // printing the array;
-        final int numbersCountInRow = 10;
         System.out.println("The array is:");
-
-        for (int i = 0; i < array.length; i++) {
-            System.out.printf("%4d", array[i]);
-
-            if ((i + 1) % numbersCountInRow == 0) {
-                System.out.println();
-            }
-        }
+        printArray(array);
 
         System.out.print("Enter a number to find: ");
-        int numberToFind = scanner.nextInt();
+        int number = scanner.nextInt();
 
-        int leftBound = 0;
-        int rightBound = array.length - 1;
+        System.out.printf("Number's position is %d%n", getElementIndex(array, 0, array.length, number));
+    }
 
-        int position = getNumberPositionInArray(array, numberToFind, leftBound, rightBound);
+    private static int getElementIndex(int[] array, int left, int right, int number) {
+        int middle = left + (right - left) / 2;
 
-        if (position != -1) {
-            System.out.printf("Position in array is %d%n", position);
+        if ((array[middle] < number) && right > left) {
+            return getElementIndex(array, middle + 1, right, number);
+        } else if ((array[middle] > number) && right > left) {
+            return getElementIndex(array, left, middle - 1, number);
         } else {
-            System.out.println("Number is not found");
+            if (array[middle] == number) {
+                return middle;
+            }
+
+            return -1;
         }
     }
 
-    private static int getNumberPositionInArray(int[] array, int numberToFind, int leftBound, int rightBound) {
-        int middlePosition = leftBound + (rightBound - leftBound) / 2;
-
-        if ((array[middlePosition] < numberToFind) && (rightBound - leftBound > 1)) {
-            return getNumberPositionInArray(array, numberToFind, middlePosition + 1, rightBound);
-        } else if ((array[middlePosition] > numberToFind) && (rightBound - leftBound > 1)) {
-            return getNumberPositionInArray(array, numberToFind, leftBound, middlePosition - 1);
-        } else {
-            if (array[middlePosition] == numberToFind) {
-                return middlePosition + 1;
-            } else if (array[rightBound] == numberToFind) {
-                return rightBound + 1;
-            } else {
-                return -1;
-            }
+    public static void printArray(int[] array) {
+        for (int number : array) {
+            System.out.printf("%4d", number);
         }
+
+        System.out.println();
     }
 }
