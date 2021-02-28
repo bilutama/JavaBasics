@@ -23,7 +23,7 @@ public class QuickSort {
             return;
         }
 
-        int referenceValue = array[left]; // Maybe any element of the (sub)array
+        int referenceValue = array[left]; // Can be any element of the (sub)array
         int i = left;
         int j = right;
 
