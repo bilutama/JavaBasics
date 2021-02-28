@@ -27,21 +27,19 @@ public class BinarySearch {
         int left = 0;
         int right = array.length - 1;
 
-        while (true) {
+        while (right >= left) {
             int middle = left + (right - left) / 2;
 
-            if ((array[middle] > number) && right > left) {
+            if (array[middle] > number) {
                 right = middle - 1;
-            } else if ((array[middle] < number) && right > left) {
+            } else if (array[middle] < number) {
                 left = middle + 1;
             } else {
-                if (array[middle] == number) {
-                    return middle;
-                }
-
-                return -1;
+                return middle;
             }
         }
+
+        return -1;
     }
 
     public static void printArray(int[] array) {

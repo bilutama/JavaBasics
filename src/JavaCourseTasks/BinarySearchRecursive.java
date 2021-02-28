@@ -25,19 +25,21 @@ public class BinarySearchRecursive {
     }
 
     private static int getElementIndex(int[] array, int left, int right, int number) {
-        int middle = left + (right - left) / 2;
-
-        if ((array[middle] < number) && right > left) {
-            return getElementIndex(array, middle + 1, right, number);
-        } else if ((array[middle] > number) && right > left) {
-            return getElementIndex(array, left, middle - 1, number);
-        } else {
-            if (array[middle] == number) {
-                return middle;
-            }
-
+        if (left > right) {
             return -1;
         }
+
+        int middle = left + (right - left) / 2;
+
+        if (array[middle] < number) {
+            return getElementIndex(array, middle + 1, right, number);
+        }
+
+        if (array[middle] > number) {
+            return getElementIndex(array, left, middle - 1, number);
+        }
+
+        return middle;
     }
 
     public static void printArray(int[] array) {
