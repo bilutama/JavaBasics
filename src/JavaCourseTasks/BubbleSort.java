@@ -2,12 +2,11 @@ package JavaCourseTasks;
 
 public class BubbleSort {
     public static void main(String[] args) {
-        final int arraySize = 30;
-        int[] array = new int[arraySize];
+        final int ARRAY_SIZE = 20;
+        int[] array = new int[ARRAY_SIZE];
 
-        // Array initialization
-        for (int i = 0; i < arraySize; ++i) {
-            array[i] = arraySize - i;
+        for (int i = 0; i < ARRAY_SIZE; ++i) {
+            array[i] = ARRAY_SIZE - i;
         }
 
         System.out.println("The initial array:");
@@ -35,7 +34,7 @@ public class BubbleSort {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                 }
-                printArray(array);
+                //printArray(array);
 
                 if (isSorted) {
                     break;

@@ -2,12 +2,11 @@ package JavaCourseTasks;
 
 public class InsertionSort {
     public static void main(String[] args) {
-        final int arraySize = 10;
-        int[] array = new int[arraySize];
+        final int ARRAY_SIZE = 20;
+        int[] array = new int[ARRAY_SIZE];
 
-        // Array initialization
-        for (int i = 0; i < arraySize; ++i) {
-            array[i] = arraySize - i;
+        for (int i = 0; i < ARRAY_SIZE; ++i) {
+            array[i] = ARRAY_SIZE - i;
         }
 
         System.out.println("The initial array:");
@@ -25,16 +24,16 @@ public class InsertionSort {
         }
 
         for (int i = 0; i < array.length - 1; ++i) {
-            if (array[i + 1] < array[i]) {
+            if (array[i] > array[i + 1]) {
                 int j = i;
 
-                while (j >= 0 && array[j + 1] < array[j]) {
+                do {
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     --j;
                     //printArray(array); // For debugging
-                }
+                } while (j >= 0 && array[j] > array[j + 1]);
             }
         }
     }

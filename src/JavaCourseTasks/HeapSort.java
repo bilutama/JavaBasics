@@ -2,7 +2,12 @@ package JavaCourseTasks;
 
 public class HeapSort {
     public static void main(String[] args) {
-        int[] array = {15, 9, 18, 1, 3, 2, 17, 5, 7, 8, 50, 4, 100, 121, 16, 32, 65, 76, 44, 51};
+        final int ARRAY_SIZE = 20;
+        int[] array = new int[ARRAY_SIZE];
+
+        for (int i = 0; i < ARRAY_SIZE; ++i) {
+            array[i] = ARRAY_SIZE - i;
+        }
 
         System.out.println("The initial array:");
         printArray(array);
@@ -20,7 +25,6 @@ public class HeapSort {
 
         for (int i = 0; i < array.length; ++i) {
             buildHeap(array, 0, array.length - i);
-            //printArray(array); // For monitoring while debugging
 
             int temp = array[0];
             array[0] = array[array.length - i - 1];
@@ -44,7 +48,7 @@ public class HeapSort {
                 maximum = rightChild;
             }
 
-            // Move the maximum element to the root and recursively sift the heap down to leaves
+            // Move the maximum element to the root and recursively sift down
             if (i != maximum) {
                 int temp = array[maximum];
                 array[maximum] = array[i];

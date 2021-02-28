@@ -2,12 +2,12 @@ package JavaCourseTasks;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        final int arraySize = 10;
-        int[] array = new int[arraySize];
+        final int ARRAY_SIZE = 20;
+        int[] array = new int[ARRAY_SIZE];
 
         // Array initialization
-        for (int i = 0; i < arraySize; ++i) {
-            array[i] = arraySize - i;
+        for (int i = 0; i < ARRAY_SIZE; ++i) {
+            array[i] = ARRAY_SIZE - i;
         }
 
         System.out.println("The initial array:");
@@ -25,17 +25,17 @@ public class SelectionSort {
         }
 
         for (int i = 0; i < array.length - 1; ++i) {
-            int minIndex = i;
+            int minimumElementIndex = i;
 
             for (int j = i + 1; j < array.length; ++j) {
-                if (array[j] < array[minIndex]) {
-                    minIndex = j;
+                if (array[j] < array[minimumElementIndex]) {
+                    minimumElementIndex = j;
                 }
             }
 
-            if (array[i] > array[minIndex]) {
-                int temp = array[minIndex];
-                array[minIndex] = array[i];
+            if (array[i] > array[minimumElementIndex]) {
+                int temp = array[minimumElementIndex];
+                array[minimumElementIndex] = array[i];
                 array[i] = temp;
             }
         }
