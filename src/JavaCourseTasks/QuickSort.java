@@ -2,14 +2,14 @@ package JavaCourseTasks;
 
 public class QuickSort {
     public static void main(String[] args) {
-        final int ARRAY_SIZE = 15;
-        int[] array = new int[ARRAY_SIZE];
+//        final int ARRAY_SIZE = 15;
+//        int[] array = new int[ARRAY_SIZE];
+//
+//        for (int i = 0; i < ARRAY_SIZE; ++i) {
+//            array[i] = ARRAY_SIZE - i;
+//        }
 
-        for (int i = 0; i < ARRAY_SIZE; ++i) {
-            array[i] = ARRAY_SIZE - i;
-        }
-
-        //int[] array = {4, 1, 3, 2};
+        int[] array = {4, 6, 3, 5, 2, 1};
 
         System.out.println("The initial array:");
         printArray(array);
@@ -23,10 +23,12 @@ public class QuickSort {
 
     private static void sortArray(int[] array, int left, int right) {
         //int reference = left + (right - left) / 2;
-        int reference = array[left + (right - left) / 2];
+        int reference = array[right];
 
         int i = left;
         int j = right;
+
+        //System.out.printf("i=%d, j=%d%n", i, j);
 
         while (i <= j) {
             while (array[i] < reference) {
@@ -43,15 +45,19 @@ public class QuickSort {
                 array[j] = temp;
                 ++i;
                 --j;
-                //printArray(array);
+                printArray(array);
             }
         }
 
+        System.out.printf("i=%d, j=%d%n", i, j);
+
         if (i < right) {
+            //System.out.printf("i=%d, right=%d%n", i, right);
             sortArray(array, i, right);
         }
 
         if (j > left) {
+            //System.out.printf("j=%d, left=%d%n", j, left);
             sortArray(array, left, j);
         }
     }
