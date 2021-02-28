@@ -32,7 +32,6 @@ public class InsertionSort {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     --j;
-                    //printArray(array); // For debugging
                 } while (j >= 0 && array[j] > array[j + 1]);
             }
         }
