@@ -5,7 +5,6 @@ public class SelectionSort {
         final int ARRAY_SIZE = 20;
         int[] array = new int[ARRAY_SIZE];
 
-        // Array initialization
         for (int i = 0; i < ARRAY_SIZE; ++i) {
             array[i] = ARRAY_SIZE - i;
         }
@@ -25,13 +24,7 @@ public class SelectionSort {
         }
 
         for (int i = 0; i < array.length - 1; ++i) {
-            int minimumElementIndex = i;
-
-            for (int j = i + 1; j < array.length; ++j) {
-                if (array[j] < array[minimumElementIndex]) {
-                    minimumElementIndex = j;
-                }
-            }
+            int minimumElementIndex = getMinimumElementIndexOnArrayTail(array, i);
 
             if (array[i] > array[minimumElementIndex]) {
                 int temp = array[minimumElementIndex];
@@ -39,6 +32,22 @@ public class SelectionSort {
                 array[i] = temp;
             }
         }
+    }
+
+    private static int getMinimumElementIndexOnArrayTail(int[] array, int start) {
+        if (start >= array.length - 1) {
+            return array.length - 1;
+        }
+
+        int minimumElementIndex = start;
+
+        for (int j = minimumElementIndex + 1; j < array.length; ++j) {
+            if (array[j] < array[minimumElementIndex]) {
+                minimumElementIndex = j;
+            }
+        }
+
+        return minimumElementIndex;
     }
 
     private static void printArray(int[] array) {
