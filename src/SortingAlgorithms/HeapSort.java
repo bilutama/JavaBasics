@@ -1,14 +1,10 @@
-package JavaCourseTasks;
+package SortingAlgorithms;
 
 public class HeapSort {
     public static void main(String[] args) {
-        final int ARRAY_SIZE = 20;
-        int[] array = new int[ARRAY_SIZE];
+        int[] array = {1, 2, 5, 80, 3, 4, 100, 10, 30, 16, 13, 25, 9};
 
-        for (int i = 0; i < ARRAY_SIZE; ++i) {
-            array[i] = ARRAY_SIZE - i;
-        }
-
+        System.out.println("*** Heap Sort ***");
         System.out.println("The initial array:");
         printArray(array);
 
@@ -59,9 +55,9 @@ public class HeapSort {
         }
     }
 
-    static private void printArray(int[] array) {
-        for (int i : array) {
-            System.out.printf("%4d", i);
+    private static void printArray(int[] array) {
+        for (int element : array) {
+            System.out.printf("%4d", element);
         }
 
         System.out.println();

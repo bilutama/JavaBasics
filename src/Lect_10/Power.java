@@ -18,19 +18,19 @@ public class Power {
             power = scanner.nextInt();
         }
 
-        System.out.printf("%.3f ^ %d = %.3f (calculated recursively)%n", number, power, powerNumberRecursively(number, power));
-        System.out.printf("%.3f ^ %d = %.3f (calculated cyclically)%n", number, power, powerNumber(number, power));
+        System.out.printf("%.3f ^ %d = %.3f (calculated recursively)%n", number, power, getNumberRaisedToPowerRecursively(number, power));
+        System.out.printf("%.3f ^ %d = %.3f (calculated cyclically)%n", number, power, getNumberRaisedToPower(number, power));
     }
 
-    public static double powerNumberRecursively(double number, int power) {
+    public static double getNumberRaisedToPowerRecursively(double number, int power) {
         if (power == 0) {
             return 1;
         }
 
-        return number * powerNumberRecursively(number, power - 1);
+        return number * getNumberRaisedToPowerRecursively(number, power - 1);
     }
 
-    public static double powerNumber(double number, int power) {
+    public static double getNumberRaisedToPower(double number, int power) {
         double numberInPower = 1.0;
 
         for (int i = 0; i < power; ++i) {
