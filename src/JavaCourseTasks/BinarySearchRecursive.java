@@ -6,22 +6,15 @@ public class BinarySearchRecursive {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        final int ARRAY_SIZE = 30;
-        int[] array = new int[ARRAY_SIZE];
+        int[] array = {1, 3, 5, 7, 9, 11, 13, 14, 15, 16, 18, 20, 22};
 
-        // Array initialization
-        for (int i = 0; i < ARRAY_SIZE; ++i) {
-            array[i] = 2 * (i + 1);
-        }
-
-        // printing the array;
         System.out.println("The array is:");
         printArray(array);
 
         System.out.print("Enter a number to find: ");
         int number = scanner.nextInt();
 
-        System.out.printf("Number's index is %d%n", getElementIndex(array, 0, array.length, number));
+        System.out.printf("Number's index is %d%n", getElementIndex(array, 0, array.length - 1, number));
     }
 
     private static int getElementIndex(int[] array, int left, int right, int number) {

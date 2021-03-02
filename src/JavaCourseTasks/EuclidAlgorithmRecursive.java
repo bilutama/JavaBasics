@@ -23,7 +23,7 @@ public class EuclidAlgorithmRecursive {
 
     public static int getGreatestCommonDivisor(int number1, int number2) {
         if (number2 == 0 && number1 == 0) {
-            throw new RuntimeException();
+            throw new RuntimeException("Both numbers are zeros");
         }
 
         int dividend = Math.max(number1, number2);
