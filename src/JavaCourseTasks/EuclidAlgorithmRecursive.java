@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class EuclidAlgorithmRecursive {
     public static void main(String[] args) {
-        System.out.println("*** Euclid Algorithm (GCD for two numbers) ***");
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("*** Euclid Algorithm (GCD for two numbers) ***");
@@ -23,18 +21,18 @@ public class EuclidAlgorithmRecursive {
         }
     }
 
-    public static int getGreatestCommonDivisor(int maximumNumber, int minimumNumber) throws Exception {
-        if (minimumNumber == 0 && maximumNumber == 0) {
-            throw new Exception("no GCD when both numbers equal zeros");
+    public static int getGreatestCommonDivisor(int number1, int number2) {
+        if (number2 == 0 && number1 == 0) {
+            throw new RuntimeException();
         }
 
-        minimumNumber = Math.abs(minimumNumber);
-        maximumNumber = Math.abs(maximumNumber);
+        int dividend = Math.max(number1, number2);
+        int divisor = Math.min(number1, number2);
 
-        if (minimumNumber == 0) {
-            return maximumNumber;
+        if (divisor == 0) {
+            return dividend;
         }
 
-        return getGreatestCommonDivisor(minimumNumber, maximumNumber % minimumNumber);
+        return getGreatestCommonDivisor(divisor, dividend % divisor);
     }
 }
