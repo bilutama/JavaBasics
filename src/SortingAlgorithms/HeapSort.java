@@ -15,11 +15,11 @@ public class HeapSort {
     }
 
     private static void sortArray(int[] array) {
-        // 1 STAGE - building the heap
+        // 1 STAGE - initializing a heap on the array
         buildHeap(array);
 
         // 2 STAGE - swap the first and the last elements of the heap
-        // and rebuild the heap sifting down the new root
+        // and rebuild the reduced heap sifting down the new root
         for (int i = 0; i < array.length; ++i) {
             int temp = array[0];
             array[0] = array[array.length - i - 1];
@@ -57,7 +57,6 @@ public class HeapSort {
                 int temp = array[maximumElementIndex];
                 array[maximumElementIndex] = array[currentRoot];
                 array[currentRoot] = temp;
-                printArray(array);
 
                 currentRoot = maximumElementIndex;
             }
