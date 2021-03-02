@@ -15,42 +15,51 @@ public class HeapSort {
     }
 
     private static void sortArray(int[] array) {
-        if (array.length < 2) {
-            return;
-        }
+        // 1 STAGE - building the heap
+        buildHeap(array);
 
+        // 2 STAGE - swap the first and the last elements of the heap
+        // and rebuild the heap sifting down the new root
         for (int i = 0; i < array.length; ++i) {
-            buildHeap(array, 0, array.length - i);
-
             int temp = array[0];
             array[0] = array[array.length - i - 1];
             array[array.length - i - 1] = temp;
+
+            siftHeapElementDown(array, 0, array.length - i - 1);
         }
     }
 
-    static private void buildHeap(int[] array, int heapRoot, int heapLength) {
-        for (int i = heapLength / 2 - 1; i >= heapRoot; --i) {
+    private static void buildHeap(int[] array) {
+        for (int i = array.length / 2 - 1; i >= 0; --i) {
+            siftHeapElementDown(array, i, array.length);
+        }
+    }
 
-            int leftChild = 2 * i + 1;
-            int rightChild = 2 * i + 2;
+    private static void siftHeapElementDown(int[] array, int heapRoot, int heapLength) {
+        int currentRoot = heapRoot;
+        int maximumElementIndex = heapRoot;
 
-            int maximum = i;
+        while (true) {
+            int leftChildIndex = 2 * currentRoot + 1;
+            int rightChildIndex = 2 * currentRoot + 2;
 
-            if (leftChild < heapLength && array[leftChild] > array[i]) {
-                maximum = leftChild;
+            if (leftChildIndex < heapLength && array[leftChildIndex] > array[currentRoot]) {
+                maximumElementIndex = leftChildIndex;
             }
 
-            if (rightChild < heapLength && array[rightChild] > array[maximum]) {
-                maximum = rightChild;
+            if (rightChildIndex < heapLength && array[rightChildIndex] > array[maximumElementIndex]) {
+                maximumElementIndex = rightChildIndex;
             }
 
-            // Move the maximum element to the root and recursively sift down
-            if (i != maximum) {
-                int temp = array[maximum];
-                array[maximum] = array[i];
-                array[i] = temp;
+            if (currentRoot == maximumElementIndex) {
+                break;
+            } else {
+                int temp = array[maximumElementIndex];
+                array[maximumElementIndex] = array[currentRoot];
+                array[currentRoot] = temp;
+                printArray(array);
 
-                buildHeap(array, maximum, heapLength);
+                currentRoot = maximumElementIndex;
             }
         }
     }
