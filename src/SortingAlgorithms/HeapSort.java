@@ -2,7 +2,7 @@ package SortingAlgorithms;
 
 public class HeapSort {
     public static void main(String[] args) {
-        int[] array = {1, 2, 5, 80, 3, 4, 100, 10, 30, 16, 13, 25, 9};
+        int[] array = {13, 25, 5, 80, 3, 4, 100, 10, 30, 16, 1, 2, 9};
 
         System.out.println("*** Heap Sort ***");
         System.out.println("The initial array:");
@@ -20,7 +20,7 @@ public class HeapSort {
 
         // 2 STAGE - swap the first and the last elements of the heap
         // and rebuild the reduced heap sifting down the new root
-        for (int i = 0; i < array.length; ++i) {
+        for (int i = 0; i < array.length - 1; ++i) {
             int temp = array[0];
             array[0] = array[array.length - i - 1];
             array[array.length - i - 1] = temp;
@@ -53,13 +53,13 @@ public class HeapSort {
 
             if (currentRoot == maximumElementIndex) {
                 break;
-            } else {
-                int temp = array[maximumElementIndex];
-                array[maximumElementIndex] = array[currentRoot];
-                array[currentRoot] = temp;
-
-                currentRoot = maximumElementIndex;
             }
+
+            int temp = array[maximumElementIndex];
+            array[maximumElementIndex] = array[currentRoot];
+            array[currentRoot] = temp;
+
+            currentRoot = maximumElementIndex;
         }
     }
 

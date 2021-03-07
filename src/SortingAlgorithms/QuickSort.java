@@ -2,7 +2,7 @@ package SortingAlgorithms;
 
 public class QuickSort {
     public static void main(String[] args) {
-        int[] array = {1, 2, 5, 80, 3, 4, 100, 10, 30, 16, 13, 25, 9};
+        int[] array = {1, 2, 5, 80, 3, 4, 100, -6, -56, 10, 30, 16, 13, 25, 9};
 
         System.out.println("*** Quick Sort ***");
         System.out.println("The initial array:");
