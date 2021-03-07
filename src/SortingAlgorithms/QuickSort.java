@@ -15,11 +15,11 @@ public class QuickSort {
     }
 
     private static void sortArray(int[] array, int left, int right) {
-        if (right - left < 2) {
+        if (right < left) {
             return;
         }
 
-        int referenceValue = array[left]; // Can be any element of the (sub)array
+        int referenceValue = array[left];
         int i = left;
         int j = right;
 
