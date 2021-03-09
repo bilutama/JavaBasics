@@ -9,18 +9,18 @@ public class FileInUpperCase {
 
         String inputFile = "input.txt";
         String outputFile = "output.txt";
-        
+
         stringFromFileToUpperCase(inputFile, outputFile);
     }
 
-    public static void stringFromFileToUpperCase (String inputFile, String outputFile) throws FileNotFoundException {
+    public static void stringFromFileToUpperCase(String inputFile, String outputFile) throws FileNotFoundException {
         try (Scanner scanner = new Scanner(new FileInputStream(inputFile));
-            PrintWriter writer = new PrintWriter(outputFile)) {
-                while (scanner.hasNextLine()) {
-                    writer.println(scanner.nextLine().toUpperCase());
-                }
+             PrintWriter writer = new PrintWriter(outputFile)) {
+            while (scanner.hasNextLine()) {
+                writer.println(scanner.nextLine().toUpperCase());
+            }
 
-                System.out.println("Success!");
+            System.out.println("Success!");
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
