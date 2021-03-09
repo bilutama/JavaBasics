@@ -1,18 +1,16 @@
 package Lect_12;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class OccurrencesCount {
     public static void main(String[] args) {
-        System.out.println("*** Count occurrences of a string in a file (not case sensitive) ***");
+        System.out.println("*** Counts occurrences of a string in a file (not case sensitive) ***");
 
-        String inputFileName = "input1.txt";
+        String inputFileName = "input.txt";
         String string = "text";
-
-        System.out.printf("Text \"%s\" found in the file \"%s\" %d times.", string, inputFileName, getStringOccurrencesCount(inputFileName, string));
+        System.out.printf("%d occurrences found", getStringOccurrencesCount(inputFileName, string));
     }
 
     public static int getStringOccurrencesCount(String inputFileName, String string) {
