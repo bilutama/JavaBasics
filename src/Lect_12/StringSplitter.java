@@ -3,13 +3,13 @@ package Lect_12;
 public class StringSplitter {
     public static void main(String[] args) throws Exception {
         String string = "1, 2, 3, 4, 5";
-        String[] stringArray = string.split(",");
+        String[] stringsArray = string.split(",");
 
         try {
-            int[] numbers = new int[stringArray.length];
+            int[] numbers = new int[stringsArray.length];
             int sum = 0;
 
-            for (String s : stringArray) {
+            for (String s : stringsArray) {
                 sum += Integer.parseInt(s.trim());
             }
 
