@@ -9,14 +9,14 @@ import java.io.IOException;
 public class ImageBlurring {
     public static void main(String[] args) throws IOException {
         // читаем картинку из файлу image.jpg в объект класса BufferedImage
-        BufferedImage image = ImageIO.read(new File("image.jpg"));
+        BufferedImage imageInput = ImageIO.read(new File("image.jpg"));
 
         // получаем растр - объект, внутри которого содержится двумерный массив пикселей
-        WritableRaster raster = image.getRaster();
+        WritableRaster rasterInput = imageInput.getRaster();
 
         // получаем ширину и высоту картинки
-        int width = raster.getWidth();
-        int height = raster.getHeight();
+        int width = rasterInput.getWidth();
+        int height = rasterInput.getHeight();
 
         // Создаем новое изображение и растр, в который будем записывать результат,
         // той же размерности, что и исходное изображение
@@ -52,7 +52,7 @@ public class ImageBlurring {
                     // Проверка на граничные пиксели - их не меняем, т.к. матрица размытия выйдет за пределы изображения
                     if (y < BLURRING_STRENGTH / 2 + 1 || y >= height - BLURRING_STRENGTH / 2 ||
                             x < BLURRING_STRENGTH / 2 + 1 || x >= width - BLURRING_STRENGTH / 2) {
-                        raster.getPixel(x, y, tempPixel);
+                        rasterInput.getPixel(x, y, tempPixel);
                         pixel[k] = tempPixel[k];
                     } else {
                         double blurredPixel = 0.0;
@@ -61,7 +61,7 @@ public class ImageBlurring {
                         for (int i = 0; i < BLURRING_STRENGTH; ++i) {
                             for (int j = 0; j < BLURRING_STRENGTH; ++j) {
                                 // получаем пиксели по матрице вокруг текущего с координатами (x, y)
-                                raster.getPixel(x + i - BLURRING_STRENGTH / 2, y + j - BLURRING_STRENGTH / 2, tempPixel);
+                                rasterInput.getPixel(x + i - BLURRING_STRENGTH / 2, y + j - BLURRING_STRENGTH / 2, tempPixel);
                                 // и суммируем с перемножением на коэффициенты матрицы размытия
                                 blurredPixel += tempPixel[k] * blurringMatrix[i][j];
                             }

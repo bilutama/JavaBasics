@@ -49,4 +49,3 @@ public class ConvertToBW {
         ImageIO.write(image, "png", new File("out_BW.png"));
     }
 }
-
