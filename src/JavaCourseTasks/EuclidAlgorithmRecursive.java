@@ -24,7 +24,9 @@ public class EuclidAlgorithmRecursive {
     public static int getGreatestCommonDivisor(int number1, int number2) {
         if (number2 == 0 && number1 == 0) {
             throw new RuntimeException("Both numbers are zeros");
-        } else if (Math.min(number1, number2) == 0) {
+        }
+
+        if (Math.min(number1, number2) == 0) {
             return Math.max(number1, number2);
         }
 
