@@ -6,7 +6,6 @@ public class StringSplitter {
         String[] stringsArray = string.split(",");
 
         try {
-            int[] numbers = new int[stringsArray.length];
             int sum = 0;
 
             for (String s : stringsArray) {
