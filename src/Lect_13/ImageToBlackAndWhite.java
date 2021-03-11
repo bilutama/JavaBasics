@@ -6,7 +6,7 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 
-public class ConvertToBW {
+public class ImageToBlackAndWhite {
     public static void main(String[] args) throws IOException {
         // читаем картинку из файлу image.jpg в объект класса BufferedImage
         BufferedImage image = ImageIO.read(new File("image.jpg"));
@@ -19,7 +19,6 @@ public class ConvertToBW {
         int height = raster.getHeight();
 
         final int COLORS_COUNT_IN_RGB = 3;
-        final int MAX_RGB = 255;
 
         // создаем массив, в котором будет содержаться текущий пиксель
         // это массив из 3 элементов, в нем по очереди лежат числа R, G, B
@@ -46,6 +45,6 @@ public class ConvertToBW {
         }
 
         // сохраняем картинку в файл
-        ImageIO.write(image, "png", new File("out_BW.png"));
+        ImageIO.write(image, "png", new File("out_blackAndWhite.png"));
     }
 }
