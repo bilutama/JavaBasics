@@ -14,27 +14,27 @@ public class GetServerName {
         System.out.println(getServerNameFromURL(testURL3));
     }
 
-    public static String getServerNameFromURL(String usersURL) {
-        if (usersURL.isEmpty()) {
+    public static String getServerNameFromURL(String inputUrl) {
+        if (inputUrl.isEmpty()) {
             return "";
         }
 
         String serverNamePrefix = "://";
-        int beginIndex = usersURL.indexOf(serverNamePrefix);
+        int beginIndex = inputUrl.indexOf(serverNamePrefix);
 
         if (beginIndex == -1) {
             return "";
-        } else {
-            beginIndex += serverNamePrefix.length();
         }
+        
+        beginIndex += serverNamePrefix.length();
 
         String serverNamePostfix = "/";
-        int endIndex = usersURL.indexOf(serverNamePostfix, beginIndex);
+        int endIndex = inputUrl.indexOf(serverNamePostfix, beginIndex);
 
         if (endIndex == -1) {
-            endIndex = usersURL.length();
+            endIndex = inputUrl.length();
         }
 
-        return usersURL.substring(beginIndex, endIndex);
+        return inputUrl.substring(beginIndex, endIndex);
     }
 }
