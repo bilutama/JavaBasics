@@ -3,7 +3,7 @@ package Lect_12;
 import java.io.*;
 import java.util.Scanner;
 
-public class FileContentToUpperCase {
+public class ConvertFileContentToUpperCase {
     public static void main(String[] args) {
         System.out.println("*** Converts text from a file to upper case ***");
 

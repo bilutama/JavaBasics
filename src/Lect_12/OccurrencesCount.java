@@ -8,15 +8,15 @@ public class OccurrencesCount {
     public static void main(String[] args) {
         System.out.println("*** Counts occurrences of a string in a file (not case sensitive) ***");
 
-        String inputFile = "input.txt";
+        String inputFileName = "input.txt";
         String string = "text";
-        System.out.printf("%d occurrences found", getStringOccurrencesCount(inputFile, string));
+        System.out.printf("%d occurrences found", getStringOccurrencesCount(inputFileName, string));
     }
 
-    public static int getStringOccurrencesCount(String inputFile, String string) {
-        int stringCount = 0;
+    public static int getStringOccurrencesCount(String inputFileName, String string) {
+        int stringsCount = 0;
 
-        try (Scanner scanner = new Scanner(new FileInputStream(inputFile))) {
+        try (Scanner scanner = new Scanner(new FileInputStream(inputFileName))) {
             String stringToLowerCase = string.toLowerCase();
 
             while (scanner.hasNextLine()) {
@@ -28,7 +28,7 @@ public class OccurrencesCount {
                     currentIndex = line.indexOf(stringToLowerCase, currentIndex);
 
                     if (currentIndex == -1) {
-                        stringCount += counterInLine;
+                        stringsCount += counterInLine;
                         break;
                     }
 
@@ -40,6 +40,6 @@ public class OccurrencesCount {
             System.out.println(exception.getMessage());
         }
 
-        return stringCount;
+        return stringsCount;
     }
 }

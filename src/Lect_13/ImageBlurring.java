@@ -28,7 +28,7 @@ public class ImageBlurring {
 
         // Сила размытия, т.е. размерность матрицы пикселей, участвующих в усреднении
         // например, 3, 5, 7
-        final int BLURRING_STRENGTH = 7;
+        final int BLURRING_STRENGTH = 3;
         double[][] blurringMatrix = new double[BLURRING_STRENGTH][BLURRING_STRENGTH];
 
         // Инициализация матрицы размытия
