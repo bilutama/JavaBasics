@@ -1,20 +1,20 @@
 package Lect_12;
 
-public class GetServerName {
+public class ServerNameFromUrl {
     public static void main(String[] args) {
-        System.out.println("*** Returns server's name from URL ***");
+        System.out.println("*** Returns server's name from Url ***");
 
-        String testURL1 = "http://SomeServerName/abcd/dfdf.htm?dfdf=dfdf";
-        System.out.println(getServerNameFromURL(testURL1));
+        String testUrl1 = "http://SomeServerName/abcd/dfdf.htm?dfdf=dfdf";
+        System.out.println(getServerNameFromUrl(testUrl1));
 
-        String testURL2 = "http://SomeServerName";
-        System.out.println(getServerNameFromURL(testURL2));
+        String testUrl2 = "http://SomeServerName";
+        System.out.println(getServerNameFromUrl(testUrl2));
 
-        String testURL3 = "http://";
-        System.out.println(getServerNameFromURL(testURL3));
+        String testUrl3 = "http://";
+        System.out.println(getServerNameFromUrl(testUrl3));
     }
 
-    public static String getServerNameFromURL(String inputUrl) {
+    public static String getServerNameFromUrl(String inputUrl) {
         if (inputUrl.isEmpty()) {
             return "";
         }

@@ -3,16 +3,16 @@ package Lect_12;
 import java.io.*;
 import java.util.Scanner;
 
-public class ConvertFileContentToUpperCase {
+public class TextInFileToUpperCase {
     public static void main(String[] args) {
-        System.out.println("*** Converts text from a file to upper case ***");
+        System.out.println("*** Converts text in a file to upper case ***");
 
         String inputFileName = "input.txt";
         String outputFileName = "output.txt";
-        stringFromFileToUpperCase(inputFileName, outputFileName);
+        convertTextInFileToUpperCase(inputFileName, outputFileName);
     }
 
-    public static void stringFromFileToUpperCase(String inputFileName, String outputFileName) {
+    public static void convertTextInFileToUpperCase(String inputFileName, String outputFileName) {
         try (Scanner scanner = new Scanner(new FileInputStream(inputFileName));
              PrintWriter writer = new PrintWriter(outputFileName)) {
             while (scanner.hasNextLine()) {
