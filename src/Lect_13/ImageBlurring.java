@@ -29,12 +29,15 @@ public class ImageBlurring {
         // Сила размытия, т.е. размерность матрицы пикселей, участвующих в усреднении
         // например, 3, 5, 7
         final int BLURRING_STRENGTH = 3;
-        double[][] blurringMatrix = new double[BLURRING_STRENGTH][BLURRING_STRENGTH];
+        
+        int blurringMatrixDimension = BLURRING_STRENGTH * 2 + 1;
+        
+        double[][] blurringMatrix = new double[blurringMatrixDimension][blurringMatrixDimension];
 
         // Инициализация матрицы размытия
-        for (int i = 0; i < BLURRING_STRENGTH; ++i) {
-            for (int j = 0; j < BLURRING_STRENGTH; ++j) {
-                blurringMatrix[i][j] = 1.0 / (BLURRING_STRENGTH * BLURRING_STRENGTH);
+        for (int i = 0; i < blurringMatrixDimension; ++i) {
+            for (int j = 0; j < blurringMatrixDimension; ++j) {
+                blurringMatrix[i][j] = 1.0 / (blurringMatrixDimension * blurringMatrixDimension);
             }
         }
 
@@ -50,18 +53,18 @@ public class ImageBlurring {
             for (int x = 0; x < width; ++x) {
                 for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
                     // Проверка на граничные пиксели - их не меняем, т.к. матрица размытия выйдет за пределы изображения
-                    if (y < BLURRING_STRENGTH / 2 + 1 || y >= height - BLURRING_STRENGTH / 2 ||
-                            x < BLURRING_STRENGTH / 2 + 1 || x >= width - BLURRING_STRENGTH / 2) {
+                    if (y < blurringMatrixDimension / 2 + 1 || y >= height - blurringMatrixDimension / 2 ||
+                            x < blurringMatrixDimension / 2 + 1 || x >= width - blurringMatrixDimension / 2) {
                         rasterInput.getPixel(x, y, tempPixel);
                         pixel[k] = tempPixel[k];
                     } else {
                         double blurredPixel = 0.0;
 
                         // циклы по матрице размытия
-                        for (int i = 0; i < BLURRING_STRENGTH; ++i) {
-                            for (int j = 0; j < BLURRING_STRENGTH; ++j) {
+                        for (int i = 0; i < blurringMatrixDimension; ++i) {
+                            for (int j = 0; j < blurringMatrixDimension; ++j) {
                                 // получаем пиксели по матрице вокруг текущего с координатами (x, y)
-                                rasterInput.getPixel(x + i - BLURRING_STRENGTH / 2, y + j - BLURRING_STRENGTH / 2, tempPixel);
+                                rasterInput.getPixel(x + i - blurringMatrixDimension / 2, y + j - blurringMatrixDimension / 2, tempPixel);
                                 // и суммируем с перемножением на коэффициенты матрицы размытия
                                 blurredPixel += tempPixel[k] * blurringMatrix[i][j];
                             }
