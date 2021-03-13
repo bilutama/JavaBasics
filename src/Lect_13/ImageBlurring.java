@@ -26,10 +26,10 @@ public class ImageBlurring {
         final int COLORS_COUNT_IN_RGB = 3;
         //final int MAX_RGB = 255;
 
-        // Сила размытия, т.е. размерность матрицы пикселей, участвующих в усреднении
-        // например, 3, 5, 7
+        // Степень размытия - значение, от которой вычисляется размерность матрицы размытия
         final int BLURRING_STRENGTH = 3;
-        
+
+        // Размерность матрицы размытия
         int blurringMatrixDimension = BLURRING_STRENGTH * 2 + 1;
         
         double[][] blurringMatrix = new double[blurringMatrixDimension][blurringMatrixDimension];

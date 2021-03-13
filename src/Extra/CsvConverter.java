@@ -11,16 +11,23 @@ public class CsvConverter {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
 
-        String inputFileName = "inputCsv.txt";
-        String outputFileName = "outputCsv.txt";
-        convertTextInFileToUpperCase(inputFileName, outputFileName);
+        String str = "\"\"\"\" & <>";
+        System.out.println(str);
+        System.out.println(formatStringToHtml(str));
+//        String inputFileName = "inputCsv.txt";
+//        String outputFileName = "outputCsv.txt";
+//        convertCsvToHtmlTable(inputFileName, outputFileName);
     }
 
-    public static void convertTextInFileToUpperCase(String inputFileName, String outputFileName) {
+    public static void convertCsvToHtmlTable(String inputFileName, String outputFileName) {
         try (Scanner scanner = new Scanner(new FileInputStream(inputFileName));
              PrintWriter writer = new PrintWriter(outputFileName)) {
-            //String separator = ",";
-            //String beginQuotes = "\"";
+            final String SEPARATOR = ",";
+            final String BEGIN_QUOTES = "\"";
+
+            boolean isQuotesOpen = false;
+            boolean isRowFinished = true;
+
             StringBuilder stringBuilder = new StringBuilder();
 
             while (scanner.hasNextLine()) {
@@ -35,5 +42,31 @@ public class CsvConverter {
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
+    }
+
+    public static String formatStringToHtml(String string) {
+        final String[][] CHAR_REPLACEMENTS = {
+                {"\"\"", "\""},
+                {"&", "&amp"},
+                {"<", "&lt"},
+                {">", "&gt"},
+                {"\n", "<br/>"}
+        };
+
+        String resultString = string;
+
+        for (String[] char_replacement : CHAR_REPLACEMENTS) {
+            resultString = resultString.replace(char_replacement[0], char_replacement[1]);
+        }
+
+        return resultString;
+    }
+
+    public static String getWrappedFormattedCell (String cellString) {
+        return "<td>" + formatStringToHtml(cellString) + "</td>";
+    }
+
+    public static String getWrappedTableRow (String tableRow) {
+        return "<tr>" + tableRow + "</tr>";
     }
 }
