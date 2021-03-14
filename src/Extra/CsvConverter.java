@@ -13,7 +13,7 @@ public class CsvConverter {
 
         String str = "\"\"\"\" & <>";
         System.out.println(str);
-        System.out.println(formatStringToHtml(str));
+        System.out.println(formatCellToHtml(str));
 //        String inputFileName = "inputCsv.txt";
 //        String outputFileName = "outputCsv.txt";
 //        convertCsvToHtmlTable(inputFileName, outputFileName);
@@ -26,12 +26,11 @@ public class CsvConverter {
             final String BEGIN_QUOTES = "\"";
 
             boolean isQuotesOpen = false;
-            boolean isRowFinished = true;
+            //boolean isRowFinished = true;
 
             StringBuilder stringBuilder = new StringBuilder();
 
             while (scanner.hasNextLine()) {
-
                 stringBuilder.append(scanner.nextLine()).append("\n");
             }
 
@@ -44,7 +43,7 @@ public class CsvConverter {
         }
     }
 
-    public static String formatStringToHtml(String string) {
+    public static String formatCellToHtml(String string) {
         final String[][] CHAR_REPLACEMENTS = {
                 {"\"\"", "\""},
                 {"&", "&amp"},
@@ -63,7 +62,7 @@ public class CsvConverter {
     }
 
     public static String getWrappedFormattedCell (String cellString) {
-        return "<td>" + formatStringToHtml(cellString) + "</td>";
+        return "<td>" + formatCellToHtml(cellString) + "</td>";
     }
 
     public static String getWrappedTableRow (String tableRow) {
