@@ -30,15 +30,15 @@ public class MatrixDeterminant {
         int determinant = 0;
 
         for (int i = 0; i < matrix.length; ++i) {
-            determinant += (1 - 2 * (i % 2)) * matrix[i][REFERENCE_COLUMN_INDEX] * getMatrixDeterminant(getMinorMatrix(matrix, i, REFERENCE_COLUMN_INDEX));
+            determinant += (1 - 2 * (i % 2)) * matrix[i][REFERENCE_COLUMN_INDEX] * getMatrixDeterminant(getMinor(matrix, i, REFERENCE_COLUMN_INDEX));
         }
 
         return determinant;
     }
 
     // Вычисление минора основной матрицы
-    public static int[][] getMinorMatrix(int[][] matrix, int excludedRowIndex, int excludedColumnIndex) {
-        int[][] subMatrix = new int[matrix[0].length - 1][matrix[0].length - 1];
+    public static int[][] getMinor(int[][] matrix, int excludedRowIndex, int excludedColumnIndex) {
+        int[][] minor = new int[matrix[0].length - 1][matrix[0].length - 1];
 
         for (int i = 0; i < matrix.length; ++i) {
             // Пропуск референсной строки
@@ -57,11 +57,11 @@ public class MatrixDeterminant {
 
                 // Вычисление сдвига индекса по столбцу
                 int columnIndexShift = j > excludedColumnIndex ? -1 : 0;
-                subMatrix[i + rowIndexShift][j + columnIndexShift] = matrix[i][j];
+                minor[i + rowIndexShift][j + columnIndexShift] = matrix[i][j];
             }
         }
 
-        return subMatrix;
+        return minor;
     }
 
     public static void printMatrix(int[][] matrix) {
