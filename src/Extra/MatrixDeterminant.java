@@ -5,14 +5,22 @@ public class MatrixDeterminant {
         int[][] matrix = {
                 {1, -2, 3},
                 {4, 8, 6},
-                {-7, 8, 9}
+                {-7, 8, 9},
         };
 
         printMatrix(matrix);
-        System.out.printf("Determinant = %d%n", getMatrixDeterminant(matrix));
+        try {
+            System.out.printf("Determinant = %d%n", getMatrixDeterminant(matrix));
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
-    public static int getMatrixDeterminant(int[][] matrix) {
+    public static int getMatrixDeterminant(int[][] matrix) throws Exception {
+        if (matrix.length != matrix[0].length) {
+            throw new Exception("The matrix is not square, could not get determinant.");
+        }
+
         if (matrix.length == 1) {
             return matrix[0][0];
         }
