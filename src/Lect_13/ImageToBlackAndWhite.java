@@ -33,10 +33,10 @@ public class ImageToBlackAndWhite {
                 raster.getPixel(x, y, pixel);
 
                 // считаем показели пикселя по правилу перевода в черно-белое
-                int pixelBlackAndWhite = (int) (0.3 * pixel[0] + 0.59 * pixel[1] + 0.11 * pixel[2]);
+                int grayPixel = (int) (0.3 * pixel[0] + 0.59 * pixel[1] + 0.11 * pixel[2]);
 
                 for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
-                    pixel[k] = pixelBlackAndWhite;
+                    pixel[k] = grayPixel;
                 }
 
                 // записываем значения цветов для пикселя в картинку
