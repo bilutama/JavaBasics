@@ -22,7 +22,7 @@ public class CsvConverter {
     public static void convertCsvToHtmlTable(String inputFileName, String outputFileName) {
         try (Scanner scanner = new Scanner(new FileInputStream(inputFileName));
              PrintWriter writer = new PrintWriter(outputFileName)) {
-            final String SEPARATOR = ",";
+            final char SEPARATOR = ',';
             final String BEGIN_QUOTES = "\"";
 
             boolean isQuotesOpen = false;
@@ -30,8 +30,16 @@ public class CsvConverter {
 
             StringBuilder stringBuilder = new StringBuilder();
 
+            String processedString;
+
             while (scanner.hasNextLine()) {
-                stringBuilder.append(scanner.nextLine()).append("\n");
+                processedString = scanner.nextLine();
+
+                for (int i = 0; i < processedString.length(); ++i) {
+                    if (processedString.charAt(i) != SEPARATOR) {
+
+                    }
+                }
             }
 
             writer.println(stringBuilder.toString().trim());

@@ -30,14 +30,14 @@ public class MatrixDeterminant {
         int determinant = 0;
 
         for (int i = 0; i < matrix.length; ++i) {
-            determinant += (1 - 2 * (i % 2)) * matrix[i][REFERENCE_COLUMN_INDEX] * getMatrixDeterminant(getMinor(matrix, i, REFERENCE_COLUMN_INDEX));
+            determinant += (1 - 2 * (i % 2)) * matrix[i][REFERENCE_COLUMN_INDEX] * getMatrixDeterminant(getReducedMatrix(matrix, i, REFERENCE_COLUMN_INDEX));
         }
 
         return determinant;
     }
 
-    // Вычисление минора основной матрицы
-    public static int[][] getMinor(int[][] matrix, int excludedRowIndex, int excludedColumnIndex) {
+    // Вычисление матрицы n - 1 порядка
+    public static int[][] getReducedMatrix(int[][] matrix, int excludedRowIndex, int excludedColumnIndex) {
         int[][] minor = new int[matrix[0].length - 1][matrix[0].length - 1];
 
         for (int i = 0; i < matrix.length; ++i) {
