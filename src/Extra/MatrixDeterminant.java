@@ -18,7 +18,7 @@ public class MatrixDeterminant {
 
     public static int getMatrixDeterminant(int[][] matrix) throws Exception {
         if (matrix.length != matrix[0].length) {
-            throw new Exception("The matrix is not square, could not get determinant.");
+            throw new Exception("The matrix is not square, cannot get determinant.");
         }
 
         if (matrix.length == 1) {
@@ -38,7 +38,7 @@ public class MatrixDeterminant {
 
     // Вычисление матрицы n - 1 порядка
     public static int[][] getReducedMatrix(int[][] matrix, int excludedRowIndex, int excludedColumnIndex) {
-        int[][] minor = new int[matrix[0].length - 1][matrix[0].length - 1];
+        int[][] reducedMatrix = new int[matrix[0].length - 1][matrix[0].length - 1];
 
         for (int i = 0; i < matrix.length; ++i) {
             // Пропуск референсной строки
@@ -57,11 +57,11 @@ public class MatrixDeterminant {
 
                 // Вычисление сдвига индекса по столбцу
                 int columnIndexShift = j > excludedColumnIndex ? -1 : 0;
-                minor[i + rowIndexShift][j + columnIndexShift] = matrix[i][j];
+                reducedMatrix[i + rowIndexShift][j + columnIndexShift] = matrix[i][j];
             }
         }
 
-        return minor;
+        return reducedMatrix;
     }
 
     public static void printMatrix(int[][] matrix) {
