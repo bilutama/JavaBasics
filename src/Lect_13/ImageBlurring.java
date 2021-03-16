@@ -24,6 +24,8 @@ public class ImageBlurring {
         WritableRaster outputRaster = outputImage.getRaster();
 
         final int COLORS_COUNT_IN_RGB = 3;
+        final int MIN_RGB = 0;
+        final int MAX_RGB = 255;
 
         // Степень размытия - значение, от которой вычисляется размерность матрицы размытия
         final int BLURRING_STRENGTH = 3;
@@ -81,13 +83,13 @@ public class ImageBlurring {
                 for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
                     outputPixel[k] = (int) intermediateOutputPixel[k];
 
-                    if (outputPixel[k] > 255) {
-                        outputPixel[k] = 255;
+                    if (outputPixel[k] > MAX_RGB) {
+                        outputPixel[k] = MAX_RGB;
                         continue;
                     }
 
-                    if (outputPixel[k] < 0) {
-                        outputPixel[k] = 0;
+                    if (outputPixel[k] < MIN_RGB) {
+                        outputPixel[k] = MIN_RGB;
                     }
                 }
 
