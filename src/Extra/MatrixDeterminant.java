@@ -5,7 +5,7 @@ public class MatrixDeterminant {
         int[][] matrix = {
                 {1, -2, 3},
                 {4, 8, 6},
-                {-7, 8, 9},
+                {-7, 8, 9}
         };
 
         printMatrix(matrix);
@@ -67,9 +67,9 @@ public class MatrixDeterminant {
     public static void printMatrix(int[][] matrix) {
         System.out.println("Matrix:");
 
-        for (int[] element : matrix) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                System.out.printf("%3d", element[j]);
+        for (int[] row : matrix) {
+            for (int element : row) {
+                System.out.printf("%3d", element);
             }
 
             System.out.println();
