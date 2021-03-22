@@ -1,16 +1,17 @@
-package Extra;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
+//import java.util.Scanner;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
-public class CsvConverter {
+public class Main {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
 
         String inputFileName = "inputCsv.txt";
-        String outputFileName = "outputCsv.html";
+        String outputFileName = "outputCsv.txt";
 
         convertCsvToHtmlTable(inputFileName, outputFileName);
     }
@@ -18,11 +19,19 @@ public class CsvConverter {
     public static void convertCsvToHtmlTable(String inputFileName, String outputFileName) {
         try (Scanner scanner = new Scanner(new FileInputStream(inputFileName));
              PrintWriter writer = new PrintWriter(outputFileName)) {
-            writer.println("<table>");
-
             final char SEPARATOR = ',';
             final char QUOTES = '\"';
             final char EOL = '\n';
+                    
+            final String TABLE_OPEN_TAG = "<table>";
+            final String TABLE_CLOSE_TAG = "</table>";
+            final String ROW_OPEN_TAG = "<tr>";
+            final String ROW_CLOSE_TAG = "</tr>";
+            final String CELL_OPEN_TAG = "<td>";
+            final String CELL_CLOSE_TAG = "</td>";
+            final String BREAK_LINE_TAG = "<br/>";
+
+            writer.println(TABLE_OPEN_TAG);
 
             StringBuilder newCell = new StringBuilder();
             String processedString;
@@ -31,7 +40,7 @@ public class CsvConverter {
             boolean isNewCell = true;
 
             while (scanner.hasNextLine()) {
-                processedString = scanner.nextLine();
+                processedString = replaceChars(scanner.nextLine());
 
                 int beginIndex = 0;
                 int endIndex;
@@ -40,19 +49,19 @@ public class CsvConverter {
 
                 while (i < processedString.length()) {
                     char currentChar = processedString.charAt(i);
-                    char nextChar = (i < processedString.length() - 1) ? processedString.charAt(i + 1) : '\n';
+                    char nextChar = (i < processedString.length() - 1) ? processedString.charAt(i + 1) : EOL;
 
                     if (i == 0 && isNewCell) {
-                        newCell.append("<tr>");
+                        newCell.append(ROW_OPEN_TAG).append(EOL);
                     }
 
                     // Обработка начала новой ячейки
                     if (isNewCell) {
-                        newCell.append("<td>");
+                        newCell.append(CELL_OPEN_TAG);
 
                         if (currentChar == SEPARATOR) {
                             if (nextChar == SEPARATOR || nextChar == EOL) {
-                                newCell.append("</td>");
+                                newCell.append(CELL_CLOSE_TAG).append(EOL);
                             }
 
                             ++i;
@@ -75,7 +84,7 @@ public class CsvConverter {
                         if (nextChar == SEPARATOR) {
                             endIndex = i + 1;
 
-                            newCell.append(processedString, beginIndex, endIndex).append("</td>");
+                            newCell.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(EOL);
 
                             isNewCell = true;
                             i = i + 2;
@@ -85,7 +94,7 @@ public class CsvConverter {
                         if (nextChar == EOL) {
                             endIndex = i + 1;
 
-                            newCell.append(processedString, beginIndex, endIndex).append("</td>").append("</tr>");
+                            newCell.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(EOL).append(ROW_CLOSE_TAG);
 
                             writer.println(newCell.toString());
                             newCell = new StringBuilder();
@@ -100,14 +109,14 @@ public class CsvConverter {
                     }
 
                     if (currentChar == QUOTES) {
-                        if (nextChar == QUOTES) {
+                        /*if (nextChar == QUOTES) {
                             i = i + 2;
                             continue;
-                        }
+                        }*/
 
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
-                            newCell.append(processedString, beginIndex, endIndex).append("</td>");
+                            newCell.append(processedString, beginIndex, endIndex).append(ROW_CLOSE_TAG).append(EOL);
 
                             separatorMode = true;
                             isNewCell = true;
@@ -118,7 +127,7 @@ public class CsvConverter {
                         // Ковычки - последний символ в строке
                         if (nextChar == EOL) {
                             endIndex = i;
-                            newCell.append(processedString, beginIndex, endIndex).append("</td>").append("</tr>");
+                            newCell.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(EOL).append(ROW_CLOSE_TAG);
 
                             writer.println(newCell.toString());
                             newCell = new StringBuilder();
@@ -132,7 +141,7 @@ public class CsvConverter {
 
                     if (nextChar == EOL) {
                         endIndex = i + 1;
-                        newCell.append(processedString, beginIndex, endIndex).append("<br/>");
+                        newCell.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
 
                         ++i;
                         continue;
@@ -142,7 +151,7 @@ public class CsvConverter {
                 }
             }
 
-            writer.println("</table>");
+            writer.println(TABLE_CLOSE_TAG);
 
             System.out.printf("Success! Result is in the file \"%s\"%n", outputFileName);
         } catch (IOException exception) {
@@ -151,19 +160,23 @@ public class CsvConverter {
     }
 
     public static String replaceChars(String inputString) {
-        final String[][] REPLACEMENTS = {
-                {"\"\"", "\""},
-                {"&", "&amp"},
-                {"<", "&lt"},
-                {">", "&gt"}
-        };
-
-        String resultString = "";
-
-        for (String[] row : REPLACEMENTS) {
-            resultString = inputString.replace(row[0], row[1]);
+        Pattern pattern = Pattern.compile("\"\"|&|<|>");
+        Matcher matcher = pattern.matcher(inputString);
+        
+        Map<String, String> replacementMap = new HashMap<>();
+        replacementMap.put("\"\"", "\"");
+        replacementMap.put("&", "&amp");
+        replacementMap.put("<", "&lt");
+        replacementMap.put(">", "&gt");
+        
+        StringBuffer stringBuffer = new StringBuffer();
+        
+        while(matcher.find()) {
+            String wordToReplace = matcher.group();
+            matcher.appendReplacement(stringBuffer, replacementMap.get(wordToReplace));
         }
-
-        return resultString;
+        
+        matcher.appendTail(stringBuffer);
+        return stringBuffer.toString();
     }
 }
