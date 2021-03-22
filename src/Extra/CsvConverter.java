@@ -1,3 +1,5 @@
+package Extra;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,12 +8,12 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class Main {
+public class CsvConverter {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
 
         String inputFileName = "inputCsv.txt";
-        String outputFileName = "outputCsv.txt";
+        String outputFileName = "outputCsv.html";
 
         convertCsvToHtmlTable(inputFileName, outputFileName);
     }
@@ -109,11 +111,6 @@ public class Main {
                     }
 
                     if (currentChar == QUOTES) {
-                        /*if (nextChar == QUOTES) {
-                            i = i + 2;
-                            continue;
-                        }*/
-
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
                             newCell.append(processedString, beginIndex, endIndex).append(ROW_CLOSE_TAG).append(EOL);
@@ -160,7 +157,7 @@ public class Main {
     }
 
     public static String replaceChars(String inputString) {
-        Pattern pattern = Pattern.compile("\"\"|&|<|>");
+        Pattern pattern = Pattern.compile("(\"\"|&|<|>)");
         Matcher matcher = pattern.matcher(inputString);
         
         Map<String, String> replacementMap = new HashMap<>();
