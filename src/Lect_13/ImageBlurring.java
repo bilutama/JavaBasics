@@ -27,11 +27,11 @@ public class ImageBlurring {
         final int MIN_RGB = 0;
         final int MAX_RGB = 255;
 
-        // Степень размытия - значение, от которой вычисляется размерность матрицы размытия
-        final int BLURRING_STRENGTH = 3;
+        // Степень размытия и отступ от краев изображения
+        final int INDENT = 3;
 
         // Размерность матрицы размытия
-        int convolutionMatrixDimension = BLURRING_STRENGTH * 2 + 1;
+        int convolutionMatrixDimension = INDENT * 2 + 1;
 
         double[][] convolutionMatrix = new double[convolutionMatrixDimension][convolutionMatrixDimension];
 
@@ -45,44 +45,44 @@ public class ImageBlurring {
         }
 
         // начальный, конечный и вспомогательный (для промежуточных вычислений) пиксели
-        int[] inputPixel = new int[COLORS_COUNT_IN_RGB];
         int[] outputPixel = new int[COLORS_COUNT_IN_RGB];
         double[] intermediateOutputPixel = new double[COLORS_COUNT_IN_RGB];
 
-        int indent = convolutionMatrixDimension / 2;
-        int widthIndent = width - indent;
-        int heightIndent = height - indent;
+        int widthIndent = width - INDENT;
+        int heightIndent = height - INDENT;
 
         // цикл по столбцу картинки
         for (int x = 0; x < width; ++x) {
             // цикл по строке картинки
             for (int y = 0; y < height; ++y) {
                 // Проверка на граничные пиксели - их не меняем, т.к. матрица размытия выйдет за пределы изображения
-                if (x <= indent || x >= widthIndent ||
-                        y <= indent || y >= heightIndent) {
+                if (x < INDENT || x >= widthIndent ||
+                        y < INDENT || y >= heightIndent) {
                     inputRaster.getPixel(x, y, outputPixel);
                     outputRaster.setPixel(x, y, outputPixel);
                     continue;
                 }
 
-                int processedImageAreaLeftTopX = x - indent;
-                int processedImageAreaLeftTopY = y - indent;
+                int processedImageAreaLeftTopX = x - INDENT;
+                int processedImageAreaLeftTopY = y - INDENT;
 
                 // цикл по матрице свертки
                 for (int i = 0; i < convolutionMatrixDimension; ++i) {
                     for (int j = 0; j < convolutionMatrixDimension; ++j) {
-                        inputRaster.getPixel(processedImageAreaLeftTopX + j, processedImageAreaLeftTopY + i, inputPixel);
+                        inputRaster.getPixel(processedImageAreaLeftTopX + j, processedImageAreaLeftTopY + i, outputPixel);
 
                         for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
-                            intermediateOutputPixel[k] += inputPixel[k] * convolutionMatrix[i][j];
+                            intermediateOutputPixel[k] += outputPixel[k] * convolutionMatrix[i][j];
                         }
                     }
                 }
 
                 // покомпонентная запись вычисленных цветов в результирующий пиксель
                 // с проверкой выхода значений за пределы RGB[0..255]
+                // и очистка вспомогательного пикселя
                 for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
                     outputPixel[k] = (int) intermediateOutputPixel[k];
+                    intermediateOutputPixel[k] = 0.0;
 
                     if (outputPixel[k] > MAX_RGB) {
                         outputPixel[k] = MAX_RGB;
@@ -94,18 +94,13 @@ public class ImageBlurring {
                     }
                 }
 
-                // Очистка вспомогательного пикселя
-                for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
-                    intermediateOutputPixel[k] = 0.0;
-                }
-
                 // записываем пиксель в картинку
                 outputRaster.setPixel(x, y, outputPixel);
             }
         }
 
         // сохраняем картинку в файл
-        String fileName = "out_blurred_strength=" + BLURRING_STRENGTH + ".jpg";
+        String fileName = "out_blurred_strength=" + INDENT + ".jpg";
         ImageIO.write(outputImage, "jpg", new File(fileName));
     }
 }
