@@ -3,7 +3,6 @@ package Extra;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-//import java.util.Scanner;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -57,10 +56,11 @@ public class CsvConverter {
                         stringBuilder.append(ROW_OPEN_TAG).append(END_OF_STRING);
                     }
 
-                    // Обработка начала новой ячейки
+                    // Обработка начала новой ячейки по флагу
                     if (isNewCell) {
                         stringBuilder.append(CELL_OPEN_TAG);
 
+                        // Проверка и финализация ячейки, если она пустая
                         if (currentChar == SEPARATOR) {
                             if (nextChar == SEPARATOR || nextChar == END_OF_STRING) {
                                 stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING);
@@ -72,6 +72,8 @@ public class CsvConverter {
 
                         isNewCell = false;
 
+                        // Определение индекса первого символа текста ячейки
+                        // Если встречаем кавычки, то меняем режим чтения
                         if (currentChar == QUOTES) {
                             beginIndex = i + 1;
                             separatorMode = false;
