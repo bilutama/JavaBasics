@@ -23,8 +23,8 @@ public class CsvConverter {
              PrintWriter writer = new PrintWriter(outputFileName)) {
             final char SEPARATOR = ',';
             final char QUOTES = '\"';
-            final char EOL = '\n';
-                    
+            final char END_OF_STRING = '\n';
+
             final String TABLE_OPEN_TAG = "<table>";
             final String TABLE_CLOSE_TAG = "</table>";
             final String ROW_OPEN_TAG = "<tr>";
@@ -35,14 +35,14 @@ public class CsvConverter {
 
             writer.println(TABLE_OPEN_TAG);
 
-            StringBuilder newCell = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
             String processedString;
 
             boolean separatorMode = true;
             boolean isNewCell = true;
 
             while (scanner.hasNextLine()) {
-                processedString = replaceChars(scanner.nextLine());
+                processedString = getFormattedString(scanner.nextLine());
 
                 int beginIndex = 0;
                 int endIndex;
@@ -51,19 +51,19 @@ public class CsvConverter {
 
                 while (i < processedString.length()) {
                     char currentChar = processedString.charAt(i);
-                    char nextChar = (i < processedString.length() - 1) ? processedString.charAt(i + 1) : EOL;
+                    char nextChar = (i < processedString.length() - 1) ? processedString.charAt(i + 1) : END_OF_STRING;
 
                     if (i == 0 && isNewCell) {
-                        newCell.append(ROW_OPEN_TAG).append(EOL);
+                        stringBuilder.append(ROW_OPEN_TAG).append(END_OF_STRING);
                     }
 
                     // Обработка начала новой ячейки
                     if (isNewCell) {
-                        newCell.append(CELL_OPEN_TAG);
+                        stringBuilder.append(CELL_OPEN_TAG);
 
                         if (currentChar == SEPARATOR) {
-                            if (nextChar == SEPARATOR || nextChar == EOL) {
-                                newCell.append(CELL_CLOSE_TAG).append(EOL);
+                            if (nextChar == SEPARATOR || nextChar == END_OF_STRING) {
+                                stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING);
                             }
 
                             ++i;
@@ -82,24 +82,28 @@ public class CsvConverter {
                         continue;
                     }
 
+                    // Блок кода для режима чтения separatorMode, т.е. нет кавычек, читаем строку
+                    // и проверяем следующий символ пока не встретим конец или разделитель
                     if (separatorMode) {
+                        // Если вс разделитель, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i + 1;
 
-                            newCell.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(EOL);
+                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             isNewCell = true;
                             i = i + 2;
                             continue;
                         }
 
-                        if (nextChar == EOL) {
+                        // Если , финализируем ячейку и дописываем в stringBuilder
+                        if (nextChar == END_OF_STRING) {
                             endIndex = i + 1;
 
-                            newCell.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(EOL).append(ROW_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
 
-                            writer.println(newCell.toString());
-                            newCell = new StringBuilder();
+                            writer.println(stringBuilder.toString());
+                            stringBuilder = new StringBuilder();
 
                             isNewCell = true;
                             ++i;
@@ -110,10 +114,13 @@ public class CsvConverter {
                         continue;
                     }
 
+                    // Блок кода для режима чтения !separatorMode, т.е. когда содержимое ячейки в кавычках
+                    // Если встречаем двойные кавычки, то смотрим следующий символ nextChar
                     if (currentChar == QUOTES) {
+                        // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
-                            newCell.append(processedString, beginIndex, endIndex).append(ROW_CLOSE_TAG).append(EOL);
+                            stringBuilder.append(processedString, beginIndex, endIndex).append(ROW_CLOSE_TAG).append(END_OF_STRING);
 
                             separatorMode = true;
                             isNewCell = true;
@@ -121,13 +128,14 @@ public class CsvConverter {
                             continue;
                         }
 
-                        // Ковычки - последний символ в строке
-                        if (nextChar == EOL) {
+                        // Если nextChar - конец строки, то финализируем ячейку и строку
+                        // добавляем в stringBuilder и записываем в html-файл и сбрасываем stringBuilder
+                        if (nextChar == END_OF_STRING) {
                             endIndex = i;
-                            newCell.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(EOL).append(ROW_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
 
-                            writer.println(newCell.toString());
-                            newCell = new StringBuilder();
+                            writer.println(stringBuilder.toString());
+                            stringBuilder = new StringBuilder();
 
                             separatorMode = true;
                             isNewCell = true;
@@ -136,14 +144,18 @@ public class CsvConverter {
                         }
                     }
 
-                    if (nextChar == EOL) {
+                    // Если nextChar - конец строки, то вставляем тэг переноса строки
+                    // и добавляем в stringBuilder.
+                    // Далее строка заканчивается и читается новая из файла.
+                    if (nextChar == END_OF_STRING) {
                         endIndex = i + 1;
-                        newCell.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
+                        stringBuilder.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
 
                         ++i;
                         continue;
                     }
 
+                    // Если ни одно условие выше не выполняется, то переходим к следующему символу
                     ++i;
                 }
             }
@@ -156,23 +168,23 @@ public class CsvConverter {
         }
     }
 
-    public static String replaceChars(String inputString) {
+    public static String getFormattedString(String inputString) {
         Pattern pattern = Pattern.compile("(\"\"|&|<|>)");
         Matcher matcher = pattern.matcher(inputString);
-        
+
         Map<String, String> replacementMap = new HashMap<>();
         replacementMap.put("\"\"", "\"");
         replacementMap.put("&", "&amp");
         replacementMap.put("<", "&lt");
         replacementMap.put(">", "&gt");
-        
+
         StringBuffer stringBuffer = new StringBuffer();
-        
-        while(matcher.find()) {
+
+        while (matcher.find()) {
             String wordToReplace = matcher.group();
             matcher.appendReplacement(stringBuffer, replacementMap.get(wordToReplace));
         }
-        
+
         matcher.appendTail(stringBuffer);
         return stringBuffer.toString();
     }
