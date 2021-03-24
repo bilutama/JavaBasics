@@ -45,8 +45,8 @@ public class ImageBlurring {
         }
 
         // начальный, конечный и вспомогательный (для промежуточных вычислений) пиксели
-        int[] outputPixel = new int[COLORS_COUNT_IN_RGB];
-        double[] intermediateOutputPixel = new double[COLORS_COUNT_IN_RGB];
+        int[] pixel = new int[COLORS_COUNT_IN_RGB];
+        double[] intermediatePixel = new double[COLORS_COUNT_IN_RGB];
 
         int widthIndent = width - INDENT;
         int heightIndent = height - INDENT;
@@ -58,8 +58,8 @@ public class ImageBlurring {
                 // Проверка на граничные пиксели - их не меняем, т.к. матрица размытия выйдет за пределы изображения
                 if (x < INDENT || x >= widthIndent ||
                         y < INDENT || y >= heightIndent) {
-                    inputRaster.getPixel(x, y, outputPixel);
-                    outputRaster.setPixel(x, y, outputPixel);
+                    inputRaster.getPixel(x, y, pixel);
+                    outputRaster.setPixel(x, y, pixel);
                     continue;
                 }
 
@@ -69,10 +69,10 @@ public class ImageBlurring {
                 // цикл по матрице свертки
                 for (int i = 0; i < convolutionMatrixDimension; ++i) {
                     for (int j = 0; j < convolutionMatrixDimension; ++j) {
-                        inputRaster.getPixel(processedImageAreaLeftTopX + j, processedImageAreaLeftTopY + i, outputPixel);
+                        inputRaster.getPixel(processedImageAreaLeftTopX + j, processedImageAreaLeftTopY + i, pixel);
 
                         for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
-                            intermediateOutputPixel[k] += outputPixel[k] * convolutionMatrix[i][j];
+                            intermediatePixel[k] += pixel[k] * convolutionMatrix[i][j];
                         }
                     }
                 }
@@ -81,21 +81,21 @@ public class ImageBlurring {
                 // с проверкой выхода значений за пределы RGB[0..255]
                 // и очистка вспомогательного пикселя
                 for (int k = 0; k < COLORS_COUNT_IN_RGB; ++k) {
-                    outputPixel[k] = (int) intermediateOutputPixel[k];
-                    intermediateOutputPixel[k] = 0.0;
+                    pixel[k] = (int) intermediatePixel[k];
+                    intermediatePixel[k] = 0.0;
 
-                    if (outputPixel[k] > MAX_RGB) {
-                        outputPixel[k] = MAX_RGB;
+                    if (pixel[k] > MAX_RGB) {
+                        pixel[k] = MAX_RGB;
                         continue;
                     }
 
-                    if (outputPixel[k] < MIN_RGB) {
-                        outputPixel[k] = MIN_RGB;
+                    if (pixel[k] < MIN_RGB) {
+                        pixel[k] = MIN_RGB;
                     }
                 }
 
                 // записываем пиксель в картинку
-                outputRaster.setPixel(x, y, outputPixel);
+                outputRaster.setPixel(x, y, pixel);
             }
         }
 
