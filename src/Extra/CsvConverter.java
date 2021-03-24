@@ -104,7 +104,7 @@ public class CsvConverter {
 
                             stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
 
-                            writer.println(stringBuilder.toString());
+                            writer.println(replaceEscapeQuotes(stringBuilder.toString()));
                             stringBuilder = new StringBuilder();
 
                             isNewCell = true;
@@ -119,6 +119,12 @@ public class CsvConverter {
                     // Блок кода для режима чтения !separatorMode, т.е. когда содержимое ячейки в кавычках
                     // Если встречаем двойные кавычки, то смотрим следующий символ nextChar
                     if (currentChar == QUOTES) {
+                        // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
+                        if (nextChar == QUOTES) {
+                            i = i + 2;
+                            continue;
+                        }
+
                         // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
@@ -136,7 +142,7 @@ public class CsvConverter {
                             endIndex = i;
                             stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
 
-                            writer.println(stringBuilder.toString());
+                            writer.println(replaceEscapeQuotes(stringBuilder.toString()));
                             stringBuilder = new StringBuilder();
 
                             separatorMode = true;
@@ -170,12 +176,18 @@ public class CsvConverter {
         }
     }
 
+    public static String replaceEscapeQuotes(String inputString) {
+        Pattern pattern = Pattern.compile("(\"\")");
+        Matcher matcher = pattern.matcher(inputString);
+
+        return matcher.replaceAll("\"");
+    }
+
     public static String getFormattedString(String inputString) {
-        Pattern pattern = Pattern.compile("(\"\"|&|<|>)");
+        Pattern pattern = Pattern.compile("[&<>]");
         Matcher matcher = pattern.matcher(inputString);
 
         Map<String, String> replacementMap = new HashMap<>();
-        replacementMap.put("\"\"", "\"");
         replacementMap.put("&", "&amp");
         replacementMap.put("<", "&lt");
         replacementMap.put(">", "&gt");
