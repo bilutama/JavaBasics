@@ -85,10 +85,10 @@ public class CsvConverter {
                         continue;
                     }
 
-                    // Блок кода для режима чтения separatorMode, т.е. нет кавычек, читаем строку
-                    // и проверяем следующий символ пока не встретим конец или разделитель
+                    // Блок кода для режима чтения separatorMode, т.е. нет кавычек
+                    // и проверяем следующий символ пока не встретим конец строки или разделитель
                     if (separatorMode) {
-                        // Если вс разделитель, финализируем ячейку и дописываем в stringBuilder
+                        // Если nextChar разделитель, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i + 1;
 
@@ -99,7 +99,7 @@ public class CsvConverter {
                             continue;
                         }
 
-                        // Если , финализируем ячейку и дописываем в stringBuilder
+                        // Если nextChar - конец строки, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == END_OF_STRING) {
                             endIndex = i + 1;
 
@@ -141,7 +141,6 @@ public class CsvConverter {
                             continue;
                         }
 
-                        // TODO: не работает если пар кавычек более 1
                         // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
