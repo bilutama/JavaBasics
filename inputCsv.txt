@@ -1,5 +1,5 @@
 cell1,"ce<l""l>, &2"
-"cell, ""3"",",cell 4
+"cell, """"3"",",cell 4
 a,b,c
 d,"e,""
 ee",f

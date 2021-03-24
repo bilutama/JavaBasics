@@ -39,6 +39,7 @@ public class CsvConverter {
 
             boolean separatorMode = true;
             boolean isNewCell = true;
+            boolean isEscapeQuotes = false;
 
             while (scanner.hasNextLine()) {
                 processedString = getFormattedString(scanner.nextLine());
@@ -117,14 +118,30 @@ public class CsvConverter {
                     }
 
                     // Блок кода для режима чтения !separatorMode, т.е. когда содержимое ячейки в кавычках
-                    // Если встречаем двойные кавычки, то смотрим следующий символ nextChar
                     if (currentChar == QUOTES) {
-                        // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
-                        if (nextChar == QUOTES) {
-                            i = i + 2;
+                        // Если предыдущий символ были экранирующие кавычки, то эти кавычки нужно пропустить
+                        // и выключить флаг.
+                        // Но если сразу за ними конец строки, добавляем в stringBuilder тэг разрыва строки
+                        if (isEscapeQuotes) {
+                            isEscapeQuotes = false;
+
+                            if (nextChar == END_OF_STRING) {
+                                endIndex = i + 1;
+                                stringBuilder.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
+                            }
+
+                            ++i;
                             continue;
                         }
 
+                        // Если nextChar тоже кавычки, ставим флаг isEscapeQuotes и переходим на следующий символ
+                        if (nextChar == QUOTES) {
+                            isEscapeQuotes = true;
+                            ++i;
+                            continue;
+                        }
+
+                        // TODO: не работает если пар кавычек более 1
                         // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
