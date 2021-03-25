@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 
 public class Practice {
     public static void main(String[] args) {
-        String string1 = "\"Vas\"\",ya\",Petya,Kolya,\"Karl\"";
+        String string1 = "Vasya,\"Petya\",Kolya,\"Karl\"";
         //String string2 = "\"Vas\"\",ya\",Petya,Kolya,Karl";
         //String string3 = "\"Vasya\",Petya,Kolya,\"Karl\"";
 

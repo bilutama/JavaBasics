@@ -41,8 +41,13 @@ public class CsvConverter {
             boolean isNewCell = true;
             boolean isEscapeQuotes = false;
 
+            Map<String, String> replacementMap = new HashMap<>();
+            replacementMap.put("&", "&amp");
+            replacementMap.put("<", "&lt");
+            replacementMap.put(">", "&gt");
+
             while (scanner.hasNextLine()) {
-                processedString = getFormattedString(scanner.nextLine());
+                processedString = getFormattedString(scanner.nextLine(), replacementMap);
 
                 int beginIndex = 0;
                 int endIndex;
@@ -144,7 +149,9 @@ public class CsvConverter {
                         // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
-                            stringBuilder.append(processedString, beginIndex, endIndex).append(ROW_CLOSE_TAG).append(END_OF_STRING);
+
+                            //stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(ROW_CLOSE_TAG).append(END_OF_STRING);
+                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             separatorMode = true;
                             isNewCell = true;
@@ -199,14 +206,9 @@ public class CsvConverter {
         return matcher.replaceAll("\"");
     }
 
-    public static String getFormattedString(String inputString) {
+    public static String getFormattedString(String inputString, Map<String, String> replacementMap) {
         Pattern pattern = Pattern.compile("[&<>]");
         Matcher matcher = pattern.matcher(inputString);
-
-        Map<String, String> replacementMap = new HashMap<>();
-        replacementMap.put("&", "&amp");
-        replacementMap.put("<", "&lt");
-        replacementMap.put(">", "&gt");
 
         StringBuffer stringBuffer = new StringBuffer();
 
