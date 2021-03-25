@@ -5,11 +5,12 @@ import java.util.regex.Matcher;
 
 public class Practice {
     public static void main(String[] args) {
-        String string1 = "\"Vasya\",Pet\"\"ya,Kolya,\"Karl\"";
+        String string1 = "\"Vas\"\",ya\",Petya,Kolya,\"Karl\"";
         //String string2 = "\"Vas\"\",ya\",Petya,Kolya,Karl";
         //String string3 = "\"Vasya\",Petya,Kolya,\"Karl\"";
 
-        Pattern pattern = Pattern.compile("^((\"(?:[^\"]|\"\")*\"|[^,]*)(,(\"(?:[^\"]|\"\")*\"|[^,]*))*)$");
+        Pattern pattern = Pattern.compile("(\"(?:[^\"]|\"\")*\"|[^,\"\\n\\r]*)(,|\\r?\\n|\\r|$)");
+        //Pattern pattern = Pattern.compile("^((\"(?:[^\"]|\"\")*\"|[^,]*)(,(\"(?:[^\"]|\"\")*\"|[^,]*))*)$");
         //Pattern pattern = Pattern.compile("(?:^|\")([^\"]*)(?:$|\")");
 
         //String[] words = string1.split(",");
