@@ -42,9 +42,9 @@ public class CsvConverter {
             boolean isEscapeQuotes = false;
 
             Map<String, String> replacementMap = new HashMap<>();
-            replacementMap.put("&", "&amp");
-            replacementMap.put("<", "&lt");
-            replacementMap.put(">", "&gt");
+            replacementMap.put("&", "&amp;");
+            replacementMap.put("<", "&lt;");
+            replacementMap.put(">", "&gt;");
 
             while (scanner.hasNextLine()) {
                 processedString = getFormattedString(scanner.nextLine(), replacementMap);
@@ -150,7 +150,6 @@ public class CsvConverter {
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
 
-                            //stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(ROW_CLOSE_TAG).append(END_OF_STRING);
                             stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             separatorMode = true;
