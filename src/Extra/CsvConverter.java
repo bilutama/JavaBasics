@@ -93,7 +93,7 @@ public class CsvConverter {
                     // Блок кода для режима чтения separatorMode, т.е. нет кавычек
                     // и проверяем следующий символ пока не встретим конец строки или разделитель
                     if (separatorMode) {
-                        // Если nextChar разделитель, финализируем ячейку и дописываем в stringBuilder
+                        // Если nextChar - разделитель, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i + 1;
 
@@ -124,9 +124,9 @@ public class CsvConverter {
 
                     // Блок кода для режима чтения !separatorMode, т.е. когда содержимое ячейки в кавычках
                     if (currentChar == QUOTES) {
-                        // Если предыдущий символ были экранирующие кавычки, то эти кавычки нужно пропустить
-                        // и выключить флаг.
-                        // Но если сразу за ними конец строки, добавляем в stringBuilder тэг разрыва строки
+                        // Если предыдущий символ были экранирующие кавычки,
+                        // то эти кавычки нужно пропустить и выключить флаг,
+                        // но если сразу за ними конец строки, добавляем в stringBuilder тэг разрыва строки.
                         if (isEscapeQuotes) {
                             isEscapeQuotes = false;
 
@@ -149,7 +149,6 @@ public class CsvConverter {
                         // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
                             endIndex = i;
-
                             stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             separatorMode = true;
@@ -176,7 +175,7 @@ public class CsvConverter {
 
                     // Если nextChar - конец строки, то вставляем тэг переноса строки
                     // и добавляем в stringBuilder.
-                    // Далее строка заканчивается и читается новая из файла.
+                    // Далее строка заканчивается и читается следующая из файла.
                     if (nextChar == END_OF_STRING) {
                         endIndex = i + 1;
                         stringBuilder.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
