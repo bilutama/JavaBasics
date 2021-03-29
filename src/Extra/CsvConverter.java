@@ -50,15 +50,13 @@ public class CsvConverter {
                 processedString = getFormattedString(scanner.nextLine(), replacementMap);
 
                 int beginIndex = 0;
-                int endIndex;
+                int currentCharIndex = 0;
 
-                int i = 0;
+                while (currentCharIndex < processedString.length()) {
+                    char currentChar = processedString.charAt(currentCharIndex);
+                    char nextChar = (currentCharIndex < processedString.length() - 1) ? processedString.charAt(currentCharIndex + 1) : END_OF_STRING;
 
-                while (i < processedString.length()) {
-                    char currentChar = processedString.charAt(i);
-                    char nextChar = (i < processedString.length() - 1) ? processedString.charAt(i + 1) : END_OF_STRING;
-
-                    if (i == 0 && isNewCell) {
+                    if (currentCharIndex == 0 && isNewCell) {
                         stringBuilder.append(ROW_OPEN_TAG).append(END_OF_STRING);
                     }
 
@@ -72,7 +70,7 @@ public class CsvConverter {
                                 stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING);
                             }
 
-                            ++i;
+                            ++currentCharIndex;
                             continue;
                         }
 
@@ -81,10 +79,10 @@ public class CsvConverter {
                         // Определение индекса первого символа текста ячейки
                         // Если встречаем кавычки, то меняем режим чтения
                         if (currentChar == QUOTES) {
-                            beginIndex = i + 1;
+                            beginIndex = currentCharIndex + 1;
                             separatorMode = false;
                         } else {
-                            beginIndex = i;
+                            beginIndex = currentCharIndex;
                         }
 
                         continue;
@@ -95,30 +93,26 @@ public class CsvConverter {
                     if (separatorMode) {
                         // Если nextChar - разделитель, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == SEPARATOR) {
-                            endIndex = i + 1;
-
-                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             isNewCell = true;
-                            i = i + 2;
+                            currentCharIndex = currentCharIndex + 2;
                             continue;
                         }
 
                         // Если nextChar - конец строки, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == END_OF_STRING) {
-                            endIndex = i + 1;
-
-                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
 
                             writer.println(replaceEscapeQuotes(stringBuilder.toString()));
                             stringBuilder = new StringBuilder();
 
                             isNewCell = true;
-                            ++i;
+                            ++currentCharIndex;
                             continue;
                         }
 
-                        ++i;
+                        ++currentCharIndex;
                         continue;
                     }
 
@@ -131,44 +125,41 @@ public class CsvConverter {
                             isEscapeQuotes = false;
 
                             if (nextChar == END_OF_STRING) {
-                                endIndex = i + 1;
-                                stringBuilder.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
+                                stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(BREAK_LINE_TAG);
                             }
 
-                            ++i;
+                            ++currentCharIndex;
                             continue;
                         }
 
                         // Если nextChar тоже кавычки, ставим флаг isEscapeQuotes и переходим на следующий символ
                         if (nextChar == QUOTES) {
                             isEscapeQuotes = true;
-                            ++i;
+                            ++currentCharIndex;
                             continue;
                         }
 
                         // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
-                            endIndex = i;
-                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             separatorMode = true;
                             isNewCell = true;
-                            i = i + 2;
+                            currentCharIndex = currentCharIndex + 2;
                             continue;
                         }
 
                         // Если nextChar - конец строки, то финализируем ячейку и строку
                         // добавляем в stringBuilder и записываем в html-файл и сбрасываем stringBuilder
                         if (nextChar == END_OF_STRING) {
-                            endIndex = i;
-                            stringBuilder.append(processedString, beginIndex, endIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
 
                             writer.println(replaceEscapeQuotes(stringBuilder.toString()));
                             stringBuilder = new StringBuilder();
 
                             separatorMode = true;
                             isNewCell = true;
-                            ++i;
+                            ++currentCharIndex;
                             continue;
                         }
                     }
@@ -177,15 +168,14 @@ public class CsvConverter {
                     // и добавляем в stringBuilder.
                     // Далее строка заканчивается и читается следующая из файла.
                     if (nextChar == END_OF_STRING) {
-                        endIndex = i + 1;
-                        stringBuilder.append(processedString, beginIndex, endIndex).append(BREAK_LINE_TAG);
+                        stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(BREAK_LINE_TAG);
 
-                        ++i;
+                        ++currentCharIndex;
                         continue;
                     }
 
                     // Если ни одно условие выше не выполняется, то переходим к следующему символу
-                    ++i;
+                    ++currentCharIndex;
                 }
             }
 
