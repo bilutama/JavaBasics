@@ -19,7 +19,8 @@ public class CsvConverter {
 
     public static void convertCsvToHtmlTable(String inputFileName, String outputFileName) {
         try (Scanner scanner = new Scanner(new FileInputStream(inputFileName));
-             PrintWriter writer = new PrintWriter(outputFileName)) {
+            PrintWriter writer = new PrintWriter(outputFileName)) {
+
             final char SEPARATOR = ',';
             final char QUOTES = '\"';
             final char END_OF_STRING = '\n';
@@ -32,11 +33,6 @@ public class CsvConverter {
             final String CELL_CLOSE_TAG = "</td>";
             final String BREAK_LINE_TAG = "<br/>";
 
-            writer.println(TABLE_OPEN_TAG);
-
-            StringBuilder stringBuilder = new StringBuilder();
-            String processedString;
-
             boolean separatorMode = true;
             boolean isNewCell = true;
             boolean isEscapeQuotes = false;
@@ -45,6 +41,10 @@ public class CsvConverter {
             replacementMap.put("&", "&amp;");
             replacementMap.put("<", "&lt;");
             replacementMap.put(">", "&gt;");
+
+            writer.println(TABLE_OPEN_TAG);
+            StringBuilder stringBuilder = new StringBuilder();
+            String processedString;
 
             while (scanner.hasNextLine()) {
                 processedString = getFormattedString(scanner.nextLine(), replacementMap);
