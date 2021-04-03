@@ -1,0 +1,94 @@
+[
+  {
+    "nameEng": "Russian Federation",
+    "nameRus": "Российская Федерация",
+    "numericCode": "643",
+    "currency": "RUB",
+    "topCities": [
+      {
+        "nameEng": "Moscow",
+        "nameRus": "Москва",
+        "population": 12593000
+      },
+      {
+        "nameEng": "Saint Petersburg",
+        "nameRus": "Санкт-Петербург",
+        "population": 5504000
+      },
+      {
+        "nameEng": "Novosibirsk",
+        "nameRus": "Новосибирск",
+        "population": 1676000
+      }
+    ]
+  },
+  {
+    "nameEng": "Great Britain",
+    "nameRus": "Великобритания",
+    "numericCode": "826",
+    "currency": "GBP",
+    "topCities": [
+      {
+        "nameEng": "London",
+        "nameRus": "Лондон",
+        "population": 7556900
+      },
+      {
+        "nameEng": "Birmingham",
+        "nameRus": "Бирмингем",
+        "population": 984333
+      },
+      {
+        "nameEng": "Liverpool",
+        "nameRus": "Ливерпуль",
+        "population": 864122
+      }
+    ]
+  },
+  {
+    "nameEng": "Australia",
+    "nameRus": "Австралия",
+    "numericCode": "036",
+    "currency": "AUD",
+    "topCities": [
+      {
+        "nameEng": "Sydney",
+        "nameRus": "Сидней",
+        "population": 4992000
+      },
+      {
+        "nameEng": "Melbourne",
+        "nameRus": "Мельбурн",
+        "population": 5061000
+      },
+      {
+        "nameEng": "Brisbane",
+        "nameRus": "Брисбан",
+        "population": 2439000
+      }
+    ]
+  },
+  {
+    "nameEng": "Germany",
+    "nameRus": "Германия",
+    "numericCode": "036",
+    "currency": "EUR",
+    "topCities": [
+      {
+        "nameEng": "Berlin",
+        "nameRus": "Берлин",
+        "population": 3567000
+      },
+      {
+        "nameEng": "Hamburg",
+        "nameRus": "Гамбург",
+        "population": 1789000
+      },
+      {
+        "nameEng": "Munich",
+        "nameRus": "Мюнхен",
+        "population": 1553000
+      }
+    ]
+  }
+]

@@ -1,4 +1,0 @@
-text_1
-Text_2
-texT_3
-qqq teXT_4 text5 TEXT6

@@ -11,8 +11,8 @@ public class CsvConverter {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
 
-        String inputFileName = "inputCsv.txt";
-        String outputFileName = "outputCsv.html";
+        String inputFileName = args[0];
+        String outputFileName = args[1];
 
         convertCsvToHtmlTable(inputFileName, outputFileName);
     }
@@ -66,8 +66,21 @@ public class CsvConverter {
 
                         // Проверка и финализация ячейки, если она пустая
                         if (currentChar == SEPARATOR) {
-                            if (nextChar == SEPARATOR || nextChar == END_OF_STRING) {
+                            if (nextChar == SEPARATOR) {
                                 stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING);
+
+                                ++currentCharIndex;
+                                continue;
+                            }
+
+                            if (nextChar == END_OF_STRING) {
+                                stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
+
+                                writer.println(replaceEscapeQuotes(stringBuilder.toString()));
+                                stringBuilder = new StringBuilder();
+
+                                ++currentCharIndex;
+                                continue;
                             }
 
                             ++currentCharIndex;
@@ -96,7 +109,7 @@ public class CsvConverter {
                             stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             isNewCell = true;
-                            currentCharIndex = currentCharIndex + 2;
+                            ++currentCharIndex;
                             continue;
                         }
 
@@ -145,7 +158,7 @@ public class CsvConverter {
 
                             separatorMode = true;
                             isNewCell = true;
-                            currentCharIndex = currentCharIndex + 2;
+                            ++currentCharIndex;
                             continue;
                         }
 
