@@ -3,9 +3,13 @@ package Extra;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class CsvConverter {
+public class CsvConverterBackup {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
 
@@ -35,12 +39,19 @@ public class CsvConverter {
             boolean isNewCell = true;
             boolean isEscapeQuotes = false;
 
+            Map<String, String> replacementMap = new HashMap<>();
+            replacementMap.put("&", "&amp;");
+            replacementMap.put("<", "&lt;");
+            replacementMap.put(">", "&gt;");
+
             writer.println(TABLE_OPEN_TAG);
+            StringBuilder stringBuilder = new StringBuilder();
             String processedString;
 
             while (scanner.hasNextLine()) {
-                processedString = scanner.nextLine();
+                processedString = getFormattedString(scanner.nextLine(), replacementMap);
 
+                int beginIndex = 0;
                 int currentCharIndex = 0;
 
                 while (currentCharIndex < processedString.length()) {
@@ -48,69 +59,74 @@ public class CsvConverter {
                     char nextChar = (currentCharIndex < processedString.length() - 1) ? processedString.charAt(currentCharIndex + 1) : END_OF_STRING;
 
                     if (currentCharIndex == 0 && isNewCell) {
-                        writer.println(ROW_OPEN_TAG);
+                        stringBuilder.append(ROW_OPEN_TAG).append(END_OF_STRING);
                     }
 
                     // Обработка начала новой ячейки по флагу
                     if (isNewCell) {
-                        writer.print(CELL_OPEN_TAG);
+                        stringBuilder.append(CELL_OPEN_TAG);
 
                         // Проверка и финализация ячейки, если она пустая
                         if (currentChar == SEPARATOR) {
                             if (nextChar == SEPARATOR) {
-                                writer.println(CELL_CLOSE_TAG);
+                                stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING);
+
                                 ++currentCharIndex;
                                 continue;
                             }
 
                             if (nextChar == END_OF_STRING) {
-                                writer.println(CELL_CLOSE_TAG);
-                                writer.println(ROW_CLOSE_TAG);
+                                stringBuilder.append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
+
+                                writer.println(replaceEscapeQuotes(stringBuilder.toString()));
+                                stringBuilder = new StringBuilder();
+
                                 ++currentCharIndex;
                                 continue;
                             }
 
-                            if (nextChar == QUOTES) {
-                                isNewCell = false;
-                                separatorMode = false;
-                                currentCharIndex += 2;
-                                continue;
-                            }
-
-                            isNewCell = false;
                             ++currentCharIndex;
                             continue;
                         }
 
                         isNewCell = false;
+
+                        // Определение индекса первого символа текста ячейки
+                        // Если встречаем кавычки, то меняем режим чтения
+                        if (currentChar == QUOTES) {
+                            beginIndex = currentCharIndex + 1;
+                            separatorMode = false;
+                        } else {
+                            beginIndex = currentCharIndex;
+                        }
+
                         continue;
                     }
 
-                    // Блок кода для режима чтения separatorMode, т.е. не в кавычках
+                    // Блок кода для режима чтения separatorMode, т.е. нет кавычек
+                    // и проверяем следующий символ пока не встретим конец строки или разделитель
                     if (separatorMode) {
-                        // Если nextChar - разделитель, то
-                        // записываем символ и финализируем ячейку
+                        // Если nextChar - разделитель, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == SEPARATOR) {
-                            writer.print(getFormattedString(currentChar));
-                            writer.println(CELL_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             isNewCell = true;
                             ++currentCharIndex;
                             continue;
                         }
 
-                        // Если nextChar - конец строки, финализируем ячейку и строку
+                        // Если nextChar - конец строки, финализируем ячейку и дописываем в stringBuilder
                         if (nextChar == END_OF_STRING) {
-                            writer.print(getFormattedString(currentChar));
-                            writer.println(CELL_CLOSE_TAG);
-                            writer.println(ROW_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
+
+                            writer.println(replaceEscapeQuotes(stringBuilder.toString()));
+                            stringBuilder = new StringBuilder();
 
                             isNewCell = true;
                             ++currentCharIndex;
                             continue;
                         }
 
-                        writer.print(getFormattedString(currentChar));
                         ++currentCharIndex;
                         continue;
                     }
@@ -119,13 +135,12 @@ public class CsvConverter {
                     if (currentChar == QUOTES) {
                         // Если предыдущий символ были экранирующие кавычки,
                         // то эти кавычки нужно пропустить и выключить флаг,
-                        // но если сразу за ними конец строки, записываем тэг разрыва строки.
+                        // но если сразу за ними конец строки, добавляем в stringBuilder тэг разрыва строки.
                         if (isEscapeQuotes) {
-                            writer.print(getFormattedString(currentChar));
                             isEscapeQuotes = false;
 
                             if (nextChar == END_OF_STRING) {
-                                writer.print(BREAK_LINE_TAG);
+                                stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(BREAK_LINE_TAG);
                             }
 
                             ++currentCharIndex;
@@ -139,9 +154,9 @@ public class CsvConverter {
                             continue;
                         }
 
-                        // Если nextChar - разделитель, то финализируем ячейку
+                        // Если nextChar - разделитель, то финализируем ячейку и добавляем в stringBuilder
                         if (nextChar == SEPARATOR) {
-                            writer.println(CELL_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING);
 
                             separatorMode = true;
                             isNewCell = true;
@@ -150,9 +165,12 @@ public class CsvConverter {
                         }
 
                         // Если nextChar - конец строки, то финализируем ячейку и строку
+                        // добавляем в stringBuilder и записываем в html-файл и сбрасываем stringBuilder
                         if (nextChar == END_OF_STRING) {
-                            writer.println(CELL_CLOSE_TAG);
-                            writer.println(ROW_CLOSE_TAG);
+                            stringBuilder.append(processedString, beginIndex, currentCharIndex).append(CELL_CLOSE_TAG).append(END_OF_STRING).append(ROW_CLOSE_TAG);
+
+                            writer.println(replaceEscapeQuotes(stringBuilder.toString()));
+                            stringBuilder = new StringBuilder();
 
                             separatorMode = true;
                             isNewCell = true;
@@ -161,26 +179,22 @@ public class CsvConverter {
                         }
                     }
 
-                    // Если nextChar - конец строки, то вставляем символ и
-                    // добавляем тэг переноса строки
+                    // Если nextChar - конец строки, то вставляем тэг переноса строки
+                    // и добавляем в stringBuilder.
                     // Далее строка заканчивается и читается следующая из файла.
                     if (nextChar == END_OF_STRING) {
-                        writer.print(getFormattedString(currentChar));
-                        writer.print(BREAK_LINE_TAG);
+                        stringBuilder.append(processedString, beginIndex, currentCharIndex + 1).append(BREAK_LINE_TAG);
 
                         ++currentCharIndex;
                         continue;
                     }
 
-                    // Проверяем, нужно ли сделать замену,
-                    // или записываем текущий символ
-                    writer.print(getFormattedString(currentChar));
-
+                    // Если ни одно условие выше не выполняется, то переходим к следующему символу
                     ++currentCharIndex;
                 }
             }
 
-            writer.print(TABLE_CLOSE_TAG);
+            writer.println(TABLE_CLOSE_TAG);
 
             System.out.printf("Success! Result is in the file \"%s\"%n", outputFileName);
         } catch (IOException exception) {
@@ -188,17 +202,25 @@ public class CsvConverter {
         }
     }
 
-    public static String getFormattedString(char charToReplace) {
-        if (charToReplace == '&') {
-            return "&amp";
-        } else if (charToReplace == '<') {
-            return "&lt;";
-        } else if (charToReplace == '>') {
-            return "&gt;";
-        } else {
-            return Character.toString(charToReplace);
-        }
+    public static String replaceEscapeQuotes(String inputString) {
+        Pattern pattern = Pattern.compile("(\"\")");
+        Matcher matcher = pattern.matcher(inputString);
 
+        return matcher.replaceAll("\"");
     }
 
+    public static String getFormattedString(String inputString, Map<String, String> replacementMap) {
+        Pattern pattern = Pattern.compile("[&<>]");
+        Matcher matcher = pattern.matcher(inputString);
+
+        StringBuffer stringBuffer = new StringBuffer();
+
+        while (matcher.find()) {
+            String wordToReplace = matcher.group();
+            matcher.appendReplacement(stringBuffer, replacementMap.get(wordToReplace));
+        }
+
+        matcher.appendTail(stringBuffer);
+        return stringBuffer.toString();
+    }
 }
