@@ -8,11 +8,14 @@ import java.util.Scanner;
 public class CsvConverter {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
+        try {
+            String inputFileName = args[0];
+            String outputFileName = args[1];
 
-        String inputFileName = args[0];
-        String outputFileName = args[1];
-
-        convertCsvToHtmlTable(inputFileName, outputFileName);
+            convertCsvToHtmlTable(inputFileName, outputFileName);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     public static void convertCsvToHtmlTable(String inputFileName, String outputFileName) {
@@ -34,6 +37,13 @@ public class CsvConverter {
             boolean separatorMode = true;
             boolean isNewCell = true;
             boolean isEscapeQuotes = false;
+
+            writer.println("<!DOCTYPE html>" + System.lineSeparator() +
+                    "<html>" + System.lineSeparator() +
+                    "<head>" + System.lineSeparator() +
+                    "<meta charset=\"utf-8\">");
+            writer.println("<title>" + "Generated from " + inputFileName + "</title>");
+            writer.println("</head>" + System.lineSeparator() + "</body>");
 
             writer.println(TABLE_OPEN_TAG);
             String processedString;
@@ -179,6 +189,7 @@ public class CsvConverter {
             }
 
             writer.print(TABLE_CLOSE_TAG);
+            writer.print("</body>" + System.lineSeparator() + "</html>");
 
             System.out.printf("Success! Result is in the file \"%s\"%n", outputFileName);
         } catch (IOException exception) {
