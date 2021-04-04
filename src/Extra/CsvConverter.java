@@ -40,7 +40,6 @@ public class CsvConverter {
 
             while (scanner.hasNextLine()) {
                 processedString = scanner.nextLine();
-
                 int currentCharIndex = 0;
 
                 while (currentCharIndex < processedString.length()) {
@@ -175,7 +174,6 @@ public class CsvConverter {
                     // Проверяем, нужно ли сделать замену,
                     // или записываем текущий символ
                     writer.print(getFormattedString(currentChar));
-
                     ++currentCharIndex;
                 }
             }
@@ -198,7 +196,5 @@ public class CsvConverter {
         } else {
             return Character.toString(charToReplace);
         }
-
     }
-
 }

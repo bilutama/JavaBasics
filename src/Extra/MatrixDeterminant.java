@@ -3,9 +3,10 @@ package Extra;
 public class MatrixDeterminant {
     public static void main(String[] args) {
         int[][] matrix = {
-                {1, -2, 3},
-                {4, 8, 6},
-                {-7, 8, 9}
+                {1, -2, 3, 8},
+                {4, 8, 6, 9},
+                {-7, 8, 9, 3},
+                {8, 4, 1, 8}
         };
 
         printMatrix(matrix);
