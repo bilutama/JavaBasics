@@ -118,12 +118,12 @@ public class CsvConverter {
                     // Блок кода для режима чтения !separatorMode, т.е. когда содержимое ячейки в кавычках
                     if (currentChar == QUOTES) {
                         // Если предыдущий символ были экранирующие кавычки,
-                        // то эти кавычки нужно пропустить и выключить флаг,
-                        // но если сразу за ними конец строки, записываем тэг разрыва строки.
+                        // то эти кавычки нужно записать и выключить флаг,
                         if (isEscapeQuotes) {
-                            writer.print(getFormattedString(currentChar));
+                            writer.print(currentChar);
                             isEscapeQuotes = false;
 
+                            // Если сразу за ними конец строки, записываем тэг разрыва строки.
                             if (nextChar == END_OF_STRING) {
                                 writer.print(BREAK_LINE_TAG);
                             }
