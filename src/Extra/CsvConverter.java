@@ -100,7 +100,7 @@ public class CsvConverter {
                         // Если nextChar - разделитель, то
                         // записываем символ и финализируем ячейку
                         if (nextChar == SEPARATOR) {
-                            writer.print(getFormattedString(currentChar));
+                            writer.print(getStringWithReplacements(currentChar));
                             writer.println(CELL_CLOSE_TAG);
 
                             isNewCell = true;
@@ -110,7 +110,7 @@ public class CsvConverter {
 
                         // Если nextChar - конец строки, финализируем ячейку и строку
                         if (nextChar == END_OF_STRING) {
-                            writer.print(getFormattedString(currentChar));
+                            writer.print(getStringWithReplacements(currentChar));
                             writer.println(CELL_CLOSE_TAG);
                             writer.println(ROW_CLOSE_TAG);
 
@@ -119,7 +119,7 @@ public class CsvConverter {
                             continue;
                         }
 
-                        writer.print(getFormattedString(currentChar));
+                        writer.print(getStringWithReplacements(currentChar));
                         ++currentCharIndex;
                         continue;
                     }
@@ -174,7 +174,7 @@ public class CsvConverter {
                     // добавляем тэг переноса строки
                     // Далее строка заканчивается и читается следующая из файла.
                     if (nextChar == END_OF_STRING) {
-                        writer.print(getFormattedString(currentChar));
+                        writer.print(getStringWithReplacements(currentChar));
                         writer.print(BREAK_LINE_TAG);
 
                         ++currentCharIndex;
@@ -183,7 +183,7 @@ public class CsvConverter {
 
                     // Проверяем, нужно ли сделать замену,
                     // или записываем текущий символ
-                    writer.print(getFormattedString(currentChar));
+                    writer.print(getStringWithReplacements(currentChar));
                     ++currentCharIndex;
                 }
             }
@@ -197,7 +197,7 @@ public class CsvConverter {
         }
     }
 
-    public static String getFormattedString(char charToReplace) {
+    public static String getStringWithReplacements(char charToReplace) {
         if (charToReplace == '&') {
             return "&amp";
         } else if (charToReplace == '<') {
