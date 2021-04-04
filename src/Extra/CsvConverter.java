@@ -9,6 +9,8 @@ public class CsvConverter {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
         try {
+            if (args.length < 2) throw new Exception("Not enough parameters provided.");
+
             String inputFileName = args[0];
             String outputFileName = args[1];
 
@@ -43,7 +45,7 @@ public class CsvConverter {
                     "<head>" + System.lineSeparator() +
                     "<meta charset=\"utf-8\">");
             writer.println("<title>" + "Generated from " + inputFileName + "</title>");
-            writer.println("</head>" + System.lineSeparator() + "</body>");
+            writer.println("</head>" + System.lineSeparator() + "<body>");
 
             writer.println(TABLE_OPEN_TAG);
             String processedString;
