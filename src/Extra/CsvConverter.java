@@ -7,19 +7,28 @@ import java.util.Scanner;
 
 public class CsvConverter {
     public static void main(String[] args) {
-        System.out.println("*** Converts csv to html ***");
-        try {
-            if (args.length < 2) {
-                throw new Exception("Not enough parameters provided.");
-            }
+        if (args.length != 2) {
+            System.out.printf("Wrong arguments.%n%n");
 
-            String inputFileName = args[0];
-            String outputFileName = args[1];
+            System.out.printf("NAME%n");
+            System.out.printf("\tCsvConverter - converting csv into html-table.%n%n");
 
-            convertCsvToHtmlTable(inputFileName, outputFileName);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            System.out.printf("SYNOPSIS%n");
+            System.out.printf("\tCsvConverter [input_filename] [output_filename]%n%n");
+
+            System.out.printf("DESCRIPTION%n");
+            System.out.printf("\tTwo arguments must be provided:%n%n");
+            System.out.printf("\tinput_filename - input csv-file name (String) with delimiters%n%n");
+            System.out.printf("\toutput_filename - output html-file name (String) for generated table,%n" +
+                    "\t\tpreferably to have .html or .htm extension.%n" +
+                    "\t\tIf file exists, it will be rewritten, otherwise created.%n");
+            return;
         }
+
+        String inputFileName = args[0];
+        String outputFileName = args[1];
+
+        convertCsvToHtmlTable(inputFileName, outputFileName);
     }
 
     public static void convertCsvToHtmlTable(String inputFileName, String outputFileName) {
@@ -62,6 +71,11 @@ public class CsvConverter {
 
                     if (currentCharIndex == 0 && isNewCell) {
                         writer.println(ROW_OPEN_TAG);
+
+                        if (currentChar == SEPARATOR) {
+                            writer.print(CELL_OPEN_TAG);
+                            writer.println(CELL_CLOSE_TAG);
+                        }
                     }
 
                     // Обработка начала новой ячейки по флагу
@@ -78,10 +92,6 @@ public class CsvConverter {
 
                             if (nextChar == END_OF_STRING) {
                                 writer.println(CELL_CLOSE_TAG);
-
-                                //writer.print(CELL_OPEN_TAG);
-                                //writer.println(CELL_CLOSE_TAG);
-
                                 writer.println(ROW_CLOSE_TAG);
                                 ++currentCharIndex;
                                 continue;
@@ -206,9 +216,9 @@ public class CsvConverter {
             writer.print(TABLE_CLOSE_TAG);
             writer.print("</body>" + System.lineSeparator() + "</html>");
 
-            System.out.printf("Success! Result is in the file \"%s\"%n", outputFileName);
+            System.out.printf("Success! See \"%s\"%n", outputFileName);
         } catch (IOException exception) {
-            System.out.println(exception.getMessage());
+            System.out.printf("File %s doesn't exist.", inputFileName);
         }
     }
 
