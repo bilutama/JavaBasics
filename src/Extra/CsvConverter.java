@@ -12,6 +12,11 @@ public class CsvConverter {
             return;
         }
 
+        if (args[0].equals(args[1])) {
+            System.out.printf("The output file must be different from the input file.%n");
+            return;
+        }
+
         String inputFileName = args[0];
         String outputFileName = args[1];
 
@@ -201,7 +206,7 @@ public class CsvConverter {
                 }
             }
 
-            writer.print(TABLE_CLOSE_TAG);
+            writer.println(TABLE_CLOSE_TAG);
             writer.print("</body>" + System.lineSeparator() + "</html>");
 
             System.out.printf("Success! See \"%s\"%n", outputFileName);
