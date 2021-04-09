@@ -8,20 +8,7 @@ import java.util.Scanner;
 public class CsvConverter {
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.printf("Wrong arguments.%n%n");
-
-            System.out.printf("NAME%n");
-            System.out.printf("\tCsvConverter - converting csv into html-table.%n%n");
-
-            System.out.printf("SYNOPSIS%n");
-            System.out.printf("\tCsvConverter [input_filename] [output_filename]%n%n");
-
-            System.out.printf("DESCRIPTION%n");
-            System.out.printf("\tTwo arguments must be provided:%n%n");
-            System.out.printf("\tinput_filename - input csv-file name (String) with delimiters%n%n");
-            System.out.printf("\toutput_filename - output html-file name (String) for generated table,%n" +
-                    "\t\tpreferably to have .html or .htm extension.%n" +
-                    "\t\tIf file exists it will be overwritten, otherwise created.%n");
+            printHelpMessage();
             return;
         }
 
@@ -233,5 +220,22 @@ public class CsvConverter {
         } else {
             return Character.toString(charToReplace);
         }
+    }
+
+    private static void printHelpMessage() {
+        System.out.printf("Wrong arguments.%n%n");
+
+        System.out.printf("NAME%n");
+        System.out.printf("\tCsvConverter - converting csv into html-table.%n%n");
+
+        System.out.printf("SYNOPSIS%n");
+        System.out.printf("\tCsvConverter [input_filename] [output_filename]%n%n");
+
+        System.out.printf("DESCRIPTION%n");
+        System.out.printf("\tTwo arguments must be provided:%n%n");
+        System.out.printf("\tinput_filename - input csv-file name (String) with delimiters%n%n");
+        System.out.printf("\toutput_filename - output html-file name (String) for generated table,%n" +
+                "\t\tpreferably to have .html or .htm extension.%n" +
+                "\t\tIf file exists it will be overwritten, otherwise created.%n");
     }
 }
