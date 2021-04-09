@@ -9,7 +9,9 @@ public class CsvConverter {
     public static void main(String[] args) {
         System.out.println("*** Converts csv to html ***");
         try {
-            if (args.length < 2) throw new Exception("Not enough parameters provided.");
+            if (args.length < 2) {
+                throw new Exception("Not enough parameters provided.");
+            }
 
             String inputFileName = args[0];
             String outputFileName = args[1];
@@ -76,6 +78,10 @@ public class CsvConverter {
 
                             if (nextChar == END_OF_STRING) {
                                 writer.println(CELL_CLOSE_TAG);
+
+                                //writer.print(CELL_OPEN_TAG);
+                                //writer.println(CELL_CLOSE_TAG);
+
                                 writer.println(ROW_CLOSE_TAG);
                                 ++currentCharIndex;
                                 continue;
@@ -89,6 +95,13 @@ public class CsvConverter {
                             }
 
                             isNewCell = false;
+                            ++currentCharIndex;
+                            continue;
+                        }
+
+                        if (currentChar == QUOTES) {
+                            isNewCell = false;
+                            separatorMode = false;
                             ++currentCharIndex;
                             continue;
                         }
@@ -201,7 +214,7 @@ public class CsvConverter {
 
     public static String getStringWithReplacements(char charToReplace) {
         if (charToReplace == '&') {
-            return "&amp";
+            return "&amp;";
         } else if (charToReplace == '<') {
             return "&lt;";
         } else if (charToReplace == '>') {

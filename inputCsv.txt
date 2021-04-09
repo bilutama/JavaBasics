@@ -1,4 +1,1 @@
-<cell1>,"CELL ""2""","CELL
-3",cell_4,
-row2_1,row2_2,"row2, 3",row2_4,"row2, 5
-&6"
+"1","2",
