@@ -21,7 +21,7 @@ public class CsvConverter {
             System.out.printf("\tinput_filename - input csv-file name (String) with delimiters%n%n");
             System.out.printf("\toutput_filename - output html-file name (String) for generated table,%n" +
                     "\t\tpreferably to have .html or .htm extension.%n" +
-                    "\t\tIf file exists, it will be rewritten, otherwise created.%n");
+                    "\t\tIf file exists it will be overwritten, otherwise created.%n");
             return;
         }
 
