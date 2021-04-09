@@ -72,6 +72,7 @@ public class CsvConverter {
                     if (currentCharIndex == 0 && isNewCell) {
                         writer.println(ROW_OPEN_TAG);
 
+                        // Обработка если первая ячейка в строке пустая
                         if (currentChar == SEPARATOR) {
                             writer.print(CELL_OPEN_TAG);
                             writer.println(CELL_CLOSE_TAG);
