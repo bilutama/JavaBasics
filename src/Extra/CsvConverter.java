@@ -199,8 +199,8 @@ public class CsvConverter {
                         continue;
                     }
 
-                    // Проверяем, нужно ли сделать замену,
-                    // или записываем текущий символ
+                    // Если никакое условие не сработало,
+                    // то записываем в файл текущий символ
                     writer.print(getStringWithReplacements(currentChar));
                     ++currentCharIndex;
                 }
