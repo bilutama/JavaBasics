@@ -6,6 +6,6 @@ FROM country
 ORDER BY CHAR_LENGTH(name) DESC, name;
 
 -- #2
-SELECT name, ROUND(SQRT(SurfaceArea/PI()), 1) AS Radius
+SELECT name, SQRT(SurfaceArea / PI()) AS Radius
 FROM country
 ORDER BY Radius DESC, name;
