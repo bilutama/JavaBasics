@@ -49,8 +49,7 @@ CALL add_categories();
 
 -- Проверка созданной БД
 SELECT COUNT(name) AS productsCount,
-	MIN(price) AS minPrice,
-    MAX(price) AS maxPrice,
-    MIN(category_id) AS minCatId,
-    MAX(category_id) AS maxCatId
+	COUNT(DISTINCT category_id) AS categoriesCount,
+    MIN(price) AS minPrice,
+    MAX(price) AS maxPrice
 FROM products;
