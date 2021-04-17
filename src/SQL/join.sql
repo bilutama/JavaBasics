@@ -1,8 +1,8 @@
 USE world;
 
--- #1.1 CROSS JOIN таблиц стран и городов.
--- таблица не имеет смысла, так как все страны сопоставляются со всеми городами без критериев.
--- Использован фильтр DISTINCT, поскольку одноименные города встречаются в разных странах.
+-- #1.1 CROSS JOIN таблиц стран и городов - тестовый запрос для одного города.
+-- Таблица не имеет смысла, так как все страны сопоставляются со всеми городами без критериев.
+-- Использован DISTINCT, поскольку одноименные города встречаются в разных странах.
 -- Для примера выбран город Cambridge (есть в Великобритании, США и Канаде) - видим, что сейчас не повторяется.
 SELECT DISTINCT country.name AS countryName, city.name AS cityName
 FROM country
@@ -10,15 +10,13 @@ CROSS JOIN city
 WHERE city.name = 'Cambridge'
 ORDER BY countryName;
 
--- 1.2 CROSS JOIN для всех уникальных городов
--- Для примера выбран город Cambridge (есть в Великобритании, США и Канаде) - видим, что сейчас не повторяется.
+-- #1.2 CROSS JOIN для всех уникальных городов
+-- Для проверки выведем первые 10000 записей (по умолчанию было 1000).
 SELECT DISTINCT country.name AS countryName, city.name AS cityName
 FROM country
 CROSS JOIN city
--- WHERE city.name = 'Cambridge'
 ORDER BY countryName, cityName
 LIMIT 10000;
-
 
 -- #2 код страны, название страны и название города столицы
 SELECT country.code, country.name, city.name

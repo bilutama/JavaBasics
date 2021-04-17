@@ -47,7 +47,7 @@ public class CsvConverter {
                     "<html>" + System.lineSeparator() +
                     "<head>" + System.lineSeparator() +
                     "<meta charset=\"utf-8\">");
-            writer.println("<title>" + "Generated from " + inputFileName + "</title>");
+            writer.println("<title>Generated from " + inputFileName + "</title>");
             writer.println("</head>" + System.lineSeparator() + "<body>");
 
             writer.println(TABLE_OPEN_TAG);
