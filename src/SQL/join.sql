@@ -19,7 +19,7 @@ ORDER BY countryName, cityName
 LIMIT 10000;
 
 -- #2 код страны, название страны и название города столицы
-SELECT country.code, country.name, city.name
+SELECT country.code, country.name AS countryName, city.name AS cityName
 FROM country
 INNER JOIN city
 	ON country.capital = city.id;
@@ -31,17 +31,21 @@ INNER JOIN country
 	ON city.countryCode = country.code;
 
 -- #4 количество городов по континентам
-SELECT country.continent, COUNT(city.name)
+SELECT country.continent, COUNT(city.name) as cityCount
 FROM country
 LEFT JOIN city
 	ON country.code = city.countryCode
 GROUP BY country.continent;
 
 -- #5 количество официальных языков по странам, в порядке убывания
-SELECT country.name AS countryName, COUNT(countryLanguage.language) AS languageCount
-FROM countryLanguage
-INNER JOIN country
+-- Если выбирать только из тех стран, где есть хотя бы 1 язык, используем INNER JOIN.
+-- Если считать языки по всем странам из таблицы country, используем LEFT JOIN,
+-- тогда в список добавятся такие территории как Антарктика и Французские Южные Территории -
+-- сейчас выбраны все территории (LEFT JOIN).
+SELECT country.name AS countryName,
+	SUM(CASE WHEN isOfficial = 'T' THEN 1 ELSE 0 END) AS languageCount
+FROM country
+LEFT JOIN countryLanguage
 	ON countryLanguage.countryCode = country.code
-WHERE countryLanguage.isOfficial = 'T'
-GROUP BY countryName
+GROUP BY country.name
 ORDER BY languageCount DESC;
