@@ -25,7 +25,7 @@ CREATE TABLE discipline
 	id INT AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
 	hours INT NOT NULL,
-	reportFormat VARCHAR(255) NOT NULL,
+	reportingForm VARCHAR(255) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -85,7 +85,7 @@ VALUES ('Илларион', 'Владимирович', 'Филиппов', 'Ф�
 ('Фия', 'Натановна', 'Гаврилова', 'Химия', 2018, 'дневная', 2313, 820029),
 ('Версавия', 'Борисовна', 'Симонова', 'Химия', 2018, 'вечерняя', 2313, 820030);
 
-INSERT INTO discipline(name, hours, reportFormat)
+INSERT INTO discipline(name, hours, reportingForm)
 VALUES ('Молекулярная физика', 62, 'экзамен'),
 ('Математический анализ', 72, 'экзамен'),
 ('Электродинамика', 68, 'экзамен'),
