@@ -2,14 +2,14 @@ USE university;
 
 -- #1 Количество студентов для указанной формы обучения --
 -- 1.2 Количество студентов по всем формам обучения
-SELECT educationForm, COUNT(studentId)
+SELECT educationForm, COUNT(id)
 FROM student
 GROUP BY educationForm;
 
 -- 1.2 Количество студентов для выбранной формы обучения
 SET @educationForm = 'дневная';
 
-SELECT educationForm, COUNT(studentId)
+SELECT educationForm, COUNT(id)
 FROM student
 GROUP BY educationForm
 HAVING educationForm = @educationForm;
@@ -53,7 +53,7 @@ INNER JOIN student
 	ON gradebook.studentId = student.id
 GROUP BY gradebook.studentId
 HAVING averageGrade >= 4.25
-ORDER BY averageGrade DESC
+ORDER BY averageGrade DESC;
 
 -- #4 Студенты со стипендией после сессии --
 -- Год, семестр и минимальная допустимая оценка в зачетке задаются через переменные.
