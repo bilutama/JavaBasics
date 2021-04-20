@@ -8,7 +8,7 @@ GROUP BY educationForm;
 -- #2 Часы и форма отчетности по дисциплине --
 SET @disciplineName = 'Философия';
 
-SELECT name as discipline, hours, reportFormat
+SELECT name AS discipline, hours, reportFormat
 FROM discipline
 WHERE name = @disciplineName;
 
@@ -20,7 +20,7 @@ WHERE name = @disciplineName;
 -- при этом заранее не будет известно количество студентов (могут остаться все, например),
 -- но правило выбора будет справедливым.
 SELECT gradebook.studentId, student.firstName,
-	student.surname, AVG(gradebook.grade) as averageGrade
+	student.surname, AVG(gradebook.grade) AS averageGrade
 FROM gradebook
 INNER JOIN student
 	ON gradebook.studentId = student.id
