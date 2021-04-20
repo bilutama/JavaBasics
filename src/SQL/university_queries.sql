@@ -46,17 +46,22 @@ HAVING MIN(gradebook.grade) >= @minimumGradeForScholarship
 ORDER BY gradebook.studentId;
 
 -- #5 Дисциплина, по которой студенты лучше всего учатся --
+-- Выводим список дисциплин со средним баллом студентов по ним, сортируем по убыванию.
 SELECT name AS disciplineName, AVG(gradebook.grade) AS averageGrade
 FROM discipline
+LEFT JOIN gradebook
+	ON discipline.name = gradebook.discipline
 GROUP BY name
 ORDER BY averageGrade DESC;
 
 -- #6 Студенты, учащиеся лучше среднего --
+-- Расчитываем средний балл по всем студентам
+-- и оставляем только тех, у кого средний балл выше среднего по университету
 SELECT gradebook.studentId, student.firstName,
 	student.surname, AVG(gradebook.grade) AS averageGrade
 FROM gradebook
 INNER JOIN student
 	ON gradebook.studentId = student.id
 GROUP BY gradebook.studentId
-HAVING averageGrade > AVG (gradebook.grade)
+HAVING averageGrade > (SELECT AVG(gradebook.grade) FROM gradebook)
 ORDER BY averageGrade DESC;
