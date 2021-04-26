@@ -34,20 +34,60 @@ GROUP BY region.name;
 -- #5 Количество размещенных и неразмещенных единиц каждого вида POSm.
 -- Результаты группируются по id POSm (по данным из задачи доступен один вид)
 -- и статусу (1 - «в работе» и 2 - «выполнено»)
-SELECT formPosmSetTask.posmSetId, placePosmTask.status, SUM(placePosmTask.posmSetsCount) AS posmSetsCount
+SELECT posmItem.name,
+	SUM(CASE WHEN placePosmTask.status = 1 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS posmYetToPlace,
+    SUM(CASE WHEN placePosmTask.status = 2 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS posmPlaced
+FROM posmItem
+LEFT JOIN posmSetItem
+	ON posmItem.id = posmSetItem.posmItemId
+LEFT JOIN posmSet
+	ON posmSet.id = posmSetItem.posmSetId
+LEFT JOIN formPosmSetTask
+	ON formPosmSetTask.posmSetId = posmSet.id
+LEFT JOIN placePosmTask
+	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
+GROUP BY posmItem.name;
+
+-- #6 Количество единиц каждого вида POSm, отправленные каждому агенту.
+-- Я не очень понял нужно ли показать полное количество POSm, предназначенных для каждого агента
+-- т.е. без учета статуса задач. Поэтому сделал оба варианта:
+-- #6.1 Количество единиц каждого вида POSm, отправленные каждому агенту и полученные, т.е. статус задачи 2 - "выполнена".
+SET @status = 2;
+
+SELECT placePosmTask.agentCode,
+	SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 1 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Блокнот',
+    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 2 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Календарь',
+    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 3 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Кубарик',
+    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 4 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Пакет',
+    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 5 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Ручка'
 FROM placePosmTask
 LEFT JOIN formPosmSetTask
 	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
-GROUP BY placePosmTask.status, formPosmSetTask.posmSetId
-ORDER BY formPosmSetTask.posmSetId, placePosmTask.status;
+LEFT JOIN posmSet
+	ON formPosmSetTask.posmSetId = posmSet.id
+LEFT JOIN posmSetItem
+	ON posmSet.id = posmSetItem.posmSetId
+LEFT JOIN posmItem
+	ON posmSetItem.posmItemId = posmItem.id
+GROUP BY placePosmTask.agentCode;
 
--- #6 Количество единиц каждого вида POSm, отправленные каждому агенту.
-SELECT placePosmTask.agentCode, formPosmSetTask.posmSetId, SUM(placePosmTask.posmSetsCount) AS posmSetsCount
+-- #6.2 Количество единиц каждого вида POSm, предназначенные для каждого агента (доставленные и недоставленные), т.е. без учета статуса задачи.
+SELECT placePosmTask.agentCode,
+	SUM(CASE WHEN posmItem.id = 1 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Блокнот',
+    SUM(CASE WHEN posmItem.id = 2 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Календарь',
+    SUM(CASE WHEN posmItem.id = 3 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Кубарик',
+    SUM(CASE WHEN posmItem.id = 4 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Пакет',
+    SUM(CASE WHEN posmItem.id = 5 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Ручка'
 FROM placePosmTask
 LEFT JOIN formPosmSetTask
-	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.Id
-GROUP BY placePosmTask.agentCode, formPosmSetTask.posmSetId
-ORDER BY posmSetsCount DESC;
+	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
+LEFT JOIN posmSet
+	ON formPosmSetTask.posmSetId = posmSet.id
+LEFT JOIN posmSetItem
+	ON posmSet.id = posmSetItem.posmSetId
+LEFT JOIN posmItem
+	ON posmSetItem.posmItemId = posmItem.id
+GROUP BY placePosmTask.agentCode;
 
 -- #7 Количество задач «в работе» и «выполнено» у каждого мерчендайзера. В том числе 0.
 SELECT merchandiser.id, merchandiser.firstName, merchandiser.lastName,
