@@ -36,7 +36,7 @@ ORDER BY department_id;
 
 -- #5 Список сотрудников, не имеющих назначенного руководителя, работающего в том же отделе
 -- другими словами, department_id сотрудника не равен department_id его руководителя
-SELECT name AS employee, department_id
+SELECT department_id, name AS employee
 FROM employee AS e
 WHERE department_id <> (SELECT department_id
 						FROM employee
