@@ -1,6 +1,3 @@
--- department
--- employee
-
 DROP DATABASE employees;
 
 CREATE DATABASE employees;
@@ -16,14 +13,12 @@ CREATE TABLE department
 
 CREATE TABLE employee
 (
-	id INT AUTO_INCREMENT,
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	department_id INT,
-	chief_id INT,
+	chief_id INT NULL,
 	name VARCHAR(255) NOT NULL,
 	salary INT NOT NULL,
-	PRIMARY KEY (id)
-	FOREIGN KEY (chief_id) REFERENCES employee(id)
-	    ON UPDATE CASCADE
+	FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 INSERT INTO department (name)
@@ -41,9 +36,9 @@ VALUES (5, 6, 'Иванов Емельян', 60),
 (5, 5, 'Фомичёв Гаянэ', 90),
 (5, 1, 'Елисеев Гурий', 50),
 (5, 3, 'Казаков Аввакуум', 50),
-(3, 0, 'Никифоров Валентин', 100),
+(3, NULL, 'Никифоров Валентин', 100),
 (3, 3, 'Титов Оскар', 80),
-(4, 0, 'Попов Остап', 100),
+(4, NULL, 'Попов Остап', 100),
 (3, 2, 'Ермаков Моисей', 60),
 (1, 5, 'Колесников Оскар', 70),
 (5, 7, 'Симонов Лавр', 90),
@@ -64,3 +59,6 @@ VALUES (5, 6, 'Иванов Емельян', 60),
 (5, 10, 'Калашников Юлий', 110),
 (2, 7, 'Кондратьев Михаил', 110),
 (2, 2, 'Овчинников Юстиниан', 100);
+
+ALTER TABLE employee
+ADD CONSTRAINT chiefs FOREIGN KEY (chief_id) REFERENCES employee(id);

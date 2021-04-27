@@ -12,6 +12,7 @@ LEFT JOIN department AS chief_department
 	ON c.department_id = chief_department.id;
 
 -- #2 Список сотрудников, получающих заработную плату, большую чем у непосредственного руководителя
+-- для проверки также выводится имя и зарплата руководителя
 SELECT e.name AS employee, e.salary AS employee_salary, c.name AS chief, c.salary AS chief_salary
 FROM employee AS e
 LEFT JOIN employee AS c
