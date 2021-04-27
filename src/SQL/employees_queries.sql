@@ -42,7 +42,7 @@ WHERE department_id <> (SELECT department_id
 						FROM employee
                         WHERE id = e.chief_id);
 
--- #6 список наименований отделов с максимальной суммарной зарплатой сотрудников
+-- #6 Список наименований отделов с максимальной суммарной зарплатой сотрудников
 SELECT d.name AS departmentName, SUM(e.salary) AS departmentSalary
 FROM employee AS e
 LEFT JOIN department AS d
