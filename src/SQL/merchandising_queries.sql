@@ -47,19 +47,13 @@ LEFT JOIN placePosmTask
 GROUP BY posmItem.name;
 
 -- #6 Количество единиц каждого вида POSm, отправленные каждому агенту.
--- Я не очень понял нужно ли показать полное количество POSm, предназначенных для каждого агента
--- т.е. без учета статуса задач. Поэтому сделал оба варианта:
-
--- #6 Количество единиц каждого вида POSm, предназначенные для каждого агента.
 SELECT placePosmTask.agentCode, posmItem.name AS POSm,
 	SUM(placePosmTask.posmSetsCount * posmSetItem.posmItemsCount)
 FROM placePosmTask
 LEFT JOIN formPosmSetTask
 	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
-LEFT JOIN posmSet
-	ON formPosmSetTask.posmSetId = posmSet.id
 LEFT JOIN posmSetItem
-	ON posmSet.id = posmSetItem.posmSetId
+	ON formPosmSetTask.posmSetId = posmSetItem.posmSetId
 LEFT JOIN posmItem
 	ON posmSetItem.posmItemId = posmItem.id
 GROUP BY placePosmTask.agentCode, posmItem.name;
