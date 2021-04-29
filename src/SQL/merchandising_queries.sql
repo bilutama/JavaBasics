@@ -38,38 +38,23 @@ SELECT posmItem.name,
 FROM posmItem
 LEFT JOIN posmSetItem
 	ON posmItem.id = posmSetItem.posmItemId
-LEFT JOIN posmSet
-	ON posmSet.id = posmSetItem.posmSetId
 LEFT JOIN formPosmSetTask
-	ON formPosmSetTask.posmSetId = posmSet.id
+	ON formPosmSetTask.posmSetId = posmSetItem.posmSetId
 LEFT JOIN placePosmTask
 	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
 GROUP BY posmItem.name;
 
--- #6.1 Количество единиц каждого вида POSm, отправленные каждому агенту.
-SELECT placePosmTask.agentCode, posmItem.name AS POSm,
-	SUM(placePosmTask.posmSetsCount * posmSetItem.posmItemsCount)
-FROM placePosmTask
-LEFT JOIN formPosmSetTask
-	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
-LEFT JOIN posmSetItem
-	ON formPosmSetTask.posmSetId = posmSetItem.posmSetId
-LEFT JOIN posmItem
-	ON posmSetItem.posmItemId = posmItem.id
-GROUP BY placePosmTask.agentCode, posmItem.name;
-
--- #6.2
-SELECT placePosmTask.agentCode, posmItem.name AS POSm,
-	SUM(placePosmTask.posmSetsCount * posmSetItem.posmItemsCount)
+-- #6 Количество единиц каждого вида POSm, отправленные каждому агенту.
+SELECT placePosmTask.agentCode, posmItem.name AS posmName,
+	SUM(CASE WHEN posmSetItem.posmItemsCount IS NOT NULL THEN placePosmTask.posmSetsCount * posmSetItem.posmItemsCount ELSE 0 END) AS posmCount
 FROM posmItem
 LEFT JOIN posmSetItem
 	ON posmSetItem.posmItemId = posmItem.id
 LEFT JOIN formPosmSetTask
 	ON	formPosmSetTask.posmSetId = posmSetItem.posmSetId
-LEFT JOIN placePosmTask
-	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
-GROUP BY placePosmTask.agentCode, posmItem.name;
-
+CROSS JOIN placePosmTask
+GROUP BY placePosmTask.agentCode, posmItem.name
+ORDER BY placePosmTask.agentCode;
 
 -- #7 Количество задач «в работе» и «выполнено» у каждого мерчендайзера. В том числе 0.
 SELECT merchandiser.id, merchandiser.firstName, merchandiser.lastName,
