@@ -2,13 +2,11 @@ USE merchandising;
 
 -- #1 ФИО всех мерчендайзеров из сибирского региона (код региона 3).
 SELECT merchandiser.firstName, merchandiser.lastName, merchandiser.middleName,
-	city.name AS cityName, region.name AS regionName
+	city.name AS cityName
 FROM merchandiser
-LEFT JOIN city
+INNER JOIN city
 	ON merchandiser.cityId = city.id
-LEFT JOIN region
-	ON city.regionId = region.id
-WHERE region.id = 3;
+WHERE city.regionId = 3;
 
 -- #2 Информация о POSm, у которых не задан комментарий (NULL).
 SELECT name, format, price
@@ -16,14 +14,14 @@ FROM posmItem
 WHERE comment IS NULL;
 
 -- #3 Город и число мерчендайзеров из этого города.
-SELECT city.name, SUM(CASE WHEN merchandiser.cityId = city.id THEN 1 ELSE 0 END) AS merchandisersCount
+SELECT city.name, COUNT(merchandiser.cityId) AS merchandisersCount
 FROM city
 LEFT JOIN merchandiser
 	ON city.id = merchandiser.cityId
 GROUP BY city.name;
 
 -- #4 Регион и число мерчендайзеров из этого региона.
-SELECT region.name, SUM(CASE WHEN merchandiser.cityId = city.id AND city.regionId = region.id THEN 1 ELSE 0 END) AS merchandisersCount
+SELECT region.name, COUNT(merchandiser.id) AS merchandisersCount
 FROM region
 LEFT JOIN city
 	ON region.id = city.regionId

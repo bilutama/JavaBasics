@@ -2,21 +2,17 @@ USE university;
 
 -- #1 Количество студентов для указанной формы обучения --
 -- 1.1 Количество студентов по всем формам обучения
-SELECT studentsGroup.educationForm, COUNT(student.id) AS studentsCount
+SELECT educationForm, COUNT(id)
 FROM student
-LEFT JOIN studentsGroup
-	ON student.groupId = studentsGroup.id
-GROUP BY studentsGroup.educationForm;
+GROUP BY educationForm;
 
 -- 1.2 Количество студентов для выбранной формы обучения
 SET @educationForm = 'дневная';
 
-SELECT studentsGroup.educationForm, COUNT(student.id) AS studentsCount
+SELECT educationForm, COUNT(id)
 FROM student
-LEFT JOIN studentsGroup
-	ON student.groupId = studentsGroup.id
-GROUP BY studentsGroup.educationForm
-HAVING studentsGroup.educationForm = @educationForm;
+GROUP BY educationForm
+HAVING educationForm = @educationForm;
 
 -- #2 Часы и форма отчетности по дисциплине --
 -- 2.1 Запрос по названию дисциплины
@@ -40,22 +36,22 @@ WHERE id = 4;
 -- но правило выбора будет справедливым.
 
 -- 3.1 Вариант с LIMIT --
-SELECT gradebook.studentId, CONCAT(student.firstName, ' ', student.surname) AS student,
-	AVG(gradebook.grade) AS averageGrade
-FROM student
-LEFT JOIN gradebook
+SELECT gradebook.studentId, student.firstName,
+	student.surname, AVG(gradebook.grade) AS averageGrade
+FROM gradebook
+INNER JOIN student
 	ON gradebook.studentId = student.id
-GROUP BY gradebook.studentId, CONCAT(student.firstName, ' ', student.surname)
+GROUP BY gradebook.studentId
 ORDER BY averageGrade DESC
 LIMIT 10;
 
 -- 3.2 Вариант с минимальным средним баллом --
-SELECT gradebook.studentId, CONCAT(student.firstName, ' ', student.surname) AS student,
-	AVG(gradebook.grade) AS averageGrade
-FROM student
-LEFT JOIN gradebook
+SELECT gradebook.studentId, student.firstName,
+	student.surname, AVG(gradebook.grade) AS averageGrade
+FROM gradebook
+INNER JOIN student
 	ON gradebook.studentId = student.id
-GROUP BY gradebook.studentId, CONCAT(student.firstName, ' ', student.surname)
+GROUP BY gradebook.studentId
 HAVING averageGrade >= 4.25
 ORDER BY averageGrade DESC;
 
@@ -66,35 +62,29 @@ SET @minimumGradeForScholarship = 4;
 SET @sessionYear = 2018;
 SET @sessionTerm = 1;
 
-SELECT student.id, CONCAT(student.firstName, ' ', student.surname) AS student
-FROM student
-LEFT JOIN gradebook
-	ON student.id = gradebook.studentId
-LEFT JOIN studyPlan
-	ON gradebook.studyPlanId = studyPlan.id
-WHERE gradebook.year = @sessionYear AND studyPlan.term = @sessionTerm
-GROUP BY student.id, CONCAT(student.firstName, ' ', student.surname)
+SELECT gradebook.studentId, student.firstName, student.surname
+FROM gradebook
+INNER JOIN student
+	ON gradebook.studentId = student.id
+WHERE gradebook.year = @sessionYear AND gradebook.term = @sessionTerm
+GROUP BY gradebook.studentId
 HAVING MIN(gradebook.grade) >= @minimumGradeForScholarship
-ORDER BY student.id;
+ORDER BY gradebook.studentId;
 
 -- #5 Дисциплина, по которой студенты лучше всего учатся --
 -- 5.1 Выводим список дисциплин со средним баллом студентов по ним, сортируем по убыванию.
 SELECT name AS disciplineName, AVG(gradebook.grade) AS averageGrade
 FROM discipline
-LEFT JOIN studyPlan
-	ON discipline.id = studyPlan.disciplineId
 LEFT JOIN gradebook
-	ON studyPlan.id = gradebook.studyPlanId
+	ON discipline.name = gradebook.discipline
 GROUP BY name
 ORDER BY averageGrade DESC;
 
 -- 5.2 Выбираем первую дисциплину из списка
 SELECT name AS disciplineName, AVG(gradebook.grade) AS averageGrade
 FROM discipline
-LEFT JOIN studyPlan
-	ON discipline.id = studyPlan.disciplineId
 LEFT JOIN gradebook
-	ON studyPlan.id = gradebook.studyPlanId
+	ON discipline.name = gradebook.discipline
 GROUP BY name
 ORDER BY averageGrade DESC
 LIMIT 1;
@@ -102,11 +92,11 @@ LIMIT 1;
 -- #6 Студенты, учащиеся лучше среднего --
 -- Расчитываем средний балл по всем студентам
 -- и оставляем только тех, у кого средний балл выше среднего по университету
-SELECT student.id, CONCAT(student.firstName, ' ', student.surname) AS student,
-    AVG(gradebook.grade) AS averageGrade
+SELECT gradebook.studentId, student.firstName,
+	student.surname, AVG(gradebook.grade) AS averageGrade
 FROM gradebook
-LEFT JOIN student
+INNER JOIN student
 	ON gradebook.studentId = student.id
-GROUP BY student.id, CONCAT(student.firstName, ' ', student.surname)
+GROUP BY gradebook.studentId
 HAVING averageGrade > (SELECT AVG(gradebook.grade) FROM gradebook)
 ORDER BY averageGrade DESC;
