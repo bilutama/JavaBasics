@@ -49,15 +49,10 @@ GROUP BY posmItem.name;
 -- #6 Количество единиц каждого вида POSm, отправленные каждому агенту.
 -- Я не очень понял нужно ли показать полное количество POSm, предназначенных для каждого агента
 -- т.е. без учета статуса задач. Поэтому сделал оба варианта:
--- #6.1 Количество единиц каждого вида POSm, отправленные каждому агенту и полученные, т.е. статус задачи 2 - "выполнена".
-SET @status = 2;
 
-SELECT placePosmTask.agentCode,
-	SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 1 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Блокнот',
-    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 2 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Календарь',
-    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 3 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Кубарик',
-    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 4 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Пакет',
-    SUM(CASE WHEN placePosmTask.status = @status AND posmItem.id = 5 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Ручка'
+-- #6 Количество единиц каждого вида POSm, предназначенные для каждого агента.
+SELECT placePosmTask.agentCode, posmItem.name AS POSm,
+	SUM(placePosmTask.posmSetsCount * posmSetItem.posmItemsCount)
 FROM placePosmTask
 LEFT JOIN formPosmSetTask
 	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
@@ -67,25 +62,7 @@ LEFT JOIN posmSetItem
 	ON posmSet.id = posmSetItem.posmSetId
 LEFT JOIN posmItem
 	ON posmSetItem.posmItemId = posmItem.id
-GROUP BY placePosmTask.agentCode;
-
--- #6.2 Количество единиц каждого вида POSm, предназначенные для каждого агента (доставленные и недоставленные), т.е. без учета статуса задачи.
-SELECT placePosmTask.agentCode,
-	SUM(CASE WHEN posmItem.id = 1 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Блокнот',
-    SUM(CASE WHEN posmItem.id = 2 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Календарь',
-    SUM(CASE WHEN posmItem.id = 3 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Кубарик',
-    SUM(CASE WHEN posmItem.id = 4 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Пакет',
-    SUM(CASE WHEN posmItem.id = 5 THEN posmSetItem.posmItemsCount * placePosmTask.posmSetsCount ELSE 0 END) AS 'Ручка'
-FROM placePosmTask
-LEFT JOIN formPosmSetTask
-	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
-LEFT JOIN posmSet
-	ON formPosmSetTask.posmSetId = posmSet.id
-LEFT JOIN posmSetItem
-	ON posmSet.id = posmSetItem.posmSetId
-LEFT JOIN posmItem
-	ON posmSetItem.posmItemId = posmItem.id
-GROUP BY placePosmTask.agentCode;
+GROUP BY placePosmTask.agentCode, posmItem.name;
 
 -- #7 Количество задач «в работе» и «выполнено» у каждого мерчендайзера. В том числе 0.
 SELECT merchandiser.id, merchandiser.firstName, merchandiser.lastName,
