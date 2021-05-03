@@ -13,10 +13,10 @@ SET @educationForm = 'дневная';
 
 SELECT studentsGroup.educationForm, COUNT(student.id) AS studentsCount
 FROM student
-LEFT JOIN studentsGroup
+INNER JOIN studentsGroup
 	ON student.groupId = studentsGroup.id
-GROUP BY studentsGroup.educationForm
-HAVING studentsGroup.educationForm = @educationForm;
+WHERE studentsGroup.educationForm = @educationForm
+GROUP BY studentsGroup.educationForm;
 
 -- #2 Часы и форма отчетности по дисциплине --
 -- 2.1 Запрос по названию дисциплины
