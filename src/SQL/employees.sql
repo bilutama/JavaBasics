@@ -26,7 +26,8 @@ VALUES ('Отдел 1'),
 ('Отдел 2'),
 ('Отдел 3'),
 ('Отдел 4'),
-('Отдел 5');
+('Отдел 5'),
+('Отдел 6');
 
 INSERT INTO employee (department_id, chief_id, name, salary)
 VALUES (5, 6, 'Иванов Емельян', 60),
