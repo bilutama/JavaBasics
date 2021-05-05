@@ -65,11 +65,15 @@ AS SELECT DISTINCT salary AS filteredSalary, ROW_NUMBER() OVER (ORDER BY filtere
 FROM employee
 ORDER BY salary DESC;
 
-
 CREATE VIEW salarySortedDesc
 AS SELECT DISTINCT salary
 ORDER BY salary DESC;
 
+SELECT e.name AS employee, ee.salary
+FROM employee AS ee
+WHERE 2 = (SELECT COUNT(DISTINCT(salary))
+				FROM employee AS es
+                WHERE ee.salary <= ee.salary);
 
 SELECT e.name AS employee, e.salary
 FROM employee AS e
