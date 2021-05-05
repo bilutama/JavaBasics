@@ -59,25 +59,10 @@ WHERE ds.departmentSalary = (SELECT MAX(departmentSalary)
 							FROM departmentSalary);
 
 -- #7 ФИО сотрудника(ов), получающего третью по величине зарплату в организации
-DROP VIEW salaryInOrder;
-CREATE VIEW salaryInOrder
-AS SELECT DISTINCT salary AS filteredSalary, ROW_NUMBER() OVER (ORDER BY filteredSalary) AS RowNumber
-FROM employee
-ORDER BY salary DESC;
+SET @maximumSalaryIndex = 3;
 
-CREATE VIEW salarySortedDesc
-AS SELECT DISTINCT salary
-ORDER BY salary DESC;
-
-SELECT e.name AS employee, ee.salary
+SELECT ee.name AS employee, ee.salary
 FROM employee AS ee
-WHERE 2 = (SELECT COUNT(DISTINCT(salary))
-				FROM employee AS es
-                WHERE ee.salary <= ee.salary);
-
-SELECT e.name AS employee, e.salary
-FROM employee AS e
-WHERE salary = (SELECT DISTINCT salary
-				FROM employee
-                ORDER BY salary DESC
-                LIMIT 2, 1);
+WHERE @maximumSalaryIndex = (SELECT COUNT(DISTINCT salary)
+                            FROM employee AS es
+                            WHERE ee.salary <= es.salary);
