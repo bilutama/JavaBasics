@@ -47,11 +47,12 @@ WHERE e.department_id <> c.department_id OR c.department_id IS NULL;
 
 -- #6 Список наименований отделов с максимальной суммарной зарплатой сотрудников
 CREATE VIEW departmentSalary
-AS SELECT e.department_id AS department_id, d.name AS departmentName, SUM(e.salary) AS departmentSalary
-	FROM employee AS e
-	INNER JOIN department AS d
-		ON e.department_id = d.id
-	GROUP BY d.name, e.department_id;
+AS SELECT d.id AS department_id, d.name AS departmentName,
+	(CASE WHEN SUM(e.salary) IS NULL THEN 0 ELSE SUM(e.salary) END) AS departmentSalary
+	FROM department AS d
+	LEFT JOIN employee AS e
+		ON d.id = e.department_id
+	GROUP BY d.id, d.name;
 
 SELECT ds.department_id, ds.departmentName, ds.departmentSalary
 FROM departmentSalary AS ds
@@ -59,8 +60,16 @@ WHERE ds.departmentSalary = (SELECT MAX(departmentSalary)
 							FROM departmentSalary);
 
 -- #7 ФИО сотрудника(ов), получающего третью по величине зарплату в организации
+-- Переменная с порядковым номером максимальной зарплаты
 SET @maximumSalaryIndex = 3;
 
+-- Для проверки выводим зарплаты персонала по убыванию
+-- В данном случае третья - 110
+SELECT DISTINCT salary
+FROM employee
+ORDER BY salary DESC;
+
+-- Вывод сотрудников с максимальной зарплатой указанного в переменной @maximumSalaryIndex порядке
 SELECT ee.name AS employee, ee.salary
 FROM employee AS ee
 WHERE @maximumSalaryIndex = (SELECT COUNT(DISTINCT salary)
