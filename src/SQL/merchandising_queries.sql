@@ -57,6 +57,18 @@ INNER JOIN placePosmTask
 GROUP BY placePosmTask.agentCode, posmItem.name
 ORDER BY placePosmTask.agentCode;
 
+-- new
+SELECT placePosmTask.agentCode, posmItem.name AS posmName,
+	SUM(CASE WHEN posmSetItem.posmItemsCount IS NOT NULL THEN placePosmTask.posmSetsCount * posmSetItem.posmItemsCount ELSE 0 END) AS posmCount
+FROM placePosmTask
+INNER JOIN formPosmSetTask
+	ON formPosmSetTask.id = placePosmTask.formPosmSetTaskId
+INNER JOIN posmSetItem
+	ON posmSetItem.posmSetId = formPosmSetTask.posmSetId
+RIGHT JOIN posmItemId
+	ON posmItem.id = posmSetItem.posmItemId
+GROUP BY placePosmTask.agentCode, posmItem.name
+
 -- #7 Количество задач «в работе» и «выполнено» у каждого мерчендайзера. В том числе 0.
 SELECT merchandiser.id, merchandiser.firstName, merchandiser.lastName,
 	SUM(CASE WHEN placePosmTask.status = 2 THEN 1 ELSE 0 END) AS doneTasks,
