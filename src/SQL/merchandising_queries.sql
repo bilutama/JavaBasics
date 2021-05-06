@@ -48,11 +48,12 @@ GROUP BY posmItem.name;
 SELECT placePosmTask.agentCode, posmItem.name AS posmName,
 	SUM(CASE WHEN posmSetItem.posmItemsCount IS NOT NULL THEN placePosmTask.posmSetsCount * posmSetItem.posmItemsCount ELSE 0 END) AS posmCount
 FROM posmItem
-LEFT JOIN posmSetItem
+RIGHT JOIN posmSetItem
 	ON posmSetItem.posmItemId = posmItem.id
 LEFT JOIN formPosmSetTask
-	ON	formPosmSetTask.posmSetId = posmSetItem.posmSetId
-CROSS JOIN placePosmTask
+	ON formPosmSetTask.posmSetId = posmSetItem.posmSetId
+INNER JOIN placePosmTask
+	ON placePosmTask.formPosmSetTaskId = formPosmSetTask.id
 GROUP BY placePosmTask.agentCode, posmItem.name
 ORDER BY placePosmTask.agentCode;
 
