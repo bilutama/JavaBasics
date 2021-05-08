@@ -53,7 +53,7 @@ FROM posmSet
 CROSS JOIN posmItem
 LEFT JOIN posmSetItem
 	ON posmItem.id = posmSetItem.posmItemId;
-
+-- Вывод
 SELECT placePosmTask.agentCode, posmSetItemFull.posmName, SUM(placePosmTask.posmSetsCount * posmSetItemFull.posmItemsCount) AS posmCount
 FROM posmSetItemFull
 LEFT JOIN formPosmSetTask
