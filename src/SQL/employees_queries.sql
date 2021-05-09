@@ -28,13 +28,13 @@ WHERE salary = (SELECT MAX(salary)
 ORDER BY department_id;
 
 -- #4 Список ID отделов, количество сотрудников в которых не превышает 3 человек
-SELECT department.name AS departmentName, COUNT(employee.name) AS employeesCount
+SELECT department.id AS departmentId, COUNT(employee.name) AS employeesCount
 FROM department
 LEFT JOIN employee
 	ON department.id = employee.department_id
-GROUP BY department.name
+GROUP BY department.id
 HAVING COUNT(employee.name) <= 3
-ORDER BY departmentName;
+ORDER BY department.id;
 
 -- #5 Список сотрудников, не имеющих назначенного руководителя, работающего в том же отделе.
 -- Другими словами, department_id сотрудника не равен department_id его руководителя,
@@ -46,16 +46,16 @@ LEFT JOIN employee AS c
 WHERE e.department_id <> c.department_id OR c.department_id IS NULL;
 
 -- #6 Список наименований отделов с максимальной суммарной зарплатой сотрудников
-CREATE VIEW departmentSalary
-AS SELECT d.id AS department_id, d.name AS departmentName,
+SELECT ds.departmentId, ds.departmentName, ds.departmentSalary
+FROM
+(
+	SELECT d.id AS departmentId, d.name AS departmentName,
 	(CASE WHEN SUM(e.salary) IS NULL THEN 0 ELSE SUM(e.salary) END) AS departmentSalary
 	FROM department AS d
 	LEFT JOIN employee AS e
 		ON d.id = e.department_id
-	GROUP BY d.id, d.name;
-
-SELECT ds.department_id, ds.departmentName, ds.departmentSalary
-FROM departmentSalary AS ds
+	GROUP BY d.id, d.name
+) AS ds
 WHERE ds.departmentSalary = (SELECT MAX(departmentSalary)
 							FROM departmentSalary);
 
