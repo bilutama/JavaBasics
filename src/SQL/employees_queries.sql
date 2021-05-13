@@ -50,14 +50,20 @@ SELECT ds.departmentId, ds.departmentName, ds.departmentSalary
 FROM
 (
 	SELECT d.id AS departmentId, d.name AS departmentName,
-	(CASE WHEN SUM(e.salary) IS NULL THEN 0 ELSE SUM(e.salary) END) AS departmentSalary
+	    (CASE WHEN SUM(e.salary) IS NULL THEN 0 ELSE SUM(e.salary) END) AS departmentSalary
 	FROM department AS d
 	LEFT JOIN employee AS e
 		ON d.id = e.department_id
 	GROUP BY d.id, d.name
 ) AS ds
-WHERE ds.departmentSalary = (SELECT MAX(departmentSalary)
-							FROM departmentSalary);
+WHERE ds.departmentSalary = (SELECT MAX(dsMax.departmentSalary)
+								FROM
+								(
+									SELECT (CASE WHEN SUM(salary) IS NULL THEN 0 ELSE SUM(salary) END) AS departmentSalary
+									FROM employee
+									GROUP BY department_id
+								) AS dsMax
+							);
 
 -- #7 ФИО сотрудника(ов), получающего третью по величине зарплату в организации
 -- Переменная с порядковым номером максимальной зарплаты
