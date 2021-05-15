@@ -56,13 +56,13 @@ FROM
 		ON d.id = e.department_id
 	GROUP BY d.id, d.name
 ) AS ds
-WHERE ds.departmentSalary = (SELECT MAX(dsMax.departmentSalary)
+WHERE ds.departmentSalary = (SELECT MAX(dsMaximum.departmentSalary)
 								FROM
 								(
 									SELECT (CASE WHEN SUM(salary) IS NULL THEN 0 ELSE SUM(salary) END) AS departmentSalary
 									FROM employee
 									GROUP BY department_id
-								) AS dsMax
+								) AS dsMaximum
 							);
 
 -- #7 ФИО сотрудника(ов), получающего третью по величине зарплату в организации
